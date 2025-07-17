@@ -1,0 +1,279 @@
+<style>
+             .review_section{
+                 background: #edf5fc;
+                 padding:40px 0;
+            }
+             .review_heading {
+                 font-size: 45px;
+                 line-height: 1;
+                 font-family: 'Proxima Nove';
+                 font-weight: 600;
+                 color: #323E4D;
+                 letter-spacing: 0;
+            }
+             .review_subheadings {
+                 display: flex;
+                 align-items: center;
+            }
+             .review_subheading {
+                 font-size: 14px;
+                 color: #586673;
+                 padding-left: 10px;
+                font-family: 'Proxima Nove';
+                 font-weight: 400;
+            }
+             .review_bar {
+    width: 100%;
+    max-width: 500px;
+    margin-top: 30px;
+}
+             .star_row {
+                 display: flex;
+                 align-items: center;
+                 margin: 6px 0;
+            }
+             .star_row span {
+                 width: 30px;
+                 font-size: 20px;
+                 color: #2f3e4c;
+            }
+             .range_bar {
+                 background: #e0e0e0;
+                 height: 10px;
+                 flex-grow: 1;
+                 border-radius: 4px;
+                 overflow: hidden;
+                 margin-left: 10px;
+            }
+             .filled {
+                 background: #323E4D;
+                 height: 100%;
+                 border-radius: 10px;
+            }
+             .review_content {
+                 display: flex;
+            }
+             .review_col {
+                 width: 55%;
+            }
+           .size_col {
+    width: 45%;
+}
+             .size_col img {
+                 width: 100%;
+            }
+             .size_col_heading {
+                 display: none;
+            }
+             @media (max-width : 768px){
+                 .review_content {
+                     flex-wrap: wrap;
+                }
+                 .review_col {
+                     width: 100%;
+                }
+                 .size_col {
+                     width: 100%;
+                }
+                 .size_col_heading {
+                     display: block;
+                     font-size:30px;
+                }
+                 .review_col {
+                     width: 100%;
+                     background: #ebf6fc;
+                     border-radius: 20px;
+                     padding: 20px;
+                }
+                 .review_heading {
+                     padding-bottom: 15px;
+                }
+                 .size_col_heading p {
+                     font-weight: 600;
+                     color: #2f3e4c;
+                }
+                 .review_section {
+                     background: #cde8f7;
+                }
+                 .review_heading {
+                     font-size: 30px;
+                     width: 70%;
+                }
+                 .review_section {
+                     padding:20px 0;
+                     padding-bottom: 0;
+                }
+                .size_col img {
+                 width: 100%;
+                  border-radius: 12px;
+                }
+            }
+            @media (max-width : 480px){
+              .star_row {
+              margin: 0px 0;
+          }
+          .review_bar {
+            margin-top: 0;
+        }
+              .star_row span {
+          width: 32px;
+          font-size: 17px;
+          color: #2f3e4c;
+          letter-spacing: 3px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+      }
+              .range_bar {
+        background: #e0e0e0;
+        height: 8px;
+        flex-grow: 1;
+        border-radius: 4px;
+        overflow: hidden;
+        margin-left: 3px;
+    }
+    .size_col_heading {
+      display: block;
+      font-size: 30px;
+      padding-top: 20px;
+  }
+               .size_col img {
+                 width: 100%;
+                  border-radius: 10px;
+                }
+            }
+</style>
+<section class="review_section">
+  <div class="page-width">
+    <div class="review_heading">{{ section.settings.review_heading }}</div>
+    <div class="review_subheadings">
+      {% for i in (1..5) %}
+        <span style="color: #535256;">★</span>
+      {% endfor %}
+      <div class="review_subheading">{{ section.settings.review_subheading }}</div>
+    </div>
+    <div class="review_content">
+      <div class="review_col">
+        <!-- Rating Range Bars -->
+        <div class="review_bar">
+          <div class="star_row">
+            <span>5★</span>
+            <div class="range_bar">
+              <div class="filled" style="width: {{ section.settings.five_star_range }}%;"></div>
+            </div>
+          </div>
+          <div class="star_row">
+            <span>4★</span>
+            <div class="range_bar">
+              <div class="filled" style="width: {{ section.settings.four_star_range }}%;"></div>
+            </div>
+          </div>
+          <div class="star_row">
+            <span>3★</span>
+            <div class="range_bar">
+              <div class="filled" style="width: {{ section.settings.three_star_range }}%;"></div>
+            </div>
+          </div>
+          <div class="star_row">
+            <span>2★</span>
+            <div class="range_bar">
+              <div class="filled" style="width: {{ section.settings.two_star_range }}%;"></div>
+            </div>
+          </div>
+          <div class="star_row">
+            <span>1★</span>
+            <div class="range_bar">
+              <div class="filled" style="width: {{ section.settings.one_star_range }}%;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="size_col">
+        <div class="size_col_heading">{{ section.settings.size_col_heading }}</div>
+        {% if section.settings.size_col_image != blank %}
+          <img src="{{ section.settings.size_col_image | img_url: 'master' }}" alt="Image">
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Review Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "review_heading",
+      "label": "Review Heading",
+      "default": "Customer Reviews"
+    },
+    {
+      "type": "text",
+      "id": "review_subheading",
+      "label": "Review Subheading",
+      "default": "Based on 100+ reviews"
+    },
+    {
+      "type": "image_picker",
+      "id": "size_col_image",
+      "label": "Image for Size Column"
+    },
+    {
+      "type":"richtext",
+      "id":"size_col_heading",
+      "label":"Heading"
+    },
+    {
+      "type": "range",
+      "id": "five_star_range",
+      "label": "5 Star Rating Fill (%)",
+      "default": 90,
+      "min": 0,
+      "max": 100,
+      "step": 1
+    },
+    {
+      "type": "range",
+      "id": "four_star_range",
+      "label": "4 Star Rating Fill (%)",
+      "default": 70,
+      "min": 0,
+      "max": 100,
+      "step": 1
+    },
+    {
+      "type": "range",
+      "id": "three_star_range",
+      "label": "3 Star Rating Fill (%)",
+      "default": 60,
+      "min": 0,
+      "max": 100,
+      "step": 1
+    },
+    {
+      "type": "range",
+      "id": "two_star_range",
+      "label": "2 Star Rating Fill (%)",
+      "default": 30,
+      "min": 0,
+      "max": 100,
+      "step": 1
+    },
+    {
+      "type": "range",
+      "id": "one_star_range",
+      "label": "1 Star Rating Fill (%)",
+      "default": 15,
+      "min": 0,
+      "max": 100,
+      "step": 1
+    }
+  ],
+  "presets": [
+    {
+      "name": "Review Section"
+    }
+  ]
+}
+{% endschema %}

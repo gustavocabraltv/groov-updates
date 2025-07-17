@@ -1,0 +1,173 @@
+<style>
+.groov-section {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    background: #d5e6f7;
+}
+              .groov-section .container{
+                display:flex;
+                flex-direction:column;
+                gap:32px;
+              }
+              .groov-section .upper-div{
+              }
+        .groov-section .heading {
+        font-size: 45px;
+        line-height: normal;
+        font-family: 'Proxima Nove';
+        font-weight: 600;
+        color: #323E4D;
+        letter-spacing: 0;
+    }
+              .groov-section .image{
+                width:100%;
+                height:auto;
+                object-fit:cover;
+                display:flex;
+              }
+              .groov-section .block-top{
+                width:100%;
+                display:flex;
+                gap:15px;
+              }
+              .groov-section .inblock{
+                width:33.33%;
+              }
+              .groov-section.mobile{
+                   display:none;
+                }
+              @media (max-width: 1024px){
+                .groov-section .heading{
+                  font-size:40px;
+                }
+              }
+              @media (max-width: 989px){
+                .groov-section .inblock{
+                  width:100%;
+                }
+                .groov-section{
+                  display:none;
+                }
+                .groov-section.mobile{
+                   display:block !important;
+                }
+                .groov-section .block-top{
+                  width: 100%;
+                  display: block;
+                  gap:unset;
+                }
+            .groov-section .groov-carousel-section {
+              position: relative;
+            }
+            .groov-section .owl-theme .owl-nav [class*=owl-]{
+              background:unset;
+            }
+            .groov-section .owl-nav button {
+              width: 36px;
+              height: 36px;
+              position: absolute;
+              top: 50%;
+              transform: translateY(-50%);
+              cursor: pointer;
+            }
+            .groov-section .owl-nav button img{
+              width: 36px;
+              height: 36px;
+            }
+            .groov-section .owl-carousel .owl-prev {
+              left: -20px;
+            }
+            .groov-section .owl-carousel .owl-next {
+              right: -20px;
+            }
+          }
+              @media (max-width: 768px){
+              .groov-section{
+                padding-top:30px;
+                padding-bottom:30px;
+              }
+              }
+              @media (max-width: 550px){
+                .groov-section{
+                  padding-top:20px;
+                  padding-bottom:20px;
+                }
+                .groov-section .container{
+                  gap:20px;
+                }
+                .groov-section .owl-nav button img{
+                  width: 30px;
+                  height: 30px;
+                }
+                .groov-section .heading {
+          font-size: 30px;
+      }
+              }
+</style>
+
+<section class="groov-section">
+  <div class="page-width">
+    <div class="container">
+      <div class="upper-div">
+        <div class="heading">{{ section.settings.heading }}</div>
+      </div>
+      <div class="block-top">
+        {% for block in section.blocks %}
+          <div class="inblock">
+            <img src="{{ block.settings.image | img_url:'' }}" class="image">
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="groov-section mobile">
+  <div class="page-width">
+    <div class="container">
+      <div class="upper-div">
+        <div class="heading">{{ section.settings.heading }}</div>
+      </div>
+      <div class="groov-carousel-section block-top owl-carousel owl-theme">
+        {% for block in section.blocks %}
+          <div class="inblock">
+            <div class="image-wrapper">
+              <img src="{{ block.settings.image | img_url:'' }}" class="image">
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+"name": "groovs section",
+"settings": [
+  {
+    "type": "html",
+    "label": "Heading",
+    "id": "heading"
+  },
+],
+    "blocks": [
+    {
+      "type": "block",
+      "name": "block",
+      "settings": [
+        {
+          "type": "image_picker",
+          "label": "Image",
+          "id": "image"
+        },
+      ]
+    }
+  ],
+"presets":[
+{
+  "name": "groovs section"
+}
+]
+}
+{% endschema %}

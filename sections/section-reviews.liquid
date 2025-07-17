@@ -1,0 +1,396 @@
+<style>
+  .swiper-pagination {
+    position: relative;
+    bottom: 0;
+    text-align: center;
+    margin-top: 20px;
+    /* Make sure it's visible by default */
+    display: block;
+
+
+  }
+
+  .swiper-pagination-bullet {
+    width: 8px;
+    height: 8px;
+    margin: 0 5px;
+    background: #ccc;
+    opacity: 1;
+  }
+
+  .swiper-pagination-bullet-active {
+    background: #000;
+  }
+
+  .reviews {
+    width: 100%;
+    overflow: hidden;
+    padding: 64px 0;
+
+    min-height: 831px;
+
+    background: #f8fcff;
+    position: relative;
+  }
+
+  .left {
+    height: 806px;
+    width: 297px;
+    left: 0;
+    position: absolute;
+    z-index:2;
+  }
+
+  .right {
+    height: 806px;
+    width: 297px;
+    right: 0;
+    position: absolute;
+    z-index: 5;
+  }
+
+  .custom-style {
+    padding: 20px;
+    {% comment %} background: blue; {% endcomment %}
+    background: transparent;
+  }
+
+  .custom-style__inner {
+    background: white;
+    padding: 20px;
+    border: solid 1px #EBEBEB;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    text-align: left;
+    min-height: 250px;
+    min-width: 335px;
+  }
+
+
+
+  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .swiper {
+    width: 100%;
+    height: auto;
+  }
+
+  .reviews__heading {
+    text-align: center;
+    margin-bottom: 48px;
+    font-size: var(--font-heading-2-desktop);
+    color: var(--text-title);
+    font-weight: 500; /* var(--font-heading-1-weight)  sugestão */
+  }
+
+  .reviews__slider {
+    width: 100vw;
+    margin-left: calc((100% - 100vw) / 2);
+    padding: 20px;
+  }
+
+  .swiper-wrapper {
+  }
+
+  .reviews__card {
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: 500px;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .reviews__stars {
+    margin-bottom: 16px;
+  }
+
+  .reviews__text {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #333;
+    margin-bottom: 20px;
+  }
+
+  .reviews__divider {
+    width: 100%;
+    height: 1px;
+    background: #e5e5e5;
+    margin: 20px 0;
+    margin-top: auto;
+    align-self: flex-end;
+  }
+
+  .reviews__author {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .reviews__author-image {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .reviews__author-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    justify-content: left;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .reviews__author-name {
+    font-weight: 600;
+    color: #000;
+    margin-bottom: -6px;
+  }
+
+  .reviews__author-title {
+    font-size: 14px;
+    color: #666;
+  }
+
+  .reviews__navigation {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 32px;
+  }
+
+  .reviews__arrow {
+    width: 48px;
+    height: 48px;
+    cursor: pointer;
+  }
+
+  .reviews__arrow--prev {
+    /* Add appropriate styles for the previous arrow */
+  }
+
+  .reviews__arrow--next {
+    /* Add appropriate styles for the next arrow */
+  }
+
+  .swiper-pagination {
+    display: none;
+    margin-top: 30px;
+  }
+
+
+  @media screen and (min-width: 481px) and (max-width: 1440px) {
+
+  .custom-style__inner {
+    width: fit-content;
+    min-width: initial; /* This removes the min-width constraint */
+  }
+
+   }
+
+
+  @media screen and (max-width: 480px) {
+
+
+  .custom-style__inner {
+    min-width: 300px;
+  }
+
+    .left {
+      display: none;
+    }
+
+    .right {
+      display: none;
+    }
+
+    .reviews__heading {
+      font-size: var(--font-heading-2-mobile);
+      font-weight: 700; /* var(--font-heading-1-weight)  sugestão */
+      color: var(--text-title)
+    }
+
+    .custom-style__inner {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .reviews {
+      height: 100%;
+    }
+
+    /* Make sure pagination is clearly visible on mobile */
+    .swiper-pagination {
+      display: block;
+      margin-top: 30px;
+    }
+
+
+    }
+  }
+</style>
+
+<div class="reviews section-{{ section.id }}-padding">
+  <img src="{{ 'left.png' | asset_url }}" class="left" alt="5 stars" class="reviews__stars" width="auto" height="auto">
+  <img
+    src="{{ 'right.png' | asset_url }}"
+    class="right"
+    alt="5 stars"
+    class="reviews__stars"
+    width="auto"
+    height="auto"
+  >
+
+  <div class="page-width">
+    <h1 class="reviews__heading">{{ section.settings.title }}</h1>
+  </div>
+
+  <div class="swiper">
+    <div class="swiper-wrapper">
+      {% for block in section.blocks %}
+        <div class="swiper-slide" {{ block.shopify_attributes }}>
+          <div class="custom-style">
+            <div class="custom-style__inner">
+              <img src="{{ 'stars.svg' | asset_url }}" alt="5 stars" class="reviews__stars" width="auto" height="auto">
+              <p class="reviews__text">{{ block.settings.review_text }}</p>
+              <div class="reviews__divider">&nbsp;</div>
+
+              <div class="reviews__author">
+                {% if block.settings.author_image %}
+                  <img
+                    src="{{ block.settings.author_image | img_url: '100x100', crop: 'center' }}"
+                    alt="{{ block.settings.author_name }}"
+                    class="reviews__author-image"
+                    width="48"
+                    height="48"
+                    loading="lazy"
+                  >
+                {% else %}
+                  <img
+                    src="{{ 'author.webp' | asset_url }}"
+                    alt="{{ block.settings.author_name }}"
+                    class="reviews__author-image"
+                    width="48"
+                    height="48"
+                    loading="lazy"
+                  >
+                {% endif %}
+                <div class="reviews__author-info">
+                  <div class="reviews__author-name">{{ block.settings.author_name }}</div>
+                  <div class="reviews__author-title">{{ block.settings.author_title }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    <!-- Add pagination inside the swiper container -->
+    <div class="swiper-pagination"></div>
+  </div>
+
+  <div class="reviews__navigation">
+    <img
+      src="{{ 'arrow-left.svg' | asset_url }}"
+      alt="Previous"
+      class="reviews__arrow reviews__arrow--prev"
+      width="auto"
+      height="auto"
+    >
+    <img
+      src="{{ 'arrow-right.svg' | asset_url }}"
+      alt="Next"
+      class="reviews__arrow reviews__arrow--next"
+      width="auto"
+      height="auto"
+    >
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Section Reviews",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Hundreds of happy users"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        {
+          "type": "text",
+          "id": "author_name",
+          "label": "Nome do Autor",
+          "default": "Charles Johnson"
+        },
+        {
+          "type": "text",
+          "id": "author_title",
+          "label": "Título do Autor",
+          "default": "UFC Fighter"
+        },
+        {
+          "type": "textarea",
+          "id": "review_text",
+          "label": "Texto do Review",
+          "default": "My Groovs relieved my plantar fasciitis and got me out of a walking boot in the lead-up to my UFC debut. Ensuring I feel great on my feet lets me put in the work needed to show up strong on fight night."
+        },
+        {
+          "type": "image_picker",
+          "id": "author_image",
+          "label": "Foto do Autor"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Section Reviews",
+      "blocks": [
+        {
+          "type": "review"
+        },
+        {
+          "type": "review"
+        },
+        {
+          "type": "review"
+        },
+        {
+          "type": "review"
+        },
+        {
+          "type": "review"
+        },
+        {
+          "type": "review"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

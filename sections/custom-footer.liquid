@@ -1,0 +1,125 @@
+<style>
+.custom-footer-section{
+  padding-top:50px;
+  padding-bottom:50px;
+  /* background:#D0E6F7; */
+}
+.index section.custom-footer-section {
+  display: none;
+}
+.custom-footer-section .main-wrapper{
+  display:flex;
+  justify-content: space-between;
+}
+.custom-footer-section .menu-list-wrap{
+  display: flex;
+  justify-content: space-between;
+}
+.custom-footer-section .first-div{
+  width:15%;
+}
+.custom-footer-section .second-div{
+  width:65%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.custom-footer-section .third-div{
+  width:20%;
+  display:flex;
+  justify-content: flex-end;
+}
+.custom-footer-section .menu-title {
+  /* font-family: 'Proxima Nove'; */
+  font-weight: 600;
+  color: #90939c;
+  cursor: pointer;
+  text-decoration: none;
+}
+.custom-footer-section .copy-right {
+  /* font-family: 'Proxima Nove'; */
+  line-height: normal;
+  color: #98a0aa;
+}
+span.copy_right_content {
+  padding-right: 6px;
+}
+  a.menu-title:nth-last-child(1) {
+    border-bottom: none;
+}
+        @media (max-width: 550px){
+          .custom-footer-section .menu-title {
+    border-bottom: 1px solid #000000bf;
+}
+          .custom-footer-section{
+            padding:20px 0;
+          }
+          .custom-footer-section .first-div{
+            display:none;
+          }
+          .custom-footer-section .third-div{
+            display:none;
+          }
+          .custom-footer-section .second-div{
+            width:100%;
+          }
+          .custom-footer-section .menu-list-wrap{
+            flex-direction:column;
+            gap:15px;
+          }
+        }
+</style>
+
+<section class="custom-footer-section" style="background-color: {{ section.settings.bg_color }}">
+  <div class="page-width">
+    <div class="main-wrapper">
+      <div class="first-div">
+        <img
+          src="https://cdn.shopify.com/s/files/1/0716/2606/4183/files/groov-footer-logo.png?v=1738045027"
+          class="footer-logo"
+        >
+      </div>
+      <div class="second-div">
+        <div class="menu-box">
+          <div class="menu-list-wrap">
+            {% comment %}
+                            {% for link in section.settings.menu2.links %}
+              <a class="menu-title" href="{{ link.url }}">{{ link.title }}</a>
+                            {% endfor %}
+            {% endcomment %}
+            <a href="/pages/faqs" class="menu-title">FAQs</a>
+            <a href="/policies/privacy-policy" class="menu-title">PRIVACY POLICY</a>
+            <a href="/pages/contact" class="menu-title">CONTACT US</a>
+            <a  href="#"class="menu-title">ACCESSIBILITY</a>
+          </div>
+        </div>
+      </div>
+      <div class="third-div">
+        <div class="copy-right"><span class="copy_right_content">&COPY;</span>Groov 2025</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+  {
+  "name": "custom footer section",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+    },
+    {
+      "type": "link_list",
+      "id": "menu1",
+      "label": "Menu"
+    },
+  ],
+  "presets":[
+  {
+    "name": "custom footer section"
+  }
+]
+}
+{% endschema %}

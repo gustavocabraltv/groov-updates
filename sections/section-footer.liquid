@@ -1,0 +1,223 @@
+<style>
+    .appstore-btn {
+        position: absolute;
+        top: 500px;
+        z-index: 999;
+        left: 50%;
+        transform: translateX(-50%);
+
+
+    }
+  .footer {
+      width: 100%;
+      height: 100vh; /* Importante para o efeito inicial */
+      position: relative; /* Para permitir posicionamento absoluto interno */
+      overflow: hidden; /* Para controlar o overflow durante a animação */
+      {% comment %} background-color: red; {% endcomment %}
+  }
+
+  {% comment %} .footer .page-width {
+      height: 100%;  /* Opção 2 */
+  } {% endcomment %}
+
+  .section-{{ section.id }}-padding {
+      {% comment %} padding-top: {{ section.settings.padding_top }}px; {% endcomment %}
+      padding-top: 128px;
+      {% comment %} padding-bottom: {{ section.settings.padding_bottom }}px; {% endcomment %}
+
+  }
+
+  .footer__inner {
+      max-width: var(--page-width);
+      margin: 0 auto;
+      padding: 0 var(--grid-margin);
+      height: 100%; /* Importante para referência de altura */
+      position: relative; /* Para posicionamento dos elementos internos */
+  }
+
+  .footer__banner {
+      position: absolute;
+      top: 50%;
+      left: 50%; /* Centraliza o banner */
+      transform: translate(-50%, -50%);
+      width: 100vw; /* Usa a largura total do viewport */
+      height: 100vh;
+      background-image: url({{ 'footer_banner_img.webp' | asset_url }});
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+      overflow: hidden;
+
+  }
+
+  .footer__banner-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: black;
+      opacity: 0;
+      z-index: 2;
+      pointer-events: none;
+  }
+
+
+
+
+  /* Estado final do banner */
+  .footer__banner.is-scrolled {
+      width: 100%; /* Volta para o tamanho do container */
+      height: 600px;
+      left: 0;
+      transform: none;
+      border-radius: 24px;
+  }
+
+  {% comment %} .footer__title {
+      color: white;
+      font-size: 64px;
+      text-align: center;
+      max-width: 800px;
+      z-index: 1;
+      z-index: 3;
+
+      opacity: 0;
+      width: 600px;
+
+      visibility: hidden; /* use visibility ao invés de display: none */
+
+  } {% endcomment %}
+
+      .footer__title {
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: var(--font-heading-1-desktop);
+      text-align: center;
+      max-width: 800px;
+      width: 700px;
+      z-index: 5;
+      opacity: 0;
+      line-height: 1;
+      font-weight: 600;
+
+  }
+
+  .footer__bottom {
+      position: absolute;
+      opacity: 1; /* Inicialmente oculto */
+      {% comment %} transform: translateY(20px); /* Preparado para animar para cima */ {% endcomment %}
+      bottom: 0;
+      {% comment %} background: pink; {% endcomment %}
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      height: 95px;
+      z-index: 0;
+      border-top: 1px solid #D5D5D5;
+
+  }
+
+  .footer__bottom.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+  }
+
+  .footer__logo {
+      height: 24px;
+      width: auto;
+  }
+
+  .footer__nav {
+      display: flex;
+      gap: 8px;
+  }
+
+  .footer__link {
+      color: #000;
+      text-decoration: none;
+      transition: color 0.3s ease;
+  }
+
+  .footer__link:hover {
+      color: #666;
+  }
+
+  .footer__copyright {
+      color: #666;
+      font-size: 14px;
+  }
+
+
+
+
+      @media screen and (max-width: 480px) {
+          .footer__title {
+              font-size: var(--font-heading-1-mobile);
+              width: 80%;
+              text-align: left;
+              top: 62%;
+          }
+          .appstore-btn {
+          top: 715px;
+          left: 32%;
+          }
+          .footer__bottom {
+            padding-left: 12px;
+            padding-right: 12px;
+          }
+      }
+</style>
+
+<div class="footer">
+  <div class="footer__inner">
+    <h1 class="footer__title">The future of footwear has arrived</h1>
+    <a href="https://apps.apple.com/app/apple-store/id6733245939?pt=125813518&ct=webinstall&mt=8" class="appstore-btn">
+      <img src="{{ 'appstore-btn.svg' | asset_url }}" alt="App Store" loading="lazy" width="auto" height="auto">
+    </a>
+    <div class="footer__banner">
+      <div class="footer__banner-overlay">a</div>
+    </div>
+
+    <div class="footer__bottom">
+      <img
+        src="{{ 'logo-footer.svg' | asset_url }}"
+        alt="Groov"
+        class="footer__logo"
+        loading="lazy"
+        width="auto"
+        height="auto"
+      >
+
+      <nav class="footer__nav">
+        <a href="/pages/faqs" class="footer__link">FAQs</a>
+        <a href="/pages/privacy-policy" class="footer__link">Privacy Policy</a>
+        <a href="/pages/contact" class="footer__link">Contact Us</a>
+      </nav>
+
+      <span class="footer__copyright">© Groov 2025</span>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Section Footer",
+  "tag": "section",
+  "class": "section",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Section Footer"
+    }
+  ]
+}
+{% endschema %}

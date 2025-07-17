@@ -1,0 +1,400 @@
+{{ 'customer.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+{%- if section.settings.enable_shop_login_button == false -%}
+  {%- assign hide_shop_login_button = true -%}
+{%- endif -%}
+
+<div class="customer login section-{{ section.id }}-padding">
+  <h1 id="recover" tabindex="-1">
+    {{ 'customer.recover_password.title' | t }}
+  </h1>
+  <div>
+    <p>
+      {{ 'customer.recover_password.subtext' | t }}
+    </p>
+    <div class="alert-message-inline"></div>
+    <form id="forgot-password-form">
+      <div id="step-1">
+        <div class="field">
+          <input name="email" type="email" id="email" placeholder="Email" required>
+          <label for="email"> Email </label>
+        </div>
+        <button type="submit" id="send-otp-btn">Send OTP</button>
+        <a href="#login">
+          {{ 'customer.login_page.cancel' | t }}
+        </a>
+      </div>
+
+      <div id="step-2" style="display: none;">
+        <div class="field">
+          <input name="otp" type="text" id="otp" placeholder="Enter OTP">
+          <label for="otp"> Enter OTP </label>
+        </div>
+        <div class="field password-wrapper">
+          <input name="password" type="password" id="new-password" class="show-pass" placeholder="Enter new password">
+          <label for="new-password"> Enter New Password </label>
+          <svg
+            style="display: none"
+            class="EyeButton eyeOpen"
+            version="1.1"
+            id="svg2"
+            xmlns:dc="http://purl.org/dc/elements/1.1/"
+            xmlns:cc="http://creativecommons.org/ns#"
+            xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+            xmlns:svg="http://www.w3.org/2000/svg"
+            xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+            xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+            sodipodi:docname="eye-open.svg"
+            inkscape:version="0.48.4 r9939"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            width="800px"
+            height="800px"
+            viewBox="0 0 1200 1200"
+            enable-background="new 0 0 1200 1200"
+            xml:space="preserve"
+          >
+            <sodipodi:namedview  inkscape:cy="417.05123" inkscape:cx="455.50398" inkscape:zoom="0.37249375" showgrid="false" id="namedview30" guidetolerance="10" gridtolerance="10" objecttolerance="10" borderopacity="1" bordercolor="#666666" pagecolor="#ffffff" inkscape:current-layer="svg2" inkscape:window-maximized="1" inkscape:window-y="24" inkscape:window-height="876" inkscape:window-width="1535" inkscape:pageshadow="2" inkscape:pageopacity="0" inkscape:window-x="65">
+            	</sodipodi:namedview>
+            <path id="path6686" inkscape:connector-curvature="0" d="M779.843,599.925c0,95.331-80.664,172.612-180.169,172.612
+            	c-99.504,0-180.168-77.281-180.168-172.612c0-95.332,80.664-172.612,180.168-172.612
+            	C699.179,427.312,779.843,504.594,779.843,599.925z M600,240.521c-103.025,0.457-209.814,25.538-310.904,73.557
+            	c-75.058,37.122-148.206,89.496-211.702,154.141C46.208,501.218,6.431,549,0,599.981c0.76,44.161,48.13,98.669,77.394,131.763
+            	c59.543,62.106,130.786,113.018,211.702,154.179c94.271,45.751,198.616,72.092,310.904,73.557
+            	c103.123-0.464,209.888-25.834,310.866-73.557c75.058-37.122,148.243-89.534,211.74-154.179
+            	c31.185-32.999,70.962-80.782,77.394-131.763c-0.76-44.161-48.13-98.671-77.394-131.764
+            	c-59.543-62.106-130.824-112.979-211.74-154.141C816.644,268.36,712.042,242.2,600,240.521z M599.924,329.769
+            	c156.119,0,282.675,120.994,282.675,270.251c0,149.256-126.556,270.25-282.675,270.25S317.249,749.275,317.249,600.02
+            	C317.249,450.763,443.805,329.769,599.924,329.769L599.924,329.769z"/>
+          </svg>
+          <svg
+            class="eye-close eyeClosed"
+            width="800"
+            height="800"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M4.707 3.293a1 1 0 0 0-1.414 1.414l2.424 2.424c-1.43 1.076-2.678 2.554-3.611 4.422a1 1 0 0 0 0 .894C4.264 16.764 8.096 19 12 19c1.555 0 3.1-.355 4.53-1.055l2.763 2.762a1 1 0 0 0 1.414-1.414zm10.307 13.135c-.98.383-2 .572-3.014.572-2.969 0-6.002-1.62-7.87-5 .817-1.479 1.858-2.62 3.018-3.437l2.144 2.144a3 3 0 0 0 4.001 4.001zm3.538-2.532c.483-.556.926-1.187 1.318-1.896-1.868-3.38-4.9-5-7.87-5q-.168 0-.336.007L9.879 5.223A10.2 10.2 0 0 1 12 5c3.903 0 7.736 2.236 9.894 6.553a1 1 0 0 1 0 .894 13 13 0 0 1-1.925 2.865z" fill="#0D0D0D"/>
+          </svg>
+        </div>
+        <div class="field password-wrapper">
+          <input name="confirm-password" type="password" class="show-pass" id="confirm-password" placeholder="Confirm password">
+          <label for="confirm-password"> Confirm Password </label>
+          <svg
+            style="display: none"
+            class="EyeButton eyeOpen"
+            version="1.1"
+            id="svg2"
+            xmlns:dc="http://purl.org/dc/elements/1.1/"
+            xmlns:cc="http://creativecommons.org/ns#"
+            xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+            xmlns:svg="http://www.w3.org/2000/svg"
+            xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+            xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+            sodipodi:docname="eye-open.svg"
+            inkscape:version="0.48.4 r9939"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            width="800px"
+            height="800px"
+            viewBox="0 0 1200 1200"
+            enable-background="new 0 0 1200 1200"
+            xml:space="preserve"
+          >
+            <sodipodi:namedview  inkscape:cy="417.05123" inkscape:cx="455.50398" inkscape:zoom="0.37249375" showgrid="false" id="namedview30" guidetolerance="10" gridtolerance="10" objecttolerance="10" borderopacity="1" bordercolor="#666666" pagecolor="#ffffff" inkscape:current-layer="svg2" inkscape:window-maximized="1" inkscape:window-y="24" inkscape:window-height="876" inkscape:window-width="1535" inkscape:pageshadow="2" inkscape:pageopacity="0" inkscape:window-x="65">
+            	</sodipodi:namedview>
+            <path id="path6686" inkscape:connector-curvature="0" d="M779.843,599.925c0,95.331-80.664,172.612-180.169,172.612
+            	c-99.504,0-180.168-77.281-180.168-172.612c0-95.332,80.664-172.612,180.168-172.612
+            	C699.179,427.312,779.843,504.594,779.843,599.925z M600,240.521c-103.025,0.457-209.814,25.538-310.904,73.557
+            	c-75.058,37.122-148.206,89.496-211.702,154.141C46.208,501.218,6.431,549,0,599.981c0.76,44.161,48.13,98.669,77.394,131.763
+            	c59.543,62.106,130.786,113.018,211.702,154.179c94.271,45.751,198.616,72.092,310.904,73.557
+            	c103.123-0.464,209.888-25.834,310.866-73.557c75.058-37.122,148.243-89.534,211.74-154.179
+            	c31.185-32.999,70.962-80.782,77.394-131.763c-0.76-44.161-48.13-98.671-77.394-131.764
+            	c-59.543-62.106-130.824-112.979-211.74-154.141C816.644,268.36,712.042,242.2,600,240.521z M599.924,329.769
+            	c156.119,0,282.675,120.994,282.675,270.251c0,149.256-126.556,270.25-282.675,270.25S317.249,749.275,317.249,600.02
+            	C317.249,450.763,443.805,329.769,599.924,329.769L599.924,329.769z"/>
+          </svg>
+          <svg
+            class="eye-close eyeClosed"
+            width="800"
+            height="800"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M4.707 3.293a1 1 0 0 0-1.414 1.414l2.424 2.424c-1.43 1.076-2.678 2.554-3.611 4.422a1 1 0 0 0 0 .894C4.264 16.764 8.096 19 12 19c1.555 0 3.1-.355 4.53-1.055l2.763 2.762a1 1 0 0 0 1.414-1.414zm10.307 13.135c-.98.383-2 .572-3.014.572-2.969 0-6.002-1.62-7.87-5 .817-1.479 1.858-2.62 3.018-3.437l2.144 2.144a3 3 0 0 0 4.001 4.001zm3.538-2.532c.483-.556.926-1.187 1.318-1.896-1.868-3.38-4.9-5-7.87-5q-.168 0-.336.007L9.879 5.223A10.2 10.2 0 0 1 12 5c3.903 0 7.736 2.236 9.894 6.553a1 1 0 0 1 0 .894 13 13 0 0 1-1.925 2.865z" fill="#0D0D0D"/>
+          </svg>
+        </div>
+        <button type="submit">Reset Password</button>
+      </div>
+    </form>
+    {% comment %}
+      {%- form 'recover_customer_password' -%}
+        {% assign recover_success = form.posted_successfully? %}
+        <div class="field">
+          <input
+            type="email"
+            value=""
+            name="email"
+            id="RecoverEmail"
+            autocorrect="off"
+            autocapitalize="off"
+            autocomplete="email"
+            {% if form.errors %}
+              aria-invalid="true"
+              aria-describedby="RecoverEmail-email-error"
+              autofocus
+            {% endif %}
+            placeholder="{{ 'customer.login_page.email' | t }}"
+          >
+          <label for="RecoverEmail">
+            {{ 'customer.login_page.email' | t }}
+          </label>
+        </div>
+        {%- if form.errors -%}
+          <small id="RecoverEmail-email-error" class="form__message">
+            <span class="svg-wrapper">
+              {{- 'icon-error.svg' | inline_asset_content -}}
+            </span>
+            {{ form.errors.messages.form }}
+          </small>
+        {%- endif -%}
+
+        <button>
+          {{ 'customer.login_page.submit' | t }}
+        </button>
+
+        <a href="#login">
+          {{ 'customer.login_page.cancel' | t }}
+        </a>
+      {%- endform -%}
+    {% endcomment %}
+  </div>
+
+  <h1 id="login" tabindex="-1">
+    {{ 'customer.login_page.title' | t }}
+  </h1>
+  <div>
+    {%- if recover_success == true -%}
+      <h3 class="form__message" tabindex="-1" autofocus>
+        <span class="svg-wrapper">
+          {{- 'icon-success.svg' | inline_asset_content -}}
+        </span>
+        {{ 'customer.recover_password.success' | t }}
+      </h3>
+    {%- endif -%}
+    {%- form 'customer_login', novalidate: 'novalidate' -%}
+      {%- if form.errors -%}
+          {% comment %}
+        <h2 class="form__message" tabindex="-1" autofocus>
+            <span class="visually-hidden">{{ 'accessibility.error' | t }} </span>
+            <span class="svg-wrapper">
+              {{- 'icon-error.svg' | inline_asset_content -}}
+            </span>
+          {{ 'templates.contact.form.error_heading' | t }}
+        </h2>
+        {% endcomment %}
+        {{ form.errors | default_errors }}
+      {%- endif -%}
+
+      {%- if shop.features.login_with_shop_classic_customer_accounts? -%}
+        <section name="sign-in-with-shop-provider">
+          {{ shop | login_button: hide_button: hide_shop_login_button }}
+
+          {%- unless hide_shop_login_button -%}
+            <p>
+              {{ 'customer.login_page.alternate_provider_separator' | t }}
+            </p>
+          {%- endunless -%}
+        </section>
+      {%- endif -%}
+
+      <div class="field">
+        <input
+          type="email"
+          name="customer[email]"
+          id="CustomerEmail"
+          class="app-login-email"
+          autocomplete="email"
+          autocorrect="off"
+          autocapitalize="off"
+          {% if form.errors contains 'form' %}
+            aria-invalid="true"
+          {% endif %}
+          placeholder="{{ 'customer.login_page.email' | t }}"
+        >
+        <label for="CustomerEmail">
+          {{ 'customer.login_page.email' | t }}
+        </label>
+      </div>
+
+      {%- if form.password_needed -%}
+        <div class="field password-wrapper">
+          <input
+            type="password"
+            value=""
+            class="show-pass app-login-password"
+            name="customer[password]"
+            id="CustomerPassword"
+            autocomplete="current-password"
+            {% if form.errors contains 'form' %}
+              aria-invalid="true"
+            {% endif %}
+            placeholder="{{ 'customer.login_page.password' | t }}"
+          >
+          <label for="CustomerPassword">
+            {{ 'customer.login_page.password' | t }}
+          </label>
+          <svg
+            style="display: none"
+            class="EyeButton eyeOpen"
+            version="1.1"
+            id="svg2"
+            xmlns:dc="http://purl.org/dc/elements/1.1/"
+            xmlns:cc="http://creativecommons.org/ns#"
+            xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+            xmlns:svg="http://www.w3.org/2000/svg"
+            xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+            xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+            sodipodi:docname="eye-open.svg"
+            inkscape:version="0.48.4 r9939"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            width="800px"
+            height="800px"
+            viewBox="0 0 1200 1200"
+            enable-background="new 0 0 1200 1200"
+            xml:space="preserve"
+          >
+            <sodipodi:namedview  inkscape:cy="417.05123" inkscape:cx="455.50398" inkscape:zoom="0.37249375" showgrid="false" id="namedview30" guidetolerance="10" gridtolerance="10" objecttolerance="10" borderopacity="1" bordercolor="#666666" pagecolor="#ffffff" inkscape:current-layer="svg2" inkscape:window-maximized="1" inkscape:window-y="24" inkscape:window-height="876" inkscape:window-width="1535" inkscape:pageshadow="2" inkscape:pageopacity="0" inkscape:window-x="65">
+            	</sodipodi:namedview>
+            <path id="path6686" inkscape:connector-curvature="0" d="M779.843,599.925c0,95.331-80.664,172.612-180.169,172.612
+            	c-99.504,0-180.168-77.281-180.168-172.612c0-95.332,80.664-172.612,180.168-172.612
+            	C699.179,427.312,779.843,504.594,779.843,599.925z M600,240.521c-103.025,0.457-209.814,25.538-310.904,73.557
+            	c-75.058,37.122-148.206,89.496-211.702,154.141C46.208,501.218,6.431,549,0,599.981c0.76,44.161,48.13,98.669,77.394,131.763
+            	c59.543,62.106,130.786,113.018,211.702,154.179c94.271,45.751,198.616,72.092,310.904,73.557
+            	c103.123-0.464,209.888-25.834,310.866-73.557c75.058-37.122,148.243-89.534,211.74-154.179
+            	c31.185-32.999,70.962-80.782,77.394-131.763c-0.76-44.161-48.13-98.671-77.394-131.764
+            	c-59.543-62.106-130.824-112.979-211.74-154.141C816.644,268.36,712.042,242.2,600,240.521z M599.924,329.769
+            	c156.119,0,282.675,120.994,282.675,270.251c0,149.256-126.556,270.25-282.675,270.25S317.249,749.275,317.249,600.02
+            	C317.249,450.763,443.805,329.769,599.924,329.769L599.924,329.769z"/>
+          </svg>
+          <svg
+            class="eye-close eyeClosed"
+            width="800"
+            height="800"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M4.707 3.293a1 1 0 0 0-1.414 1.414l2.424 2.424c-1.43 1.076-2.678 2.554-3.611 4.422a1 1 0 0 0 0 .894C4.264 16.764 8.096 19 12 19c1.555 0 3.1-.355 4.53-1.055l2.763 2.762a1 1 0 0 0 1.414-1.414zm10.307 13.135c-.98.383-2 .572-3.014.572-2.969 0-6.002-1.62-7.87-5 .817-1.479 1.858-2.62 3.018-3.437l2.144 2.144a3 3 0 0 0 4.001 4.001zm3.538-2.532c.483-.556.926-1.187 1.318-1.896-1.868-3.38-4.9-5-7.87-5q-.168 0-.336.007L9.879 5.223A10.2 10.2 0 0 1 12 5c3.903 0 7.736 2.236 9.894 6.553a1 1 0 0 1 0 .894 13 13 0 0 1-1.925 2.865z" fill="#0D0D0D"/>
+          </svg>
+        </div>
+
+        <a href="#recover">
+          {{ 'customer.login_page.forgot_password' | t }}
+        </a>
+      {%- endif -%}
+
+      <button class="app-login-signin">
+        {{ 'customer.login_page.sign_in' | t }}
+      </button>
+
+      <a href="{{ routes.account_register_url }}">
+        {{ 'customer.login_page.create_account' | t }}
+      </a>
+    {%- endform -%}
+  </div>
+
+  {%- if shop.checkout.guest_login -%}
+    <div>
+      <hr>
+      <h2>{{ 'customer.login_page.guest_title' | t }}</h2>
+
+      {%- form 'guest_login' -%}
+        <button>
+          {{ 'customer.login_page.guest_continue' | t }}
+        </button>
+      {%- endform -%}
+    </div>
+  {%- endif -%}
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('.password-wrapper').forEach(wrapper => {
+    const input = wrapper.querySelector('.show-pass');
+    const eyeOpen = wrapper.querySelector('.eyeOpen');
+    const eyeClosed = wrapper.querySelector('.eyeClosed');
+
+    if (eyeOpen && input && eyeClosed) {
+      eyeOpen.addEventListener('click', () => {
+        // console.log('eyeClosed clicked', input); // Debug log
+          input.type = 'password';
+          eyeOpen.style.display = 'none';
+          eyeClosed.style.display = 'flex';
+      });
+      eyeClosed.addEventListener('click', () => {
+        // console.log('eyeOpen clicked', input); // Debug log
+          input.type = 'text';
+          eyeOpen.style.display = 'flex';
+          eyeClosed.style.display = 'none';
+      });
+
+    }
+  });
+});
+</script>
+
+{% schema %}
+{
+  "name": "t:sections.main-login.name",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_shop_login_button",
+      "label": "t:sections.main-login.shop_login_button.enable",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
+    }
+  ]
+}
+{% endschema %}

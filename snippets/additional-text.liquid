@@ -1,0 +1,226 @@
+<div class="additional-text">
+  <div class="heading-1">{{ block.settings.heading }}</div>
+  <div class="desc-1">{{ block.settings.desc-1 }}</div>
+  {% if block.settings.main-image != blank %}
+    <div class="main-image-wrapper">
+      <img class="main-image" src="{{ block.settings.main-image | img_url:'' }}">
+    </div>
+    {% endif %}
+  <div class="desc-2">{{ block.settings.desc-2 }}</div>
+  {% comment %} <div class="heading-2">{{ block.settings.heading-2 }}</div> {% endcomment %}
+
+
+
+
+
+  {% comment %} HOW IT WORKS {% endcomment %}
+{% comment %} <div class="heading-3">{{ block.settings.heading-3 }}</div> {% endcomment %}
+    
+  {% comment %} {% if block.settings.logo-image != blank %}
+    <a class="logo-image-wrapper" href="{{ block.settings.app-url }}">
+      <img class="logo-image" src="{{ block.settings.logo-image | img_url:'' }}">
+    </a>
+    {% endif %} {% endcomment %}
+  
+  
+  
+    {% comment %} <div class="sub-heading-3">{{ block.settings.sub-heading-3 }}</div>
+  <div class="desc-3">{{ block.settings.desc-3 }}</div> {% endcomment %}
+</div>
+
+
+<style>
+
+  
+/* TODOS OS TITULOS DO ADDITIONAL DESCRIPTION EM BOLD */
+  .how_it_work {
+    display: none;
+  }
+.desc-2 b,
+.desc-2 strong {
+  font-size:16px;
+}
+
+        @media (max-width : 481px){
+          .desc-2 b,
+          .desc-2 strong {
+            font-size:16px;
+          }
+        }
+
+
+  
+/* DESCRIPTIONS */
+.desc-2 p{
+  padding-top: 10px;
+
+
+
+}
+
+      @media (max-width : 481px){
+        .desc-2 p{
+          padding-top: 10px;
+          font-size:14px;
+   
+        }
+      }
+
+  
+  .additional-text{
+    margin: 10px 0 !important;
+  }
+  .additional-text .heading-1{
+            font-size: 16px;
+        line-height: 120%;
+    text-align: center;
+    padding-bottom: 10px;
+   font-weight: 600;
+    color: #323e4d !important;
+    
+  }
+
+
+  {% comment %} DEPOIMENTO  {% endcomment %}
+  .additional-text .desc-1{
+   font-size: 17px;
+  line-height: 120%;
+    text-align: center;
+   font-weight: 400;
+   font-family: 'Proxima Nova'; 
+   font-style: italic;
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  @media (max-width : 430px){
+ .additional-text .desc-1{
+     font-size: 15px;    
+ }
+
+  }
+  .additional-text .desc-2{
+    font-size: 16px;
+    line-height: 120%;
+    text-align: center;
+    font-weight: 400;
+    color: #323e4d !important;
+    
+  }
+  .additional-text .heading-2{
+    font-size: 19px;
+        line-height: 120%;
+    text-align: center;
+    padding: 10px 0;
+    color: #323e4d !important;
+    
+    
+   font-weight: 600;
+  }
+  .additional-text .heading-3{
+    font-size: 21px;
+        line-height: 100%;
+    text-align: center;
+    padding: 16px 0;
+    color: #323e4d !important;
+   font-weight: 600;
+  }
+  .additional-text .sub-heading-3{
+    font-size: 18px;
+        line-height: 100%;
+    text-align: center;
+    color: #323e4d !important;
+   font-weight: 600;
+  }
+  .additional-text .desc-3{
+    font-size: 16px;
+    color: #323e4d !important;
+        line-height: 100%;
+    text-align: center;
+   font-weight: 400;
+    padding: 10px 0;
+  }
+  .additional-text .main-image-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   font-weight: 400;
+    color: #323e4d !important;
+  }
+  .additional-text .main-image{
+    display: flex;
+    width: 100%;
+    max-width: 300px;
+  }
+
+ @media (max-width : 481px){
+      .additional-text .main-image{
+    margin-top: 32px;
+    margin-bottom: 32px;
+    display: flex;
+    width: 100%;
+    max-width: 230px;
+  }
+   }
+
+  
+  .additional-text .logo-image-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+
+
+
+  
+  .additional-text .logo-image{
+      display: flex;
+    width: 100%;
+    max-width: 70px;
+    overflow: hidden;
+    padding: 0 0 10px 0;
+  }
+  @media(max-width: 390px){
+
+
+    {% comment %} esconde todos os outros deixa apenas o primeiro {% endcomment %}
+    .desc-2 p:nth-of-type(n+3) {
+      display: none;
+    }
+
+  .additional-text .heading-1{
+            font-size: 16px;
+            {% comment %} color: blue!important; {% endcomment %}
+            color: rgb(75, 75, 75);
+    
+  }
+  .additional-text .desc-1{
+            font-size: 16px;
+  }
+  .additional-text .desc-2{
+            font-size: 14px!important;
+           
+  }
+  .desc-2 p strong {
+    font-size: 16px;
+    padding-bottom: 32px;
+    margin-bottom: 24px;
+    line-height: 32px;
+    color:rgb(61, 61, 61);
+  }
+  .additional-text .heading-2{
+    font-size: 17px;
+  }
+  .additional-text .heading-3{
+    font-size: 19px;
+  }
+  .additional-text .sub-heading-3{
+    font-size: 16px;
+  }
+  .additional-text .desc-3{
+    font-size: 13px;
+    color: pink!important;
+  }
+  }
+</style>

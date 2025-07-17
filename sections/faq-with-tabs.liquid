@@ -1,0 +1,489 @@
+
+<style>
+    section.landing-faq-section {
+    max-width: 100%;
+    /* background: #F3EFE8; */
+    padding: 30px 0px;
+}
+  .landing-faq-section .page-width {
+    padding: 3rem 4rem;
+    max-width: 1440px;
+  }
+  .landing-faq-section .landing-accordion {
+    cursor: pointer;
+    padding: 20px 0;
+    width: 100%;
+    transition: 0.4s;
+    position: relative;
+    margin: 0;
+    border-top: 0 !important;
+    border-bottom: 1px solid #000 !important;
+    display: flex;
+    justify-content: space-between;
+    color: #3b3838;
+    /* font-family: Montserrat; */
+    font-size: 15.802px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 153.5%; /* 24.257px */
+    text-transform: capitalize;
+  }
+ .landing-faq-section .landing-accordion img {
+    height: 20px;
+    width: 20px;
+  }
+  .landing-faq-section .landing-accordion:after{
+    content: '';
+    background-image: url('https://cdn.shopify.com/s/files/1/0756/4977/7945/files/Vector_2.png?v=1714973170');
+    width: 15px;
+    height: 15px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    top: 26px;
+    position: absolute;
+    right: 15px;
+  }
+  .landing-faq-section .landing-accordion.current:after{
+    content: '';
+    background-image: url('https://cdn.shopify.com/s/files/1/0756/4977/7945/files/Vector_1_58348335-6079-4608-aca9-fc3f4d033f65.png?v=1714973170');
+    width: 15px;
+    height: 15px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    top: 26px;
+    position: absolute;
+    right: 15px;
+  }
+  .landing-faq-section .landing-accordion.current img {
+    transform:rotate(90deg);
+  }
+  .landing-faq-section .acc-box {
+    display: none;
+    flex-direction: column;
+    gap: 0px;
+    width: 100%;
+  }
+  .landing-faq-section .acc-box.active {
+    display: flex;
+  }
+  .landing-faq-section .main-container-wrapper{
+    width: 75%;
+  }
+  .landing-faq-section .main-heading {
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-transform: capitalize;
+    padding-bottom: 10px;
+  }
+  .landing-faq-section .main-textarea {
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 130%;
+  }
+  .landing-faq-section .panel {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    padding: 0px 10px;
+  }	
+   .landing-faq-section .panel ul li {
+    /* font-family: Forma DJR Deck; */
+  }	
+  .landing-faq-section .panel p{
+    padding-top: 10px;
+    max-width: 510px;
+    color: #3b3838;
+    /* font-family: Montserrat; */
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+  .landing-faq-section .image-box img {
+    height: 100%;
+    object-fit: contain;
+    width: max-content;
+    border-radius: 20px;
+  }
+  .landing-faq-section .image-box {
+    width: 25%;
+  }
+  .landing-faq-section .pfs-container {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row-reverse;
+    /* padding: 0px 10rem;
+    gap: 90px; */
+    padding: 0px 0rem;
+    gap: 30px;
+  }
+  .landing-faq-section .head1 {
+    width: max-content;
+    border-radius: 24.586px;
+    border: 1px solid #000;
+    padding: 10px 30px;
+    color: #3b3838;
+    text-align: center;
+    /* font-family: Montserrat; */
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.27px;
+    text-transform: capitalize;
+  }
+  .landing-faq-section .head1.active{
+    color:#fff;
+  }
+  /* .landing-faq-section .tab-text1.active{
+    background:#B09BCA
+  }
+  .landing-faq-section .tab-text2.active{
+    background:#98BF01
+  }
+  .landing-faq-section .tab-text3.active{
+    background:#5EB1F5
+  } */
+  .landing-faq-section .head1.active {
+    border: 2px solid #1c67f3;
+    color: #1c67f3;
+  }
+  .landing-faq-section .head-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding-bottom: 20px;
+  }
+  .landing-faq-section .tab-heading {
+    max-width: 500px;
+  }
+  @media(max-width: 1024px){
+    .landing-faq-section .image-box img {
+      display: none;
+    }
+    .landing-faq-section .main-container-wrapper{
+      width: 100%;
+    }
+    .landing-faq-section .main-textarea {
+      text-align: center;
+      padding-bottom: 10px;
+    }
+    .landing-faq-section .pfs-container {
+      padding: 0;
+      flex-direction: column-reverse;
+      gap: 10px;
+      align-items: center;
+    }
+    .landing-faq-section .main-heading {
+      font-size: 40px;
+      text-align: center;
+      margin: 0 auto;
+    }
+    .landing-faq-section .head-wrapper {
+      justify-content: center;
+    }
+    .landing-faq-section .image-box {
+      width: 100%;
+    }
+  }
+  @media(max-width: 550px){
+    .landing-faq-section .page-width {
+      padding: 3rem 2rem;
+    }
+    .landing-faq-section .tab-heading {
+      max-width: 280px;
+    }
+    .landing-faq-section .landing-accordion {
+      font-size: 13px;
+    }
+    .landing-faq-section .main-textarea {
+      text-align: center;
+      font-size: 14px;
+    }
+    .landing-faq-section .main-heading {
+      font-size: 30px;
+      text-align: center;
+      max-width: 310px;
+      margin: 0 auto;
+      letter-spacing: -1px;
+    }
+    .landing-faq-section .panel p {
+      font-size: 13px;
+    }
+    .landing-faq-section .head1 {
+      padding: 6px 10px;
+      font-size: 11px;
+    }
+    .landing-faq-section .head-wrapper {
+      gap: 5px;
+      overflow: auto;
+      white-space: nowrap;
+      justify-content: flex-start;
+    }
+  }
+</style>
+
+
+
+<section class="landing-faq-section">
+  <div class="page-width">
+    <div class="pfs-container">
+      <div class="main-container-wrapper">
+        <div class="head-wrapper">
+          <div class="head1 tab-text1 active" data-box="data-tab-1" >{{ section.settings.head1 }}</div>
+          <div class="head1 tab-text2" data-box="data-tab-2">{{ section.settings.head2 }}</div>
+          <div class="head1 tab-text3" data-box="data-tab-3">{{ section.settings.head3 }}</div>
+          <div class="head1 tab-text4" data-box="data-tab-4">{{ section.settings.head4 }}</div>
+          <div class="head1 tab-text5" data-box="data-tab-5">{{ section.settings.head5 }}</div>
+          <div class="head1 tab-text6" data-box="data-tab-6">{{ section.settings.head6 }}</div>
+        </div>
+        <div class="faq-box-wrapper">
+          <div class="acc-box landing-acc-box active" data-box="data-tab-1">    
+            {% for block in section.blocks %}
+              {% case block.type %}
+                {% when 'tab1' %}
+                  <div class="tab-container">
+                    <div class="landing-accordion "><div class="tab-heading">{{ block.settings.heading }}</div></div>
+                    <div class="panel">
+                      <p>{{ block.settings.textarea }}</p>
+                    </div>
+                  </div>
+                {% endcase %}
+            {% endfor %}
+          </div>
+          <div class="acc-box landing-acc-box" data-box="data-tab-2">    
+            {% for block in section.blocks %}
+              {% case block.type %}
+                {% when 'tab2' %}
+                  <div class="tab-container">
+                    <div class="landing-accordion "><div class="tab-heading">{{ block.settings.heading }}</div></div>
+                    <div class="panel">
+                      <p>{{ block.settings.textarea }}</p>
+                    </div>
+                  </div>
+                {% endcase %}
+            {% endfor %}
+          </div>
+          <div class="acc-box landing-acc-box" data-box="data-tab-3">    
+            {% for block in section.blocks %}
+              {% case block.type %}
+                {% when 'tab3' %}
+                  <div class="tab-container">
+                    <div class="landing-accordion "><div class="tab-heading">{{ block.settings.heading }}</div></div>
+                    <div class="panel">
+                      <p>{{ block.settings.textarea }}</p>
+                    </div>
+                  </div>
+                {% endcase %}
+            {% endfor %}
+          </div>
+          <div class="acc-box landing-acc-box" data-box="data-tab-4">    
+            {% for block in section.blocks %}
+              {% case block.type %}
+                {% when 'tab4' %}
+                  <div class="tab-container">
+                    <div class="landing-accordion "><div class="tab-heading">{{ block.settings.heading }}</div></div>
+                    <div class="panel">
+                      <p>{{ block.settings.textarea }}</p>
+                    </div>
+                  </div>
+                {% endcase %}
+            {% endfor %}
+          </div>
+          <div class="acc-box landing-acc-box" data-box="data-tab-5">    
+            {% for block in section.blocks %}
+              {% case block.type %}
+                {% when 'tab5' %}
+                  <div class="tab-container">
+                    <div class="landing-accordion "><div class="tab-heading">{{ block.settings.heading }}</div></div>
+                    <div class="panel">
+                      <p>{{ block.settings.textarea }}</p>
+                    </div>
+                  </div>
+                {% endcase %}
+            {% endfor %}
+          </div>
+          <div class="acc-box landing-acc-box" data-box="data-tab-6">    
+            {% for block in section.blocks %}
+              {% case block.type %}
+                {% when 'tab6' %}
+                  <div class="tab-container">
+                    <div class="landing-accordion "><div class="tab-heading">{{ block.settings.heading }}</div></div>
+                    <div class="panel">
+                      <p>{{ block.settings.textarea }}</p>
+                    </div>
+                  </div>
+                {% endcase %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      <div class="image-box">
+        <!-- <img src="{{ section.settings.image | img_url:'' }}"> -->
+        <div class="main-heading">{{ section.settings.heading }}</div>
+        <div class="main-textarea">{{ section.settings.textarea }}</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+{% schema %}
+  {
+    "name": "Faq With Tabs",
+    "settings": [
+      {
+        "type": "inline_richtext",
+        "id": "heading",
+        "label": "Heading"
+      },
+      {
+        "type": "textarea",
+        "id": "textarea",
+        "label": "Textarea"
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "inline_richtext",
+        "id": "head1",
+        "label": "Tab 1"
+      },
+      {
+        "type": "inline_richtext",
+        "id": "head2",
+        "label": "Tab 2"
+      },
+      {
+        "type": "inline_richtext",
+        "id": "head3",
+        "label": "Tab 3"
+      },
+      {
+        "type": "inline_richtext",
+        "id": "head4",
+        "label": "Tab 4"
+      },
+      {
+        "type": "inline_richtext",
+        "id": "head5",
+        "label": "Tab 5"
+      },
+      {
+        "type": "inline_richtext",
+        "id": "head6",
+        "label": "Tab 6"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "tab1",
+        "name": "Tab 1 block",
+        "settings": [
+          {
+            "type": "inline_richtext",
+            "id": "heading",
+            "label": "Heading"
+          },
+          {
+            "type": "inline_richtext",
+            "id": "textarea",
+            "label": "Textarea"
+          }
+        ]
+      },
+      {
+        "type": "tab2",
+        "name": "Tab 2 block",
+        "settings": [
+          {
+            "type": "inline_richtext",
+            "id": "heading",
+            "label": "Heading"
+          },
+          {
+            "type": "inline_richtext",
+            "id": "textarea",
+            "label": "Textarea"
+          }
+        ]
+      },
+      {
+        "type": "tab3",
+        "name": "Tab 3 block",
+        "settings": [
+          {
+            "type": "inline_richtext",
+            "id": "heading",
+            "label": "Heading"
+          },
+          {
+            "type": "inline_richtext",
+            "id": "textarea",
+            "label": "Textarea"
+          }
+        ]
+      },
+      {
+        "type": "tab4",
+        "name": "Tab 4 block",
+        "settings": [
+          {
+            "type": "inline_richtext",
+            "id": "heading",
+            "label": "Heading"
+          },
+          {
+            "type": "inline_richtext",
+            "id": "textarea",
+            "label": "Textarea"
+          }
+        ]
+      },
+      {
+        "type": "tab5",
+        "name": "Tab 5 block",
+        "settings": [
+          {
+            "type": "inline_richtext",
+            "id": "heading",
+            "label": "Heading"
+          },
+          {
+            "type": "inline_richtext",
+            "id": "textarea",
+            "label": "Textarea"
+          }
+        ]
+      },
+      {
+        "type": "tab6",
+        "name": "Tab 6 block",
+        "settings": [
+          {
+            "type": "inline_richtext",
+            "id": "heading",
+            "label": "Heading"
+          },
+          {
+            "type": "inline_richtext",
+            "id": "textarea",
+            "label": "Textarea"
+          }
+        ]
+      },
+    ],
+    "presets": [
+      {
+        "name": "Faq With Tabs"
+      }
+    ]
+  }
+{% endschema %}

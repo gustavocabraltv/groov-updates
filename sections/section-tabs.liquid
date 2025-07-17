@@ -1,0 +1,278 @@
+<style>
+  .gradient__bg {
+    position: absolute;
+    top: -241px;
+    left: 36%; /* Centralizar */
+    transform: translateX(-50%); /* Centralizar */
+    width: 739.89px; /* Largura com base no conteúdo da seção */
+    height: 683.12px; /* Altura com base no conteúdo da seção */
+    background: url('{{ 'gradient-smooth.png' | asset_url }}') no-repeat center center;
+
+    background-size: auto 100%;
+    {% comment %} background: red; {% endcomment %}
+    background-size: cover; /* Garante que a imagem cubra todo o espaço */
+    z-index: 1;
+    opacity: 0.5;
+  }
+  .flash-icon {
+
+  }
+  .tabs {
+      padding-top: 48px;
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+      height: 100vh;
+      {% comment %} background: #EBF7FF; {% endcomment %}
+      background: linear-gradient(to bottom, #EBF7FF, #f8fcff);
+  }
+
+  .tabs__inner {
+      display: flex;
+      position: relative;
+      flex-direction: row;
+
+
+  }
+
+  .tabs__content-left {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      padding: 64px 0;
+      z-index: 2;
+  }
+
+  .tabs__heading {
+    font-size: var(--font-heading-2-desktop);
+    color: var(--text-title);
+
+
+      line-height: 53px;
+      margin-bottom: 64px;
+      width: 80%;
+      font-weight: 600;
+  }
+
+  .tabs__heading-highlight {
+      color: #66ABF4;
+  }
+
+  .tabs__steps {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      width: 85%;
+  }
+
+  .tabs__step {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      padding: 24px 20px;
+      cursor: pointer;
+  }
+
+  .tabs__step.active {
+      background: white;
+      box-shadow: -6px 0 10px rgba(83, 160, 241, 0.37);
+      border-radius: 12px;
+      border: 1px solid rgba(102, 171, 244, 0.44);
+  }
+
+  .tabs__step-number {
+      width: 32px;
+      height: 32px;
+      background: #CEE8FA;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 15px;
+      font-weight: 600;
+  }
+
+  .tabs__step.active .tabs__step-number {
+      background: #66ABF4;
+  }
+
+  .tabs__step-text {
+      font-size: 15px;
+      color: #293C4A;
+      line-height: 17px;
+  }
+
+  .tabs__step.active .tabs__step-text {
+      color: black;
+      font-weight: 600;
+  }
+
+  .tabs__notification {
+      margin-top: 48px;
+      background: #E9F4FA;
+      border-radius: 7px;
+      border: 1px solid #E3EEF6;
+      padding: 17px 20px;
+      color: #617A90;
+      font-size: 18px;
+      width: 85%;
+
+      display: flex;
+      flex-direction: row;
+      gap: 14px;
+  }
+
+  .tabs__notification img {
+    width: 20px;
+    height: auto;
+   }
+
+  .tabs__content-right {
+      {% comment %} Antes aqui era absolute {% endcomment %}
+      position: relative;
+      right: 0;
+      top: 0;
+      width: 57vw;
+      height: 100vh;
+      {% comment %} background-image: url({{ 'slide-1.png' | asset_url }}); {% endcomment %}
+      background-size: cover;
+      background-position: right;
+      background-repeat: no-repeat;
+      display: flex;
+      {% comment %} Alinha ao centro e a esquerda {% endcomment %}
+      align-items: center;
+      justify-content: left;
+
+      overflow: hidden;
+      border-radius: 24px;
+    {% comment %} background: red; {% endcomment %}
+  }
+  .tabs__content-right img {
+    width: 100%;
+  }
+
+  .tabs__image {
+      width: 550px;
+      border-radius: 20px;
+  }
+
+
+  @media screen and (max-width: 480px) {
+
+    .tabs {
+      height: fit-content;
+      min-height: auto;
+    }
+
+    .tabs__step {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 11px;
+      cursor: pointer;
+      border-radius: 50px;
+  }
+
+      .tabs__heading {
+          font-size: var(--font-heading-2-mobile);
+          font-weight: 700;
+          line-height: 38px;
+          margin-bottom: 24px;
+          color: var(--text-title);
+      }
+      .tabs__step-text {
+          font-size: 13px;
+      }
+      .tabs__steps {
+          width: 100%;
+          gap: 0px;
+      }
+      .tabs__image {
+          height: 320px;
+          object-fit: cover;
+          border-radius: 24px;
+          overflow: hidden;
+      }
+     .tabs__content-right {
+      width: 100%;
+      height: auto;
+   }
+
+   .tabs__content-left {
+      width: 100%;
+      padding: 24px 0 0 0;
+  }
+
+  .tabs__inner {
+      flex-direction: column;
+
+  }
+
+  .tabs__image {
+  width: 100%;
+  }
+
+  .tabs__notification {
+      margin: 14px 0 24px 0;
+      width: 100%;
+      padding: 8px 8px;
+      font-size: 13px;
+  }
+
+
+  }
+</style>
+
+<div class="tabs section-{{ section.id }}-padding">
+  <div class="page-width">
+    <div class="tabs__inner">
+      <div class="gradient__bg">&nbsp;</div>
+      <div class="tabs__content-left">
+        <h1 class="tabs__heading">
+          Getting yours couldn't
+          <span class="tabs__heading-highlight">be easier</span>
+        </h1>
+
+        <div class="tabs__steps">
+          <div class="tabs__step active" data-slide="1" data-image="slide-1.webp">
+            <div class="tabs__step-number">1</div>
+            <div class="tabs__step-text">Download the app and create an account</div>
+          </div>
+
+          <div class="tabs__step" data-slide="2" data-image="slide-2.webp">
+            <div class="tabs__step-number">2</div>
+            <div class="tabs__step-text">Scan your foot using our ShapeSense technology</div>
+          </div>
+
+          <div class="tabs__step" data-slide="3" data-image="slide-3.webp">
+            <div class="tabs__step-number">3</div>
+            <div class="tabs__step-text">Select your finish and place your order</div>
+          </div>
+        </div>
+
+        <div class="tabs__notification">
+          <img src="{{ 'flash-icon.svg' | asset_url }}" alt="flash" class="flash-icon" width="auto" height="auto"> Your
+          Groovs will arrive within one week!
+        </div>
+      </div>
+      <div class="tabs__content-right">
+        <img src="{{ 'slide-1.webp' | asset_url }}" alt="Slide" class="tabs__image" width="auto" height="auto">
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Section Tabs",
+  "tag": "section",
+  "class": "section",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Section Tabs"
+    }
+  ]
+}
+{% endschema %}

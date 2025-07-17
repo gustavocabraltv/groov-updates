@@ -1,0 +1,743 @@
+<style>
+    .qr-code-tool {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px;
+      background-color: white;
+      gap: 14px;
+
+      {% comment %} height: 400px; {% endcomment %}
+      width: 200px;
+
+      border-radius: 12px;
+    }
+  .play-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+  }
+    .qr-code-divider {
+      width: 100%;
+      height: 1px;
+      background: #DDDCDC;
+      }
+
+    .p-body {
+      font-size: 14px;
+      line-height: 18px;
+      text-align: center;
+      color: #647584;
+    }
+
+    .video-preview {
+      display: flex;
+      height: 97px;
+      width: 100%;
+      background: lightgray;
+      border-radius: 10px;
+      position: relative;
+      cursor: pointer;
+
+      background-image: url({{ 'video-preview.png' | asset_url }});
+      background-size: cover;
+      background-position: center;
+    }
+
+    /* Estilos do controle personalizado de play/pause */
+    .custom-video-controls {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80px;
+      height: 80px;
+      z-index: 10001;
+      cursor: pointer;
+      display: none;
+    }
+
+    .custom-play-btn, .custom-pause-btn {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .custom-play-btn {
+      opacity: 1;
+    }
+
+    .custom-pause-btn {
+      opacity: 0;
+    }
+
+    /* Mostrar controles apenas no desktop */
+    @media screen and (min-width: 481px) {
+      #modalVideo {
+        cursor: pointer;
+      }
+
+      .custom-video-controls {
+        display: block;
+      }
+
+      .custom-video-controls.playing .custom-play-btn {
+        opacity: 0;
+      }
+
+      .custom-video-controls.playing .custom-pause-btn {
+        opacity: 1;
+      }
+
+      /* Faz os controles aparecerem ao passar o mouse sobre o vídeo */
+      #modalVideo:hover + .custom-video-controls,
+      .custom-video-controls:hover {
+        opacity: 1;
+      }
+    }
+
+    /* Video Modal Styles - ADAPTATIVO */
+    .video-modal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: rgba(0, 0, 0, 0.9);
+    }
+
+    /* Estilo específico para desktop - dentro do wireframe__content-right */
+    @media screen and (min-width: 481px) {
+      .video-modal {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: auto;
+        height: auto;
+        background-color: rgba(0, 0, 0, 0.85);
+        border-radius: 20px;
+      }
+
+      /* No desktop, removemos os controles nativos do vídeo */
+      #modalVideo::-webkit-media-controls {
+        display: none !important;
+      }
+
+      #modalVideo::-webkit-media-controls-enclosure {
+        display: none !important;
+      }
+    }
+
+    /* Bloqueio de scroll - apenas no mobile */
+    @media screen and (max-width: 480px) {
+      html.modal-open {
+        overflow: hidden;
+      }
+
+      body.modal-open {
+        overflow: hidden;
+      }
+
+      /* Controle de largura do vídeo no mobile - pode ser ajustado conforme necessário */
+      #modalVideo {
+        width: 90%; /* Valor padrão ajustável */
+        max-width: 500px; /* Limite máximo, se necessário */
+        margin: 0 auto;
+      }
+    }
+
+    .video-modal-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 90%;
+      max-width: 90%;
+      max-height: 90%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #modalVideo {
+      width: 100%;
+      max-height: 90vh;
+      border-radius: 10px;
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      color: white;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+      z-index: 10000;
+    }
+
+    .wireframe {
+        width: 100%;
+
+        overflow: hidden;
+        height: 100vh;
+        {% comment %} background: pink; {% endcomment %}
+
+        display: flex; /* Adicionado para centralizar o conteúdo */
+        align-items: center; /* Centraliza verticalmente */
+        justify-content: center; /* Centraliza horizontalmente */
+
+    }
+
+    @media screen and (min-width: 482px) {
+        .wireframe {
+          margin-bottom: 64px;
+        }
+    }
+
+    .wireframe__inner {
+        display: flex;
+        justify-content: space-between;
+        padding: 64px 0;
+        {% comment %} background: blue; {% endcomment %}
+    }
+
+    .wireframe__content-left {
+        flex: 1;
+        padding-right: 48px;
+
+
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+
+    }
+
+    .wireframe__heading {
+
+        font-size: var(  --font-heading-2-desktop);
+        color: var(--text-title);
+        margin-bottom: 64px;
+        font-weight: 600;
+    }
+
+    .wireframe__benefits {
+        display: flex;
+        flex-direction: column;
+        gap: 48px;
+    }
+
+    .wireframe__benefit {
+        display: flex;
+        gap: 24px;
+    }
+
+    .wireframe__benefit-icon {
+        width: 30px;
+        height: 30px;
+        flex-shrink: 0;
+    }
+
+    .wireframe__benefit-text {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .wireframe__benefit-title {
+        font-size: 20px;
+        font-weight: 600;
+        color: var(--text-title);
+        margin: 0;
+    }
+
+    .wireframe__benefit-description {
+        font-size: 16px;
+        color: #657985;
+        margin: 0;
+    }
+
+    .wireframe__content-right {
+        flex: 1;
+        position: relative;
+        border-radius: 20px;
+        overflow: hidden; /* Importante para que as imagens filhas respeitem o border-radius */
+        background: #F4F4F6;
+        margin-bottom: -60px;
+        height: 619px;
+    }
+
+    .wireframe__content-right--after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #C5E7FF;
+        opacity: 1;
+        clip-path: inset(100% 0 0 0);
+        border-radius: 0px; /* Adiciona border-radius à div sobreposta */
+
+
+    }
+    .qr-code-img {
+        position: absolute;
+        top: 14px;
+        right: 14px;
+        z-index: 2;
+
+    }
+
+    .wireframe__image {
+        height: 621px;
+        width: auto;
+        object-fit: contain;
+    }
+
+    .page-width-own {
+        max-width: var(--page-width);
+        margin: 0 auto;
+        padding: 0 4.5rem;
+      }
+
+      .appstore-btn-black {
+        display: none;
+      }
+    @media screen and (max-width: 480px) {
+      .appstore-btn-black {
+        display: block;
+      }
+      .appstore-qrcode {
+        display: none;
+      }
+      .p-body {
+        font-size: 21px;
+        line-height: 28px;
+        text-align: center;
+        width: 90%;
+      }
+
+      .video-preview{
+        height: 160px;
+      }
+
+      /* Melhoria para dispositivos móveis */
+      .video-modal-content {
+        width: 100%;
+        height: 100%;
+        padding: 0;
+      }
+
+      .close-modal {
+        top: 20px;
+        right: 20px;
+        font-size: 46px;
+      }
+
+      .qr-code-img {
+          position: relative;
+          left: 50%;
+          transform: translateX(-50%);
+          margin-bottom: 193px;
+          width: 300px;
+          gap: 24px;
+      }
+
+      .page-width-own {
+          max-width: var(--page-width);
+          margin: 0 auto;
+          padding: 0;
+        }
+
+
+      .wireframe__content-right--after {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: #BAE4FD;
+          opacity: 1;
+          clip-path: inset(30% 0 0 0);
+      }
+
+      .wireframe__content-right {
+          justify-content: center;
+          align-items: center;
+          border-radius: 0;
+          height: 700px;
+      }
+
+
+      .wireframe {
+        {% comment %} height: fit-content; {% endcomment %}
+        height: fit-content;
+        display: flex;
+      }
+
+      .wireframe__inner {
+        display: flex;
+        flex-direction: column;
+        padding:0;
+      }
+
+      .wireframe__content-left {
+          padding: 4rem 2rem 4rem 2rem;
+      }
+
+      .wireframe__heading {
+          font-size: var(  --font-heading-2-mobile);
+          font-weight: 700;
+          line-height: 1.2;
+          color: var(--text-title)
+      }
+    }
+</style>
+
+<div class="wireframe section-{{ section.id }}-padding">
+  <div class="page-width-own">
+    <div class="wireframe__inner">
+      <div class="wireframe__content-left">
+        <h1 class="wireframe__heading">{{ section.settings.heading }}</h1>
+
+        <div class="wireframe__benefits">
+          <div class="wireframe__benefit">
+            <img
+              src="{{ 'Science-Molecule--Streamline-Ultimate.png' | asset_url }}"
+              alt="Science Molecule"
+              class="wireframe__benefit-icon"
+              width="auto"
+              height="auto"
+            >
+            <div class="wireframe__benefit-text">
+              <h3 class="wireframe__benefit-title">{{ section.settings.title_1 }}</h3>
+              <p class="wireframe__benefit-description">{{ section.settings.description_1 }}</p>
+            </div>
+          </div>
+
+          <div class="wireframe__benefit">
+            <img
+              src="{{ 'foot-icon.png' | asset_url }}"
+              alt="Foot Icon"
+              class="wireframe__benefit-icon"
+              width="auto"
+              height="auto"
+            >
+            <div class="wireframe__benefit-text">
+              <h3 class="wireframe__benefit-title">{{ section.settings.title_2 }}</h3>
+              <p class="wireframe__benefit-description">{{ section.settings.description_2 }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wireframe__content-right">
+        <div class="wireframe__content-right--after">
+          <img
+            src="{{ 'feet-wireframe-after.png' | asset_url }}"
+            alt="Feet Wireframe"
+            class="wireframe__image"
+            height="auto"
+            width="auto"
+          >
+        </div>
+        <img
+          src="{{ 'feet-wireframe.png' | asset_url }}"
+          alt="Feet Wireframe"
+          class="wireframe__image"
+          height="auto"
+          width="auto"
+        >
+        <div class="qr-code-img qr-code-tool">
+          <div class="video-preview">
+            <img
+              src="{{ 'play-icon.svg' | asset_url }}"
+              alt="Icon Play"
+              height="auto"
+              width="auto"
+              class="play-icon"
+            >
+          </div>
+
+          <span class="p-body">Use your phone to take a 3d scan of your foot</span>
+          <div class="qr-code-divider">&nbsp;</div>
+          <a href="https://apps.apple.com/in/app/groov-custom-insoles/id6733245939">
+            <img
+              src="{{ 'appstore-black.svg' | asset_url }}"
+              class="appstore-btn-black"
+              alt="Button App Store"
+              width="auto"
+              height="auto"
+            >
+          </a>
+          <img
+            src="{{ 'qr-code-groov.png' | asset_url }}"
+            alt="QR Code Groov"
+            class="appstore-qrcode"
+            width="auto"
+            height="auto"
+          >
+        </div>
+
+        <!-- Modal de Vídeo - Dentro do wireframe__content-right para desktop -->
+        <div id="videoModal" class="video-modal">
+          <div class="video-modal-content">
+            <span class="close-modal">&times;</span>
+            <video id="modalVideo" controls>
+              <!-- Versão móvel do vídeo (até 480px) -->
+              <source
+                src="{{ 'groov.mp4' | asset_url }}"
+                type="video/mp4"
+                media="(max-width: 480px)"
+              >
+              <!-- Versão desktop do vídeo (a partir de 481px) -->
+              <source
+                src="{{ 'groov.mp4' | asset_url }}"
+                type="video/mp4"
+                media="(min-width: 481px)"
+              >
+              Your browser does not support the video tag.
+            </video>
+
+            <!-- Controles personalizados de play/pause para desktop -->
+            <div class="custom-video-controls">
+              <img
+                src="{{ 'play.svg' | asset_url }}"
+                alt="Play"
+                width="80"
+                height="80"
+                class="custom-play-btn"
+              >
+              <img
+                src="{{ 'pause.svg' | asset_url }}"
+                alt="Pause"
+                width="80"
+                height="80"
+                class="custom-pause-btn"
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // Get the modal
+    var modal = document.getElementById('videoModal');
+
+    // Get all video preview elements
+    var videoPreview = document.querySelector('.video-preview');
+
+    // Get the video element
+    var video = document.getElementById('modalVideo');
+
+    // Get the close button
+    var closeBtn = document.querySelector('.close-modal');
+
+    // Get custom video controls
+    var customControls = document.querySelector('.custom-video-controls');
+
+    // Armazena a posição de scroll atual
+    var scrollPos;
+
+    // Verifica se é mobile
+    function isMobile() {
+      return window.innerWidth <= 480;
+    }
+
+    // Função para abrir o modal
+    function openModal() {
+      // Se for mobile, bloqueia o scroll
+      if (isMobile()) {
+        // Armazenar a posição de scroll atual antes de bloquear o scroll
+        scrollPos = window.pageYOffset || document.documentElement.scrollTop;
+
+        // Adiciona o bloqueio de scroll e mantém a posição visual atual
+        document.documentElement.classList.add('modal-open');
+        document.body.classList.add('modal-open');
+      }
+
+      // Exibe o modal
+      modal.style.display = 'block';
+
+      // Adiciona uma pequena pausa antes de iniciar o vídeo para garantir que o modal esteja visível
+      setTimeout(function () {
+        // Iniciar o vídeo automaticamente tanto no mobile quanto no desktop
+        video.play();
+        customControls.classList.add('playing');
+      }, 100);
+    }
+
+    // Função para fechar o modal
+    function closeModal() {
+      // Oculta o modal
+      modal.style.display = 'none';
+
+      // Se for mobile, desbloqueia o scroll
+      if (isMobile()) {
+        // Remove o bloqueio de scroll
+        document.documentElement.classList.remove('modal-open');
+        document.body.classList.remove('modal-open');
+
+        // Restaura a posição de scroll
+        window.scrollTo(0, scrollPos);
+      }
+
+      // Pausa o vídeo
+      video.pause();
+      video.currentTime = 0;
+
+      // Reset do estado dos controles personalizados
+      customControls.classList.remove('playing');
+    }
+
+    // Alternar Play/Pause
+    function togglePlayPause() {
+      if (video.paused || video.ended) {
+        // Play
+        video.play();
+        customControls.classList.add('playing');
+      } else {
+        // Pause
+        video.pause();
+        customControls.classList.remove('playing');
+      }
+    }
+
+    // When the user clicks on the video preview, open the modal
+    videoPreview.addEventListener('click', function (e) {
+      e.preventDefault();
+      openModal();
+    });
+
+    // When the user clicks on the close button, close the modal
+    closeBtn.addEventListener('click', closeModal);
+
+    // When the user clicks anywhere outside of the video, close it
+    modal.addEventListener('click', function (event) {
+      if (event.target == modal) {
+        closeModal();
+      }
+    });
+
+    // Fechar o modal com a tecla ESC
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && modal.style.display === 'block') {
+        closeModal();
+      }
+    });
+
+    // Toggle play/pause when clicking on the video (desktop only)
+    video.addEventListener('click', function (e) {
+      if (!isMobile()) {
+        e.preventDefault();
+        togglePlayPause();
+      }
+    });
+
+    // Toggle play/pause when clicking on the custom controls
+    customControls.addEventListener('click', function (e) {
+      e.preventDefault();
+      togglePlayPause();
+    });
+
+    // Atualizando o estado dos controles personalizados com base nos eventos do vídeo
+    video.addEventListener('play', function () {
+      customControls.classList.add('playing');
+    });
+
+    video.addEventListener('pause', function () {
+      customControls.classList.remove('playing');
+    });
+
+    video.addEventListener('ended', function () {
+      customControls.classList.remove('playing');
+      video.currentTime = 0;
+    });
+
+    // Ajusta o comportamento do modal quando a janela é redimensionada
+    window.addEventListener('resize', function () {
+      if (modal.style.display === 'block') {
+        if (isMobile()) {
+          // Se redimensionar para mobile e o modal estiver aberto, adiciona o bloqueio de scroll
+          document.documentElement.classList.add('modal-open');
+          document.body.classList.add('modal-open');
+        } else {
+          // Se redimensionar para desktop e o modal estiver aberto, remove o bloqueio de scroll
+          document.documentElement.classList.remove('modal-open');
+          document.body.classList.remove('modal-open');
+        }
+      }
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Section Wireframe",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Título Principal",
+      "default": "Built by science, with perfomance, protection and comfort in mind"
+    },
+    {
+      "type": "text",
+      "id": "title_1",
+      "label": "Título Benefício 1",
+      "default": "Straight to your door, ready to wear"
+    },
+    {
+      "type": "text",
+      "id": "description_1",
+      "label": "Descrição Benefício 1",
+      "default": "We ship your custom Groovs to your door in less than a week, ready to be inserted into every pair of shoes you own."
+    },
+    {
+      "type": "text",
+      "id": "title_2",
+      "label": "Título Benefício 2",
+      "default": "The perfect fit, every time"
+    },
+    {
+      "type": "text",
+      "id": "description_2",
+      "label": "Descrição Benefício 2",
+      "default": "Every Groov is made-to-order. Meaning no extra inventory, no extra waste, and no undue harm to our planet."
+    },
+    {
+      "type": "range",
+      "id": "mobile_video_width",
+      "min": 70,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Largura do vídeo no Mobile",
+      "default": 90
+    }
+  ],
+  "presets": [
+    {
+      "name": "Section Wireframe"
+    }
+  ]
+}
+{% endschema %}

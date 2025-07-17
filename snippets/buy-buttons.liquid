@@ -1,0 +1,215 @@
+{% comment %}
+  Renders product buy-buttons.
+  Accepts:
+  - product: {Object} product object.
+  - block: {Object} passing the block information.
+  - product_form_id: {String} product form id.
+  - section_id: {String} id of section to which this snippet belongs.
+  - show_pickup_availability: {Boolean} for the pickup availability. If true the pickup availability is rendered, false - not rendered (optional).
+
+  Usage:
+  {% render 'buy-buttons', block: block, product: product, product_form_id: product_form_id, section_id: section.id, show_pickup_availability: true %}
+{% endcomment %}
+<div {{ block.shopify_attributes }}>
+  {%- if product != blank -%}
+    {%- liquid
+      assign gift_card_recipient_feature_active = false
+      if block.settings.show_gift_card_recipient and product.gift_card?
+        assign gift_card_recipient_feature_active = true
+      endif
+
+      assign show_dynamic_checkout = false
+      if block.settings.show_dynamic_checkout and gift_card_recipient_feature_active == false
+        assign show_dynamic_checkout = true
+      endif
+    -%}
+
+    <product-form
+      class="product-form"
+      data-hide-errors="{{ gift_card_recipient_feature_active }}"
+      data-section-id="{{ section.id }}"
+    >
+      <div class="product-form__error-message-wrapper" role="alert" hidden>
+        <span class="svg-wrapper">
+          {{- 'icon-error.svg' | inline_asset_content -}}
+        </span>
+        <span class="product-form__error-message"></span>
+      </div>
+
+      {%- form 'product',
+        product,
+        id: product_form_id,
+        class: 'form',
+        novalidate: 'novalidate',
+        data-type: 'add-to-cart-form'
+      -%}
+        <p class="line-item-property__field">
+        {% if template contains 'luxe' or template contains 'response' or template contains 'everyday' or template contains 'von' %}
+        <div class="nickname-popup" style="display: none;">
+          <svg class="cross-svg-btn" fill="#000000" width="800px" height="800px" viewBox="0 0 24 24" id="cross" data-name="Line Color" xmlns="http://www.w3.org/2000/svg" class="icon line-color"><line id="primary" x1="19" y1="19" x2="5" y2="5" style="fill: none; stroke: rgb(0, 0, 0); stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;"></line><line id="primary-2" data-name="primary" x1="19" y1="5" x2="5" y2="19" style="fill: none; stroke: rgb(0, 0, 0); stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;"></line></svg>
+          <div class="inner-nick-input-wrap">
+            <label for="NickName">{{ settings.pop-up-heading }}</label>
+            <input id="NickName" input-data="NickName" type="text" value="" name="properties[NickName]">
+          </div>
+          <div class="done-btn">Add to cart</div>
+          <p>{{ settings.pop-up-desc }}</p>
+        </div>
+        <input id="TypeOfFinish" input-data="TypeOfFinish" type="hidden" value="{{ product.type }}" name="properties[TypeOfFinish]">
+          {% endif %}
+        <input id="variantID" input-data="variantID" type="hidden" value="{{ product.variants[0].id }}" name="properties[_VariantId]">
+        {% if customer %}
+          <!-- <label for="TypeOfFinish">TypeOfFinish</label> -->
+          <input id="PlayerWeight" input-data="PlayerWeight" type="hidden" value="" name="properties[_Weight]">
+          <input id="PainArea" input-data="PainArea" type="hidden" value="" name="properties[_PainArea]">
+          <input id="ShoeSize" input-data="ShoeSize" type="hidden" value="" name="properties[_ShoeSize]">
+          <input id="AditionalDetails" input-data="AditionalDetails" type="hidden" value="" name="properties[_AditionalDetails]">
+          <input id="ShoeType" input-data="ShoeType" type="hidden" value="" name="properties[_ShoeType]">
+          <input id="NonStandardWidth" input-data="NonStandardWidth" type="hidden" value="" name="properties[_NonStandardWidth]">
+          <input id="PlayerID" input-data="PlayerID" type="hidden" value="" name="properties[_PlayerID]">
+          <input id="UserID" input-data="UserID" type="hidden" value="" name="properties[_UserID]">
+          <input id="FootScanId" input-data="FootScanId" type="hidden" value="" name="properties[_FootScanId]">
+          <input id="Age" input-data="Age" type="hidden" value="" name="properties[_Age]">
+          <input id="PlayerHeight" input-data="PlayerHeight" type="hidden" value="" name="properties[_Height]">
+          <input id="LockerShoeID" input-data="LockerShoeID" type="hidden" value="" name="properties[_LockerShoeID]">
+          {% endif %}
+        </p>
+        <input
+          type="hidden"
+          name="id"
+          value="{{ product.selected_or_first_available_variant.id }}"
+          {% if product.selected_or_first_available_variant.available == false
+            or quantity_rule_soldout
+            or product.selected_or_first_available_variant == null
+          %}
+            disabled
+          {% endif %}
+          class="product-variant-id"
+        >
+
+        {%- if gift_card_recipient_feature_active -%}
+          {%- render 'gift-card-recipient-form', product: product, form: form, section: section -%}
+        {%- endif -%}
+
+        <div class="product-form__buttons">
+          {%- liquid
+            assign check_against_inventory = true
+            if product.selected_or_first_available_variant.inventory_management != 'shopify' or product.selected_or_first_available_variant.inventory_policy == 'continue'
+              assign check_against_inventory = false
+            endif
+            if product.selected_or_first_available_variant.quantity_rule.min > product.selected_or_first_available_variant.inventory_quantity and check_against_inventory
+              assign quantity_rule_soldout = true
+            endif
+          -%}
+          <button
+            id="ProductSubmitButton-{{ section_id }}"
+            type="submit"
+            name="add"
+            {% if template contains 'luxe' or template contains 'response' or template contains 'everyday' or template contains 'von' %}
+            style="display: none"
+            {% endif %}
+            class="product-form__submit button button--full-width {% if show_dynamic_checkout %}button--secondary{% else %}button--primary{% endif %}"
+            {% if product.selected_or_first_available_variant.available == false
+              or quantity_rule_soldout
+              or product.selected_or_first_available_variant == null
+            %}
+              disabled
+            {% endif %}
+          > 
+            <span>
+              {%- if product.selected_or_first_available_variant == null -%}
+                {{ 'products.product.unavailable' | t }}
+              {%- elsif product.selected_or_first_available_variant.available == false or quantity_rule_soldout -%}
+                {{ 'products.product.sold_out' | t }}
+              {%- else -%}
+                {{ 'products.product.add_to_cart' | t }}
+              {%- endif -%}
+            </span>
+            {%- render 'loading-spinner' -%}
+            
+            <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
+              {%- render 'price',
+                product: product,
+                use_variant: true,
+                show_badges: true,
+                price_class: 'price--large'
+              -%}
+            </div>
+          </button>
+         {% if template contains 'luxe' or template contains 'response' or template contains 'everyday' or template contains 'von' %}
+          <div
+            class="custom-product-form button button--full-width"
+          >
+            <span>
+              {%- if product.selected_or_first_available_variant == null -%}
+                {{ 'products.product.unavailable' | t }}
+              {%- elsif product.selected_or_first_available_variant.available == false or quantity_rule_soldout -%}
+                {{ 'products.product.sold_out' | t }}
+              {%- else -%}
+                {{ 'products.product.add_to_cart' | t }}
+              {%- endif -%}
+            </span>
+            {%- render 'loading-spinner' -%}
+            
+            <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
+              {%- render 'price',
+                product: product,
+                use_variant: true,
+                show_badges: true,
+                price_class: 'price--large'
+              -%}
+            </div>
+          </div>
+          {% endif %}
+        </div>
+      {%- endform -%}
+    </product-form>
+  {%- else -%}
+    <div class="product-form">
+      <div class="product-form__buttons form">
+        <button
+          type="submit"
+          name="add"
+          class="product-form__submit button button--full-width button--primary"
+          disabled
+        >
+          {{ 'products.product.sold_out' | t }}
+        </button>
+      </div>
+    </div>
+  {%- endif -%}
+
+  {%- if show_pickup_availability -%}
+    {{ 'component-pickup-availability.css' | asset_url | stylesheet_tag }}
+
+    {%- assign pick_up_availabilities = product.selected_or_first_available_variant.store_availabilities
+      | where: 'pick_up_enabled', true
+    -%}
+
+    <pickup-availability
+      class="product__pickup-availabilities quick-add-hidden"
+      {% if product.selected_or_first_available_variant.available and pick_up_availabilities.size > 0 %}
+        available
+      {% endif %}
+      data-root-url="{{ routes.root_url }}"
+      data-variant-id="{{ product.selected_or_first_available_variant.id }}"
+      data-has-only-default-variant="{{ product.has_only_default_variant }}"
+      data-product-page-color-scheme="gradient color-{{ section.settings.color_scheme }}"
+    >
+      <template>
+        <pickup-availability-preview class="pickup-availability-preview">
+          <span class="svg-wrapper">
+            {{- 'icon-unavailable.svg' | inline_asset_content -}}
+          </span>
+          <div class="pickup-availability-info">
+            <p class="caption-large">{{ 'products.product.pickup_availability.unavailable' | t }}</p>
+            <button class="pickup-availability-button link link--text underlined-link">
+              {{ 'products.product.pickup_availability.refresh' | t }}
+            </button>
+          </div>
+        </pickup-availability-preview>
+      </template>
+    </pickup-availability>
+
+    <script src="{{ 'pickup-availability.js' | asset_url }}" defer="defer"></script>
+  {%- endif -%}
+</div>

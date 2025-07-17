@@ -1,0 +1,1033 @@
+<!doctype html>
+<html class="js lenis lenis-smooth" lang="{{ request.locale.iso_code }}">
+  <head>
+    {% render 'replo-head' %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="">
+    <link rel="canonical" href="{{ canonical_url }}">
+    <link rel="stylesheet" href="https://use.typekit.net/ifw0ozc.css">
+
+
+    {% comment %} {{ 'banner_public.css' | asset_url | stylesheet_tag }} {% endcomment %}
+
+
+    {%- if settings.favicon != blank -%}
+      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+    {%- endif -%}
+
+    {%- unless settings.type_header_font.system? and settings.type_body_font.system? -%}
+      <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
+    {%- endunless -%}
+
+    <title>
+      {{ page_title }}
+      {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
+      {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
+      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+    </title>
+
+    {% if page_description %}
+      <meta name="description" content="{{ page_description | escape }}">
+    {% endif %}
+
+    {% render 'meta-tags' %}
+
+    <script src="{{ 'constants.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'pubsub.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'details-disclosure.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'details-modal.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'search-form.js' | asset_url }}" defer="defer"></script>
+
+    {%- if settings.animations_reveal_on_scroll -%}
+      <script src="{{ 'animations.js' | asset_url }}" defer="defer"></script>
+    {%- endif -%}
+
+    {{ content_for_header }}
+
+    {%- liquid
+      assign body_font_bold = settings.type_body_font | font_modify: 'weight', 'bold'
+      assign body_font_italic = settings.type_body_font | font_modify: 'style', 'italic'
+      assign body_font_bold_italic = body_font_bold | font_modify: 'style', 'italic'
+    %}
+
+    {% style %}
+      {{ settings.type_body_font | font_face: font_display: 'swap' }}
+      {{ body_font_bold | font_face: font_display: 'swap' }}
+      {{ body_font_italic | font_face: font_display: 'swap' }}
+      {{ body_font_bold_italic | font_face: font_display: 'swap' }}
+      {{ settings.type_header_font | font_face: font_display: 'swap' }}
+
+      {% for scheme in settings.color_schemes -%}
+        {% assign scheme_classes = scheme_classes | append: ', .color-' | append: scheme.id %}
+        {% if forloop.index == 1 -%}
+          :root,
+        {%- endif %}
+        .color-{{ scheme.id }} {
+          --color-background: {{ scheme.settings.background.red }},{{ scheme.settings.background.green }},{{ scheme.settings.background.blue }};
+        {% if scheme.settings.background_gradient != empty %}
+          --gradient-background: {{ scheme.settings.background_gradient }};
+        {% else %}
+          --gradient-background: {{ scheme.settings.background }};
+        {% endif %}
+
+        {% liquid
+          assign background_color = scheme.settings.background
+          assign background_color_brightness = background_color | color_brightness
+          if background_color_brightness <= 26
+            assign background_color_contrast = background_color | color_lighten: 50
+          elsif background_color_brightness <= 65
+            assign background_color_contrast = background_color | color_lighten: 5
+          else
+            assign background_color_contrast = background_color | color_darken: 25
+          endif
+        %}
+
+        --color-foreground: {{ scheme.settings.text.red }},{{ scheme.settings.text.green }},{{ scheme.settings.text.blue }};
+        --color-background-contrast: {{ background_color_contrast.red }},{{ background_color_contrast.green }},{{ background_color_contrast.blue }};
+        --color-shadow: {{ scheme.settings.shadow.red }},{{ scheme.settings.shadow.green }},{{ scheme.settings.shadow.blue }};
+        --color-button: {{ scheme.settings.button.red }},{{ scheme.settings.button.green }},{{ scheme.settings.button.blue }};
+        --color-button-text: {{ scheme.settings.button_label.red }},{{ scheme.settings.button_label.green }},{{ scheme.settings.button_label.blue }};
+        --color-secondary-button: {{ scheme.settings.background.red }},{{ scheme.settings.background.green }},{{ scheme.settings.background.blue }};
+        --color-secondary-button-text: {{ scheme.settings.secondary_button_label.red }},{{ scheme.settings.secondary_button_label.green }},{{ scheme.settings.secondary_button_label.blue }};
+        --color-link: {{ scheme.settings.secondary_button_label.red }},{{ scheme.settings.secondary_button_label.green }},{{ scheme.settings.secondary_button_label.blue }};
+        --color-badge-foreground: {{ scheme.settings.text.red }},{{ scheme.settings.text.green }},{{ scheme.settings.text.blue }};
+        --color-badge-background: {{ scheme.settings.background.red }},{{ scheme.settings.background.green }},{{ scheme.settings.background.blue }};
+        --color-badge-border: {{ scheme.settings.text.red }},{{ scheme.settings.text.green }},{{ scheme.settings.text.blue }};
+        --payment-terms-background-color: rgb({{ scheme.settings.background.rgb }});
+      }
+      {% endfor %}
+
+      {{ scheme_classes | prepend: 'body' }} {
+        color: rgba(var(--color-foreground), 0.75);
+        background-color: rgb(var(--color-background));
+      }
+
+      :root {
+        --font-body-family: {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }};
+        --font-body-style: {{ settings.type_body_font.style }};
+        --font-body-weight: {{ settings.type_body_font.weight }};
+        --font-body-weight-bold: {{ settings.type_body_font.weight | plus: 300 | at_most: 1000 }};
+
+        --font-heading-family: {{ settings.type_header_font.family }}, {{ settings.type_header_font.fallback_families }};
+        --font-heading-style: {{ settings.type_header_font.style }};
+        --font-heading-weight: {{ settings.type_header_font.weight }};
+
+        --font-body-scale: {{ settings.body_scale | divided_by: 100.0 }};
+        --font-heading-scale: {{ settings.heading_scale | times: 1.0 | divided_by: settings.body_scale }};
+
+        --media-padding: {{ settings.media_padding }}px;
+        --media-border-opacity: {{ settings.media_border_opacity | divided_by: 100.0 }};
+        --media-border-width: {{ settings.media_border_thickness }}px;
+        --media-radius: {{ settings.media_radius }}px;
+        --media-shadow-opacity: {{ settings.media_shadow_opacity | divided_by: 100.0 }};
+        --media-shadow-horizontal-offset: {{ settings.media_shadow_horizontal_offset }}px;
+        --media-shadow-vertical-offset: {{ settings.media_shadow_vertical_offset }}px;
+        --media-shadow-blur-radius: {{ settings.media_shadow_blur }}px;
+        --media-shadow-visible: {% if settings.media_shadow_opacity > 0 %}1{% else %}0{% endif %};
+
+        --page-width: {{ settings.page_width | divided_by: 10 }}rem;
+        --page-width-margin: {% if settings.page_width == '1600' %}2{% else %}0{% endif %}rem;
+
+        --product-card-image-padding: {{ settings.card_image_padding | divided_by: 10.0 }}rem;
+        --product-card-corner-radius: {{ settings.card_corner_radius | divided_by: 10.0 }}rem;
+        --product-card-text-alignment: {{ settings.card_text_alignment }};
+        --product-card-border-width: {{ settings.card_border_thickness | divided_by: 10.0 }}rem;
+        --product-card-border-opacity: {{ settings.card_border_opacity | divided_by: 100.0 }};
+        --product-card-shadow-opacity: {{ settings.card_shadow_opacity | divided_by: 100.0 }};
+        --product-card-shadow-visible: {% if settings.card_shadow_opacity > 0 %}1{% else %}0{% endif %};
+        --product-card-shadow-horizontal-offset: {{ settings.card_shadow_horizontal_offset | divided_by: 10.0 }}rem;
+        --product-card-shadow-vertical-offset: {{ settings.card_shadow_vertical_offset | divided_by: 10.0 }}rem;
+        --product-card-shadow-blur-radius: {{ settings.card_shadow_blur | divided_by: 10.0 }}rem;
+
+        --collection-card-image-padding: {{ settings.collection_card_image_padding | divided_by: 10.0 }}rem;
+        --collection-card-corner-radius: {{ settings.collection_card_corner_radius | divided_by: 10.0 }}rem;
+        --collection-card-text-alignment: {{ settings.collection_card_text_alignment }};
+        --collection-card-border-width: {{ settings.collection_card_border_thickness | divided_by: 10.0 }}rem;
+        --collection-card-border-opacity: {{ settings.collection_card_border_opacity | divided_by: 100.0 }};
+        --collection-card-shadow-opacity: {{ settings.collection_card_shadow_opacity | divided_by: 100.0 }};
+        --collection-card-shadow-visible: {% if settings.collection_card_shadow_opacity > 0 %}1{% else %}0{% endif %};
+        --collection-card-shadow-horizontal-offset: {{ settings.collection_card_shadow_horizontal_offset | divided_by: 10.0 }}rem;
+        --collection-card-shadow-vertical-offset: {{ settings.collection_card_shadow_vertical_offset | divided_by: 10.0 }}rem;
+        --collection-card-shadow-blur-radius: {{ settings.collection_card_shadow_blur | divided_by: 10.0 }}rem;
+
+        --blog-card-image-padding: {{ settings.blog_card_image_padding | divided_by: 10.0 }}rem;
+        --blog-card-corner-radius: {{ settings.blog_card_corner_radius | divided_by: 10.0 }}rem;
+        --blog-card-text-alignment: {{ settings.blog_card_text_alignment }};
+        --blog-card-border-width: {{ settings.blog_card_border_thickness | divided_by: 10.0 }}rem;
+        --blog-card-border-opacity: {{ settings.blog_card_border_opacity | divided_by: 100.0 }};
+        --blog-card-shadow-opacity: {{ settings.blog_card_shadow_opacity | divided_by: 100.0 }};
+        --blog-card-shadow-visible: {% if settings.blog_card_shadow_opacity > 0 %}1{% else %}0{% endif %};
+        --blog-card-shadow-horizontal-offset: {{ settings.blog_card_shadow_horizontal_offset | divided_by: 10.0 }}rem;
+        --blog-card-shadow-vertical-offset: {{ settings.blog_card_shadow_vertical_offset | divided_by: 10.0 }}rem;
+        --blog-card-shadow-blur-radius: {{ settings.blog_card_shadow_blur | divided_by: 10.0 }}rem;
+
+        --badge-corner-radius: {{ settings.badge_corner_radius | divided_by: 10.0 }}rem;
+
+        --popup-border-width: {{ settings.popup_border_thickness }}px;
+        --popup-border-opacity: {{ settings.popup_border_opacity | divided_by: 100.0 }};
+        --popup-corner-radius: {{ settings.popup_corner_radius }}px;
+        --popup-shadow-opacity: {{ settings.popup_shadow_opacity | divided_by: 100.0 }};
+        --popup-shadow-horizontal-offset: {{ settings.popup_shadow_horizontal_offset }}px;
+        --popup-shadow-vertical-offset: {{ settings.popup_shadow_vertical_offset }}px;
+        --popup-shadow-blur-radius: {{ settings.popup_shadow_blur }}px;
+
+        --drawer-border-width: {{ settings.drawer_border_thickness }}px;
+        --drawer-border-opacity: {{ settings.drawer_border_opacity | divided_by: 100.0 }};
+        --drawer-shadow-opacity: {{ settings.drawer_shadow_opacity | divided_by: 100.0 }};
+        --drawer-shadow-horizontal-offset: {{ settings.drawer_shadow_horizontal_offset }}px;
+        --drawer-shadow-vertical-offset: {{ settings.drawer_shadow_vertical_offset }}px;
+        --drawer-shadow-blur-radius: {{ settings.drawer_shadow_blur }}px;
+
+        --spacing-sections-desktop: {{ settings.spacing_sections }}px;
+        --spacing-sections-mobile: {% if settings.spacing_sections < 24 %}{{ settings.spacing_sections }}{% else %}{{ settings.spacing_sections | times: 0.7 | round | at_least: 20 }}{% endif %}px;
+
+        --grid-desktop-vertical-spacing: {{ settings.spacing_grid_vertical }}px;
+        --grid-desktop-horizontal-spacing: {{ settings.spacing_grid_horizontal }}px;
+        --grid-mobile-vertical-spacing: {{ settings.spacing_grid_vertical | divided_by: 2 }}px;
+        --grid-mobile-horizontal-spacing: {{ settings.spacing_grid_horizontal | divided_by: 2 }}px;
+
+        --text-boxes-border-opacity: {{ settings.text_boxes_border_opacity | divided_by: 100.0 }};
+        --text-boxes-border-width: {{ settings.text_boxes_border_thickness }}px;
+        --text-boxes-radius: {{ settings.text_boxes_radius }}px;
+        --text-boxes-shadow-opacity: {{ settings.text_boxes_shadow_opacity | divided_by: 100.0 }};
+        --text-boxes-shadow-visible: {% if settings.text_boxes_shadow_opacity > 0 %}1{% else %}0{% endif %};
+        --text-boxes-shadow-horizontal-offset: {{ settings.text_boxes_shadow_horizontal_offset }}px;
+        --text-boxes-shadow-vertical-offset: {{ settings.text_boxes_shadow_vertical_offset }}px;
+        --text-boxes-shadow-blur-radius: {{ settings.text_boxes_shadow_blur }}px;
+
+        --buttons-radius: {{ settings.buttons_radius }}px;
+        --buttons-radius-outset: {% if settings.buttons_radius > 0 %}{{ settings.buttons_radius | plus: settings.buttons_border_thickness }}{% else %}0{% endif %}px;
+        --buttons-border-width: {% if settings.buttons_border_opacity > 0 %}{{ settings.buttons_border_thickness }}{% else %}0{% endif %}px;
+        --buttons-border-opacity: {{ settings.buttons_border_opacity | divided_by: 100.0 }};
+        --buttons-shadow-opacity: {{ settings.buttons_shadow_opacity | divided_by: 100.0 }};
+        --buttons-shadow-visible: {% if settings.buttons_shadow_opacity > 0 %}1{% else %}0{% endif %};
+        --buttons-shadow-horizontal-offset: {{ settings.buttons_shadow_horizontal_offset }}px;
+        --buttons-shadow-vertical-offset: {{ settings.buttons_shadow_vertical_offset }}px;
+        --buttons-shadow-blur-radius: {{ settings.buttons_shadow_blur }}px;
+        --buttons-border-offset: {% if settings.buttons_radius > 0 or settings.buttons_shadow_opacity > 0 %}0.3{% else %}0{% endif %}px;
+
+        --inputs-radius: {{ settings.inputs_radius }}px;
+        --inputs-border-width: {{ settings.inputs_border_thickness }}px;
+        --inputs-border-opacity: {{ settings.inputs_border_opacity | divided_by: 100.0 }};
+        --inputs-shadow-opacity: {{ settings.inputs_shadow_opacity | divided_by: 100.0 }};
+        --inputs-shadow-horizontal-offset: {{ settings.inputs_shadow_horizontal_offset }}px;
+        --inputs-margin-offset: {% if settings.inputs_shadow_vertical_offset != 0 and settings.inputs_shadow_opacity > 0 %}{{ settings.inputs_shadow_vertical_offset | abs }}{% else %}0{% endif %}px;
+        --inputs-shadow-vertical-offset: {{ settings.inputs_shadow_vertical_offset }}px;
+        --inputs-shadow-blur-radius: {{ settings.inputs_shadow_blur }}px;
+        --inputs-radius-outset: {% if settings.inputs_radius > 0 %}{{ settings.inputs_radius | plus: settings.inputs_border_thickness }}{% else %}0{% endif %}px;
+
+        --variant-pills-radius: {{ settings.variant_pills_radius }}px;
+        --variant-pills-border-width: {{ settings.variant_pills_border_thickness }}px;
+        --variant-pills-border-opacity: {{ settings.variant_pills_border_opacity | divided_by: 100.0 }};
+        --variant-pills-shadow-opacity: {{ settings.variant_pills_shadow_opacity | divided_by: 100.0 }};
+        --variant-pills-shadow-horizontal-offset: {{ settings.variant_pills_shadow_horizontal_offset }}px;
+        --variant-pills-shadow-vertical-offset: {{ settings.variant_pills_shadow_vertical_offset }}px;
+        --variant-pills-shadow-blur-radius: {{ settings.variant_pills_shadow_blur }}px;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: inherit;
+      }
+
+      html {
+        box-sizing: border-box;
+        font-size: calc(var(--font-body-scale) * 62.5%);
+        /* font-size: 100%; */
+        height: 100%;
+      }
+
+      body {
+        display: grid;
+        grid-template-rows: auto auto 1fr auto;
+        grid-template-columns: 100%;
+        min-height: 750px;
+        margin: 0;
+        font-size: 1.5rem;
+        letter-spacing: 0.06rem;
+        line-height: calc(1 + 0.8 / var(--font-body-scale));
+        font-family: var(--font-body-family);
+        font-style: var(--font-body-style);
+        font-weight: var(--font-body-weight);
+      }
+      body.contact.page {
+        min-height: 710px;
+      }
+
+      @media screen and (min-width: 750px) {
+        body {
+          font-size: 1.6rem;
+        }
+      }
+      @media screen and (max-width: 550px) {
+        body {
+          font-size: 1.6rem;
+          min-height: 810px;
+        }
+      }
+    {% endstyle %}
+    {{ 'app.css' | asset_url | stylesheet_tag }}
+    {{ 'base.css' | asset_url | stylesheet_tag }}
+    {{ 'custom.css' | asset_url | stylesheet_tag }}
+    <link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">
+
+    {%- if settings.cart_type == 'drawer' -%}
+      {{ 'component-cart-drawer.css' | asset_url | stylesheet_tag }}
+      {{ 'component-cart.css' | asset_url | stylesheet_tag }}
+      {{ 'component-totals.css' | asset_url | stylesheet_tag }}
+      {{ 'component-price.css' | asset_url | stylesheet_tag }}
+      {{ 'component-discounts.css' | asset_url | stylesheet_tag }}
+    {%- endif -%}
+
+    {%- unless settings.type_body_font.system? -%}
+      {% comment %}theme-check-disable AssetPreload{% endcomment %}
+      <link rel="preload" as="font" href="{{ settings.type_body_font | font_url }}" type="font/woff2" crossorigin>
+      {% comment %}theme-check-enable AssetPreload{% endcomment %}
+    {%- endunless -%}
+    {%- unless settings.type_header_font.system? -%}
+      {% comment %}theme-check-disable AssetPreload{% endcomment %}
+      <link rel="preload" as="font" href="{{ settings.type_header_font | font_url }}" type="font/woff2" crossorigin>
+      {% comment %}theme-check-enable AssetPreload{% endcomment %}
+    {%- endunless -%}
+
+    {%- if localization.available_countries.size > 1 or localization.available_languages.size > 1 -%}
+      {{ 'component-localization-form.css' | asset_url | stylesheet_tag: preload: true }}
+      <script src="{{ 'localization-form.js' | asset_url }}" defer="defer"></script>
+    {%- endif -%}
+
+    {%- if settings.predictive_search_enabled -%}
+      <link
+        rel="stylesheet"
+        href="{{ 'component-predictive-search.css' | asset_url }}"
+        media="print"
+        onload="this.media='all'"
+      >
+    {%- endif -%}
+
+    <script>
+      if (Shopify.designMode) {
+        document.documentElement.classList.add('shopify-design-mode');
+      }
+    </script>
+    <!-- GSAP -->
+    <script src="https://unpkg.com/split-type" defer="defer"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js" defer="defer"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js" defer="defer"></script>
+    {%- if template == 'index' -%}
+          <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@latest/bundled/lenis.js"></script>
+    {%- endif -%}
+ 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.css" defer="defer">
+
+
+    <!-- Swiper -->
+    {% comment %} <link href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" rel="stylesheet" defer="defer"> {% endcomment %}
+    {% comment %} <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.5/swiper-bundle.min.js" defer="defer"></script> {% endcomment %}
+  </head>
+
+  <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %} {% unless template == 'index' %} body-with-background{% endunless %}  {% unless template contains "account" or template contains 'login' %} {{ page_title | handle }} {{ template.name }} {% endunless %} temp-{{ template }}">
+   {% section 'jahin-custom-fonts' %}
+    <div class="loader" style="display: none;">
+      <div class="spinner"></div>
+    </div>
+        <script>
+      // fetch('/cart.js')
+      //   .then(response => response.json())
+      //   .then(cart => {
+      //     console.log('Cart data:', cart);
+      //     // You can now access cart.items, cart.total_price, etc.
+      //   })
+      //   .catch(error => {
+      //     console.error('Error fetching cart:', error);
+      //   });
+
+      
+      {% if request.page_type contains 'account' %}
+        const shouldRedirect = localStorage.getItem('RedirectToCart');
+        if (shouldRedirect == 'true') {
+          let LoaderBox = document.querySelector('.loader');
+          if(LoaderBox){
+            LoaderBox.style.display = "flex";
+          }
+          async function FtechApiUpdateCart() {
+            const Cusemail = "{{ customer.email }}";
+            const apiRes = await fetch(`https://consumerapi.groov.me/api/consumer/${encodeURIComponent(Cusemail)}`);
+            const customerData = await apiRes.json();
+          
+            const cartRes = await fetch('/cart.js');
+            const cartData = await cartRes.json();
+          
+            for (const item of cartData.items) {
+              const props = {};
+            
+              // Step 1: Add API data with special mapping
+              for (const key in customerData) {
+                if (key !== 'NickName' && key !== '_VariantId' && key !== 'TypeOfFinish' && key !== 'FirstName' && key !== 'LastName' && key !== 'Email' && key !== 'ShoeSize' && key !== 'Gender' && key !== 'ShoeSizeGender' && key !== 'Width' && key !== 'PlayerThumbnail' && key !== 'UserType' && key !== 'PlayerStatus' && key !== 'ProfileCompleteStatus' && key !== 'EmailMarketing') {
+                  if (key === 'UserID') {
+                    props['_UserID'] = customerData[key];
+                  } else if (key === 'PlayerID') {
+                    props['_PlayerID'] = customerData[key];
+                  } else {
+                    // let hiddenKey = `_${key}`;
+                    props[key] = customerData[key];
+                  }
+                }
+              }
+            
+              // Step 2: Retain specific existing properties from the cart item
+              const itemProps = item.properties || {};
+              const keysToPreserve = ['NickName', '_VariantId', 'TypeOfFinish'];
+            
+              keysToPreserve.forEach(key => {
+                if (itemProps[key]) {
+                  props[key] = itemProps[key];
+                }
+              });
+            
+              console.log('Final props for item:', props);
+            
+              // Now add to your updates object here if needed
+
+              // Update each item via cart/change.js
+              await fetch('/cart/change.js', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Accept': 'application/json',
+                },
+                body: JSON.stringify({
+                  id: item.key,
+                  quantity: item.quantity,
+                  properties: props,
+                }),
+              });
+            }
+          
+            console.log('Cart properties updated!');
+            // Optionally reload or redirect
+            window.location.href = '/cart';
+          }
+          
+          FtechApiUpdateCart();
+
+          localStorage.removeItem('RedirectToCart');
+        }
+      {% endif %}
+
+
+      {% comment %}
+      JS for login while checkout from mobile app -->
+      {% endcomment %}
+    const showLoader = () => {
+      const loader = document.querySelector('.loader');
+      if (loader) loader.style.display = 'flex';
+    };
+    {% if request.page_type contains 'login' %}
+      const urlParams = new URLSearchParams(window.location.search);
+    
+      // Show the loader
+    
+      // Function to handle auto-login
+      const autoLogin = (userId, password) => {
+        showLoader();
+    
+        document.addEventListener('DOMContentLoaded', function () {
+          const emailInput = document.querySelector('.app-login-email');
+          const passwordInput = document.querySelector('.app-login-password');
+          const loginButton = document.querySelector('.app-login-signin');
+    
+          if (emailInput && passwordInput && loginButton) {
+            emailInput.focus();
+            if(userId){
+              emailInput.value = userId;
+            }
+            if(password){
+              passwordInput.value = password;
+            }
+    
+            // Trigger login
+            setTimeout(() => {
+              loginButton.click();
+    
+              // Clean up localStorage after triggering login
+              localStorage.removeItem('email');
+              localStorage.removeItem('password');
+            }, 500);
+          }
+        });
+      };
+      // ----------- LOGIN PAGE FLOW -----------
+      
+      // Case 1: URL contains login info (checkout_url based login)
+      if (urlParams.has('user_id') && urlParams.has('identifier')) {
+        showLoader();
+      
+        const checkoutUrl = urlParams.get('checkout_url');
+        let userId = urlParams.get('user_id');
+        const password = urlParams.get('identifier'); // or use 'pass' if that's the correct param
+        if (userId) {
+          userId = userId.replace(/ /g, '+'); // Fix for '+' being turned into space
+        }
+        localStorage.setItem('redirectAfterLogin', checkoutUrl);
+        console.log('Hidden Login:', { userId, password, checkoutUrl });
+      
+        if (userId && password) {
+          autoLogin(userId, password);
+        }
+      } else {
+        // Optional fallback login from localStorage
+        const storedEmail = localStorage.getItem('email');
+        const storedPassword = localStorage.getItem('password');
+      
+        if (storedEmail && storedPassword) {
+          console.log('Auto login with localStorage credentials');
+          showLoader();
+          autoLogin(storedEmail, storedPassword);
+        }
+      }
+    {% endif %}
+    {% if request.page_type contains 'register' %}
+      // Save checkout_url on register page
+      const urlParamss = new URLSearchParams(window.location.search);
+      if (urlParamss.has('checkout_url')) {
+        localStorage.setItem('CheckoutUrlWhileSignup', urlParamss.get('checkout_url'));
+      }
+    {% endif %}
+    {% if request.page_type contains 'login' %}
+      const redirectUrlCheckout = localStorage.getItem('CheckoutUrlWhileSignup');
+      if (redirectUrlCheckout) {
+        showLoader();
+        localStorage.removeItem('CheckoutUrlWhileSignup');
+        window.location.href = '/checkout';
+        setTimeout(() => {
+        }, 3000);
+      }else{
+        // window.location.href = '/account/login';
+      }
+    {% endif %}
+  
+
+      {% if request.page_type contains 'account' %}
+        const redirectUrl = localStorage.getItem('redirectAfterLogin');
+        // Delay to ensure Shopify finishes loading the account page
+        if (redirectUrl) {
+          showLoader();
+          // Delay to ensure Shopify finishes loading the account page
+          setTimeout(() => {
+            localStorage.removeItem('redirectAfterLogin');
+            window.location.href = redirectUrl;
+            console.log('Redirecting to:', redirectUrl);
+          }, 3000);
+        }
+      {% endif %}
+    </script>
+    <a class="skip-to-content-link button visually-hidden" href="#MainContent">
+      {{ 'accessibility.skip_to_text' | t }}
+    </a>
+
+    {%- if settings.cart_type == 'drawer' -%}
+      {%- render 'cart-drawer' -%}
+    {%- endif -%}
+
+    {% sections 'header-group' %}
+
+    <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
+      {{ content_for_layout }}
+    </main>
+
+    {% sections 'footer-group' %}
+
+    <ul hidden>
+      <li id="a11y-refresh-page-message">{{ 'accessibility.refresh_page' | t }}</li>
+      <li id="a11y-new-window-message">{{ 'accessibility.link_messages.new_window' | t }}</li>
+    </ul>
+
+    <script>
+      window.shopUrl = '{{ request.origin }}';
+      window.routes = {
+        cart_add_url: '{{ routes.cart_add_url }}',
+        cart_change_url: '{{ routes.cart_change_url }}',
+        cart_update_url: '{{ routes.cart_update_url }}',
+        cart_url: '{{ routes.cart_url }}',
+        predictive_search_url: '{{ routes.predictive_search_url }}',
+      };
+
+      window.cartStrings = {
+        error: `{{ 'sections.cart.cart_error' | t }}`,
+        quantityError: `{{ 'sections.cart.cart_quantity_error_html' | t: quantity: '[quantity]' }}`,
+      };
+
+      window.variantStrings = {
+        addToCart: `{{ 'products.product.add_to_cart' | t }}`,
+        soldOut: `{{ 'products.product.sold_out' | t }}`,
+        unavailable: `{{ 'products.product.unavailable' | t }}`,
+        unavailable_with_option: `{{ 'products.product.value_unavailable' | t: option_value: '[value]' }}`,
+      };
+
+      window.quickOrderListStrings = {
+        itemsAdded: `{{ 'sections.quick_order_list.items_added.other' | t: quantity: '[quantity]' }}`,
+        itemAdded: `{{ 'sections.quick_order_list.items_added.one' | t: quantity: '[quantity]' }}`,
+        itemsRemoved: `{{ 'sections.quick_order_list.items_removed.other' | t: quantity: '[quantity]' }}`,
+        itemRemoved: `{{ 'sections.quick_order_list.items_removed.one' | t: quantity: '[quantity]' }}`,
+        viewCart: `{{- 'sections.quick_order_list.view_cart' | t -}}`,
+        each: `{{- 'sections.quick_order_list.each' | t: money: '[money]' }}`,
+        min_error: `{{- 'sections.quick_order_list.min_error' | t: min: '[min]' }}`,
+        max_error: `{{- 'sections.quick_order_list.max_error' | t: max: '[max]' }}`,
+        step_error: `{{- 'sections.quick_order_list.step_error' | t: step: '[step]' }}`,
+      };
+
+      window.accessibilityStrings = {
+        imageAvailable: `{{ 'products.product.media.image_available' | t: index: '[index]' }}`,
+        shareSuccess: `{{ 'general.share.success_message' | t }}`,
+        pauseSlideshow: `{{ 'sections.slideshow.pause_slideshow' | t }}`,
+        playSlideshow: `{{ 'sections.slideshow.play_slideshow' | t }}`,
+        recipientFormExpanded: `{{ 'recipient.form.expanded' | t }}`,
+        recipientFormCollapsed: `{{ 'recipient.form.collapsed' | t }}`,
+        countrySelectorSearchCount: `{{ 'localization.country_results_count' | t: count: '[count]' }}`,
+      };
+    </script>
+
+    {%- if settings.predictive_search_enabled -%}
+      <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
+    {%- endif -%}
+
+    {%- if settings.cart_type == 'drawer' -%}
+      <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
+    {%- endif -%}
+    <script src="{{ 'gsap.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'tabs.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'reviews-slider.js' | asset_url }}" defer="defer"></script>
+
+    <!-- Popup Wrap -->
+    <div class="custom_popup_wrap">
+      <div class="custom_pp_content">
+        <span class="close_custom_pp"
+          ><img
+            src="https://cdn.shopify.com/s/files/1/0716/2606/4183/files/close-popup.png?v=1738750209"
+            width="auto"
+            height="auto"
+        ></span>
+        <div class="cpp_img_wrap">
+          <div class="cpp_info_wrap">
+            <span class="cpp_info_img"
+              ><img
+                src="https://cdn.shopify.com/s/files/1/0716/2606/4183/files/info-bg-blue-icon.png?v=1738567844"
+                width="auto"
+                height="auto"
+            ></span>
+            <span class="cpp_info_text">Shoes are <strong>designed for the masses</strong> and don't fit right</span>
+          </div>
+          <div class="cpp_image_wrap">
+            <div class="cpp_verticle_line">
+              <span class="cpp_top_dot"></span>
+              <span class="cpp_bottom_dot"></span>
+            </div>
+            <div class="cpp_main_img_wrap">
+              <div class="cpp_img_text">
+                <span
+                  >Shoe fitting <br>
+                  solutions are <br>
+                  <strong>100 years old</strong></span
+                >
+              </div>
+              <div class="cpp_main_img">
+                <img
+                  src="https://cdn.shopify.com/s/files/1/0716/2606/4183/files/leg-popup-img.png?v=1738567844"
+                  width="auto"
+                  height="auto"
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="cpp_content_wrap">
+          <div class="cpp_content_box">
+            <span class="pp_qoute_icon"
+              ><img
+                src="https://cdn.shopify.com/s/files/1/0716/2606/4183/files/qoute-blue-icon.png?v=1738567966"
+                width="auto"
+                height="auto"
+            ></span>
+            <p class="cpp_content_text">
+              The footwear industry is currently
+              <span class="imp_text">unable to design and manufacture footwear</span> that can conform to the
+              three-dimensional morphology of all feet in the population.
+            </p>
+            <img
+              class="nlm_logo"
+              src="https://cdn.shopify.com/s/files/1/0716/2606/4183/files/NLM-logo.png?v=1738568600"
+              width="auto"
+              height="auto"
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Custom JS -->
+    <script>
+{% if template contains 'product' %}
+document.addEventListener('DOMContentLoaded', function () {
+  // Change the submit button to a button type on page load
+  let submitBtn = document.querySelectorAll('.custom-product-form');
+    console.log('submitBtn', submitBtn)
+  if (submitBtn) {
+    // setTimeout(function(){
+    //   submitBtn.setAttribute('type', 'button'); // Change to 'button' type
+    // }, 500)
+
+    // Add click event to show the popup when the button is clicked
+    submitBtn.forEach(function(submitBtnEle){
+      submitBtnEle.addEventListener('click', function () {
+        let nickNamePopup = document.querySelector('.nickname-popup');
+        if (nickNamePopup) {
+          submitBtnEle.setAttribute('type', 'submit'); 
+          nickNamePopup.style.display = "flex"; // Show the popup
+        }
+      });
+    })
+  }
+
+  // Handle the nickname popup logic
+  let nickNamePopup = document.querySelector('.nickname-popup');
+  let nickInput = document.querySelector('input[id="NickName"]');
+  
+  if (nickNamePopup) {
+    let closeBtn = nickNamePopup.querySelector('.cross-svg-btn');
+    let DoneBtn = nickNamePopup.querySelector('.done-btn');
+    // let shopAllBtn = document.querySelectorAll('.quick_add_button.default');
+    
+    if (closeBtn) {
+      closeBtn.addEventListener('click', function () {
+        nickNamePopup.style.display = "none"; // Hide the popup when clicked
+      });
+    }
+    
+    if (DoneBtn) {
+      DoneBtn.addEventListener('click', function () {
+        if (nickInput.value.trim() != "") {
+          nickNamePopup.style.display = "none"; // Hide the popup when clicked
+
+          // Trigger the form submission after clicking Done
+          let originalSubmitBtn = document.querySelector('.product-form__submit');
+          if (originalSubmitBtn) {
+            originalSubmitBtn.click(); // Trigger the form submission
+          }
+        }
+      });
+    }
+  }
+});
+{% endif %}
+
+{% if customer == null %}
+  document.addEventListener('DOMContentLoaded', function () {
+    // Check if cart contains any restricted product handles
+    let shouldRedirect = false;
+
+    {% for item in cart.items %}
+      {% assign handle = item.product.handle | downcase %}
+      {% if handle contains 'the-luxe' or handle contains 'the-perfomance' or handle contains 'the-everyday' or handle contains 'von' %}
+        shouldRedirect = true;
+      {% endif %}
+    {% endfor %}
+
+    let checkoutBtn = document.querySelector('.anchor-cart-checkout');
+    if (checkoutBtn) {
+      checkoutBtn.addEventListener('click', function (e) {
+        e.preventDefault(); // prevent default behavior (if it's an anchor)
+        
+        {% assign match_found = false %}
+        {% for item in cart.items %}
+          {% assign handle = item.product.handle | downcase %}
+          {% if handle contains 'the-luxe' or handle contains 'the-perfomance' or handle contains 'the-everyday' or handle contains 'von' %}
+            {% assign match_found = true %}
+          {% endif %}
+        {% endfor %}
+
+        {% if match_found %}
+          // Redirect to register if restricted product is found
+          localStorage.setItem('RedirectToCart', 'true');
+          window.location.href = "/account/register";
+        {% else %}
+          // Else, proceed to checkout
+          window.location.href = "/checkout";
+        {% endif %}
+      });
+    }
+  });
+  {% endif %}
+
+
+      
+// Login flow JS starts
+document.addEventListener("DOMContentLoaded", async function () {
+  // Initialize a variable with default value false
+  let isLoggedIn = false;
+
+  // Check if the customer object is populated (logged in)
+  if ({{ customer | json }} !== null && {{ customer | json }} !== "{}") {
+    isLoggedIn = true;
+  }
+
+  // If not logged in, alert the user and exit
+  if (!isLoggedIn) {
+    // alert("Please login to continue.");
+    console.warn("Customer is not logged in.");
+    return;
+  }
+
+  // Fetch customer data based on email if logged in
+  const email = "{{ customer.email }}";
+
+  try {
+    const res = await fetch(`https://consumerapi.groov.me/api/consumer/${encodeURIComponent(email)}`);
+    const data = await res.json();
+  
+    console.log('Fetched data:', data);
+  
+    // Loop through all keys in the fetched data
+    for (const key in data) {
+      // Select ALL input fields with matching input-data attribute
+      const inputs = document.querySelectorAll(`input[input-data="${key}"]`);
+  
+      if (inputs.length > 0) {
+        inputs.forEach(input => {
+          input.value = data[key];
+          console.log(`Setting input-data="${key}" to value: ${data[key]}`);
+        });
+      } else {
+        console.warn(`No input found with input-data="${key}"`);
+      }
+    }
+  
+    console.log("All matching inputs updated based on input-data attributes.");
+  } catch (error) {
+    console.error("Error fetching or populating data:", error);
+  }
+});
+// Login flow JS ends
+
+
+  
+  
+const form1 = document.getElementById("forgot-password-form");
+const step1 = document.getElementById("step-1");
+const step2 = document.getElementById("step-2");
+const sendOtpBtn = document.getElementById("send-otp-btn");
+const alertBox = document.querySelector(".alert-message-inline");
+const SignInBtn = document.querySelector(".customer-main-login-button");
+const loginForm = document.getElementById("customer_login");
+const emailInput = loginForm?.querySelector('.customer-emails');
+const passwordInput = loginForm?.querySelector('.customer-passwords');
+
+let currentStep = 1;
+let userEmail = "";
+ 
+if (loginForm && SignInBtn && emailInput && passwordInput) {
+    loginForm.addEventListener("submit", function (e) {
+      // Check if both fields have values
+      if (emailInput.value.trim() === "" || passwordInput.value.trim() === "") {
+        e.preventDefault(); // Prevent form from submitting
+        // showAlert("Incorrect email or password.");
+        // alert("Incorrect email or password.");
+        return;
+      }
+
+      // If valid, show loading state
+      SignInBtn.disabled = true;
+      SignInBtn.innerText = "Signing In...";
+    });
+  }
+  
+function showAlert(message, color = "red") {
+  if (alertBox) {
+    alertBox.innerHTML = `<p style="color: ${color}; margin: 0;">${message}</p>`;
+  }
+}
+
+function validatePassword(password) {
+  const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#^()[\]{}])[A-Za-z\d@$!%*?&#^()[\]{}]{8,}$/;
+  return regex.test(password);
+}
+
+if(form1){
+  form1.addEventListener("submit", async function (e) {
+  e.preventDefault();
+
+  if (currentStep === 1) {
+    const emailInput = document.getElementById("email");
+    const email = emailInput.value.trim();
+
+    if (!email) {
+      showAlert("Please enter your email.");
+      return;
+    }
+
+    userEmail = email;
+    sendOtpBtn.disabled = true;
+    sendOtpBtn.innerText = "Sending OTP...";
+    showAlert("");
+
+    try {
+      const res = await fetch("https://consumerapi.groov.me/api/auth/forgot-password", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ Username: userEmail })
+      });
+
+      const data = await res.json();
+
+      if (!res.ok || data.error) {
+        showAlert("Failed to send OTP: " + (data.message || "Unknown error"));
+        sendOtpBtn.disabled = false;
+        sendOtpBtn.innerText = "Send OTP";
+        return;
+      }
+
+      setTimeout(() => {
+        step1.style.display = "none";
+        step2.style.display = "block";
+        currentStep = 2;
+
+        emailInput.removeAttribute("required");
+        document.getElementById("otp").setAttribute("required", "true");
+        document.getElementById("new-password").setAttribute("required", "true");
+        document.getElementById("confirm-password").setAttribute("required", "true");
+
+        sendOtpBtn.disabled = false;
+        sendOtpBtn.innerText = "Send OTP";
+      }, 2000);
+
+    } catch (err) {
+      console.error("OTP error:", err);
+      showAlert("Something went wrong while sending OTP.");
+      sendOtpBtn.disabled = false;
+      sendOtpBtn.innerText = "Send OTP";
+    }
+    } else if (currentStep === 2) {
+      const otp = document.getElementById("otp").value.trim();
+      const password = document.getElementById("new-password").value.trim();
+      const confirmPassword = document.getElementById("confirm-password").value.trim();
+  
+      if (!otp || !password || !confirmPassword) {
+        showAlert("Please fill in all fields.");
+        return;
+      }
+  
+      if (password !== confirmPassword) {
+        showAlert("Passwords do not match.");
+        return;
+      }
+  
+      if (!validatePassword(password)) {
+        showAlert("Password must be at least 8 characters, include an uppercase letter, lowercase letter, number, and special character.");
+        return;
+      }
+  
+      try {
+        const res = await fetch("https://consumerapi.groov.me/api/auth/new-password", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            Username: userEmail,
+            NewPassword: password,
+            ConfirmationCode: otp
+          })
+        });
+  
+        const data = await res.json();
+  
+        if (!res.ok || data.error) {
+          showAlert("Password reset failed: " + (data.message || "Invalid OTP"));
+          return;
+        }
+        const successModal = document.getElementById('passwordSuccessModal');
+        successModal.style.display = 'flex';
+  
+        setTimeout(() => {
+          window.location.href = '/account/login';
+        }, 3000);
+  
+      } catch (err) {
+        console.error("Reset error:", err);
+        showAlert("Something went wrong during password reset.");
+      }
+    }
+  });
+}
+// JS to Get values from API for line item ends
+
+</script>
+    <div id="successModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:9999; justify-content:center; align-items:center;">
+      <div style="background:white; padding:30px; border-radius:10px; text-align:center; max-width:400px; width:90%;">
+        <h2 style="color:green;">Signup Successful 🎉</h2>
+        <p>Welcome to Groov! Redirecting to login...</p>
+      </div>
+    </div>
+    <div id="passwordSuccessModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:9999; justify-content:center; align-items:center;">
+      <div style="background:white; padding:30px; border-radius:10px; text-align:center; max-width:400px; width:90%;">
+        <h2 style="color:green;">Password changed Successfully 🎉</h2>
+        <p>Welcome to Groov! Redirecting to login...</p>
+      </div>
+    </div>      
+    <script src="{{ 'custom.js' | asset_url }}" defer="defer"></script>
+      <style>
+      .loader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: #fff;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .loader .spinner {
+        display: block !important;
+        width: 40px;
+        height: 40px;
+        border: 4px solid #000;
+        border-top-color: transparent;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }      
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+    </style>
+    <script>
+      window.addEventListener('load', function () {
+        setTimeout(function () {
+          const poster = document.querySelector('.deferred-media__poster');
+          if (poster) {
+            poster.click();
+          }
+        }, 500);
+      });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    {% comment %} {% if template == 'product' %}
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.js"></script>
+    {% endif %} {% endcomment %}
+ 
+  <!-- Swiper JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.js"></script>
+  </body>
+    
+{%- comment -%}BEGIN audience11 script{%- endcomment -%}
+<script src='https://collector.audience11.com/mamon.js?w_Id=f4cb8140-b358-47fa-903e-3497c01210ec' type='text/javascript'></script>
+{%- comment -%}END audience11 script{%- endcomment -%}
+
+</html>

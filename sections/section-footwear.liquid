@@ -1,0 +1,509 @@
+<style>
+  .position-container {
+
+    width: 100%;
+    height: 700px;
+    position: absolute;
+    bottom: 0;
+  }
+  .footwear {
+    position: relative;
+    width: 100%;
+    background: radial-gradient(349.23% 112.95% at 17.12% 97.71%, #8EC6FD 0%, #0B5093 100%);
+    overflow: visible;
+    height: 100vh;
+  }
+
+  .footwear__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    height: 100vh;
+    position: relative;
+    padding-top: 64px;
+    padding-bottom: 32px;
+    {% comment %} background: red; {% endcomment %}
+    {% comment %} overflow: auto; {% endcomment %}
+  }
+      .text-names {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -40%);
+        width: 50%;
+        text-align: center;
+        margin: 0;
+        z-index: 5;
+
+        padding-bottom: 50%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end; /* Alinha itens no final (bottom) */
+        opacity: 0;
+      }
+
+      {% comment %} .fingers{
+        z-index: 2;
+        position: absolute;
+        bottom: 175px;
+        left: 465px;
+        width: 57px;
+      } {% endcomment %}
+
+      .text-names h2 {
+        position: absolute; /* Volte para absolute */
+        bottom: 2px; /* Coloca no fundo */
+        left: 54%; /* Posiciona no meio do container */
+        transform: translateX(-50%) rotate(2deg); /* Centraliza perfeitamente */
+        margin: 0;
+        color: black!important;
+        font-size: 18px;
+        z-index: 5;
+        text-align: center;
+        {% comment %} background: yellow; {% endcomment %}
+      }
+    .square-ref {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: auto;
+        height: 500px; /* Altura específica desejada */
+        object-fit: contain; /* Garante que a imagem mantenha suas proporções */
+    }
+
+    .insole-solo {
+      {% comment %} background: red; {% endcomment %}
+         /* Propriedades essenciais */
+        {% comment %} margin-top: -1000px;
+
+
+        width: 238px; {% endcomment %}
+        margin-top: -1000px;
+        top: 160px;
+        position: sticky;
+        opacity: 0;
+        z-index: 1;
+        {% comment %} background: red; {% endcomment %}
+
+
+    }
+
+
+
+    .insole-solo img {
+      width: 100%;
+      height: auto;
+  }
+
+    .w-50 {
+        width: 50%;
+    }
+    .w-60 {
+        width: 60%;
+    }
+    .w-70 {
+        width: 70%;
+    }
+    .w-80 {
+        width: 80%;
+    }
+    .w-90 {
+        width: 90%;
+    }
+    .w-100 {
+        width: 100%;
+    }
+
+
+    .text-align--left {
+        text-align: left;
+    }
+    .text-align--right {
+        text-align: right;
+    }
+
+    .footwear__heading{
+
+        {% comment %} font-size: var(--font-heading-2-desktop); {% endcomment %}
+      font-size: 64px;
+        color: #fff;
+        margin: 0;
+
+    }
+    .image-container {
+      {% comment %} background: blue; {% endcomment %}
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translate(-50%, 0%);
+        width: 100%;
+        {% comment %} background: red; {% endcomment %}
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+    }
+
+
+    .image-container img {
+        width: auto;
+        height: 680px;
+        object-fit: contain;
+        transform: translateX(67px);
+        pointer-events: none;
+        user-select: none;
+        -webkit-user-drag: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        draggable: false;
+    }
+
+    .footwear .page-width {
+        height: 100%;
+    }
+
+    .section-{{ section.id }}-padding {
+      {% comment %} padding-top: {{ section.settings.padding_top }}px; {% endcomment %}
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+
+
+
+    .feature-container {
+        position: absolute;
+        width: 400px;
+        display: flex;
+        flex-direction: column;
+        z-index: 2;
+        gap: 40px;
+        {% comment %} background: red; {% endcomment %}
+        isolation: isolate;
+    }
+
+    .feature-container[data-description="1"] {
+        right: 93px;
+        top: 106px;
+        {% comment %} align all element to the right {% endcomment %}
+
+    }
+
+    .feature-container[data-description="2"] {
+        top: 266px;
+        left: 166px;
+
+    }
+
+    .feature-container[data-description="3"] .feature-description {
+
+        align-items: flex-end;
+    }
+
+    .feature-container[data-description="3"] {
+        bottom: 271px;
+        right: 103px;
+
+    }
+
+    .feature-description {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+
+    }
+
+    .feature-description__title {
+        font-size: 18px;
+        color: #fff;
+        margin-bottom: 12px;
+
+    }
+
+    /* Nova implementação para a linha usando div em vez de SVG */
+    .feature-description__line {
+        height: 1px;              /* Altura definida */
+        width: 100%;              /* Largura total */
+        background-color: white;    /* Cor vermelha como solicitado */         /* Espaçamento superior */
+        display: block;           /* Força o comportamento de bloco */
+    }
+
+    .feature-container[data-description="3"] .feature-description__title {
+        width: 48%;
+     }
+
+
+  @media screen and (min-width: 481px) and (max-width: 1440px) {
+      .feature-container[data-description="3"] {
+        bottom: 232px;
+        right: 50px;
+      }
+  }
+
+
+  @media screen and (max-width: 480px) {
+
+    .feature-container[data-description] .feature-description__title {
+        font-size: 15px; /* Set your desired font size here */
+        font-weight: 700;
+      }
+
+    .layer {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        {% comment %} background: linear-gradient(180deg, rgba(0, 0, 0, 0.00) 34.35%, #000 100%); {% endcomment %}
+         background: black;
+        opacity: 0;
+        z-index: 2;
+      }
+
+    .image-container {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-49%);
+        width: 100%;
+        {% comment %} background: red; {% endcomment %}
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+      }
+
+    .footwear__inner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        height: 100vh;
+        position: relative;
+        padding-top: 84px;
+
+      }
+
+      .footwear {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        background: radial-gradient(349.23% 112.95% at 17.12% 97.71%, #8EC6FD 0%, #0B5093 100%);
+        overflow: visible !important;
+      }
+
+
+      .insole-solo {
+        margin: 0;
+        margin-top: -1000px;
+        position: sticky;
+        top: 350px;
+
+
+        /* Redefina qualquer margem lateral */
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+
+        /* Dimensões e estilo */
+        width: 238px;
+        z-index: 1;
+        opacity: 0;
+
+
+        /* Adicionando uma borda para visualização */
+        {% comment %} border: 2px solid yellow; {% endcomment %}
+
+    }
+
+    .text-names h2 {
+        position: absolute; /* Volte para absolute */
+        bottom: 2px; /* Coloca no fundo */
+        left: 54%; /* Posiciona no meio do container */
+        transform: translateX(-50%) rotate(2deg); /* Centraliza perfeitamente */
+        margin: 0;
+        color: black!important;
+        font-size: 12px;
+        z-index: 2;
+        text-align: center;
+        {% comment %} background: yellow; {% endcomment %}
+      }
+
+      .image-container img {
+        width: auto;
+        height: 500px;
+        object-fit: contain;
+        transform: translateX(40px)!important;
+        pointer-events: none;
+        user-select: none;
+        -webkit-user-drag: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        draggable: false;
+    }
+    .feature-container[data-description="3"] .feature-description__title {
+           width: 80%;
+    }
+     .footwear__heading {
+            font-size: 40px;
+            font-weight: 600;
+            line-height: 40px;
+            width: 100%;
+            z-index: 1;
+    }
+    .feature-container {
+            width: 180px;
+            z-index: 2;
+
+    }
+
+    .feature-container[data-description="2"] {
+      width: 239px;
+    }
+
+
+        {% comment %} .image-container img {
+
+            width: auto;
+            height: 690px;
+            object-fit: contain;
+            transform: translateX(40px);
+            pointer-events: none;
+            user-select: none;
+            -webkit-user-drag: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            draggable: false;
+
+        } {% endcomment %}
+
+
+
+
+        .feature-container[data-description="1"] {
+            right: 0;
+            top: 165px;
+            {% comment %} align all element to the right {% endcomment %}
+
+
+        }
+
+        .feature-container[data-description="2"] {
+            top: 281px;
+            left: 0;
+
+        }
+
+        .feature-container[data-description="3"] {
+            bottom: 217px;
+            right: 0;
+        }
+
+        .feature-container h2 {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+
+
+
+  }
+</style>
+
+<div class="footwear section-{{ section.id }}-padding">
+  <div class="layer">&nbsp;</div>
+  <div class="page-width">
+    <div class="footwear__inner">
+      {% comment %} <img src="{{ 'fingers.png' | asset_url }}" alt="Insole Hands" width="auto" height="auto" class="fingers"> {% endcomment %}
+      <h1 class="footwear__heading">{{ section.settings.title }}</h1>
+
+      <!-- Feature Descriptions - MOVIDOS PARA FORA do image-container -->
+      <div class="position-container">
+        <div class="feature-container" data-description="1">
+          <div class="feature-description text-align--right">
+            <h2 class="feature-description__title">{{ section.blocks[0].settings.title }}</h2>
+            <div class="feature-description__line">&nbsp;</div>
+          </div>
+        </div>
+
+        <div class="feature-container" data-description="2">
+          <div class="feature-description text-align--left">
+            <h2 class="feature-description__title">{{ section.blocks[1].settings.title }}</h2>
+            <div class="feature-description__line">&nbsp;</div>
+          </div>
+        </div>
+
+        <div class="feature-container" data-description="3">
+          <div class="feature-description">
+            <h2 class="feature-description__title text-align--right">{{ section.blocks[2].settings.title }}</h2>
+            <div class="feature-description__line">&nbsp;</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="insole-solo">
+        <div class="text-names">
+          <h2>John</h2>
+          <h2>Dan</h2>
+          <h2>Liza</h2>
+          <h2>You</h2>
+        </div>
+        <img src="{{ 'insole-solo.png' | asset_url }}" alt="Insole Solo" width="auto" height="auto">
+      </div>
+
+      <div class="image-container">
+        <!-- Apenas a imagem de fundo permanece aqui -->
+
+        <img src="{{ 'insole-hands.png' | asset_url }}" alt="Insole Hands" width="auto" height="auto">
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Section Footwear",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título Principal",
+      "default": "The Next Dimension of Footwear"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "description",
+      "name": "Descrição",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título da Descrição",
+          "default": "Descrição"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Section Footwear",
+      "blocks": [
+        {
+          "type": "description"
+        },
+        {
+          "type": "description"
+        },
+        {
+          "type": "description"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,49 @@
+<style>
+  .collection-hero-banner{
+    margin-top: 120px;
+  }
+  .collection-hero-banner .main-image {
+    height: 300px;
+    border-radius: 30px;
+    object-fit: cover;
+}
+  @media(max-width: 768px){
+  .collection-hero-banner{
+    margin-top: 90px;
+  }
+  .collection-hero-banner .main-image {
+    height: 200px;
+}
+  }
+  @media(max-width: 500px){
+  .collection-hero-banner{
+    margin-top: 90px;
+  }
+  .collection-hero-banner .main-image {
+    height: 160px;
+}
+  }
+</style>
+<section class="collection-hero-banner">
+  <div class="page-width">
+    <img class="main-image" src="{{ section.settings.image-hero-banner | img_url:'' }}" width="100%" alt="collection-hero-image">
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Collection Hero Banner",
+    "settings": [
+      {
+        "type": "image_picker",
+        "label": "Hero Baanner Image",
+        "id": "image-hero-banner"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Collection Hero Banner"
+      }
+    ]
+  }
+{% endschema %}

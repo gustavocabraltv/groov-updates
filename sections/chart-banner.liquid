@@ -1,0 +1,39 @@
+<section class="chart-banner">
+  <div class="page-width">
+    <img class="chart-image" src="{{ section.settings.chart-image | img_url:''}}">
+  </div>
+</section>
+
+    <style>
+      .chart-banner .page-width{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+      }
+      .chart-banner .chart-image{
+        max-height: 500px;
+        width: 100%;
+        object-fit: contain;
+      }
+    </style>
+      
+
+
+{% schema %}
+  {
+    "name": "Chart Banner Section",
+    "settings": [
+      {
+        "type": "image_picker",
+        "label": "Chart Image",
+        "id": "chart-image"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Chart Banner Section"
+      }
+    ]
+  }
+{% endschema %}
