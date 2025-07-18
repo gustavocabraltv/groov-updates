@@ -4,9 +4,6 @@
   data-section="{{ section.id }}"
 >
 
-
- 
-
   <div class="tw-bg-[white] tw-tracking-normal lg:tw-pt-[128px] tw-pt-[59px]">
 
     <div class="page-width tw-bg-[white]"> 
@@ -32,47 +29,78 @@
               tw-h-[347px] 
               tw-bg-[#F5F5F7] 
               tw-rounded-[12px] 
-              tw-p-[64px]
+              
+              tw-p-[100px]
 
               lg:tw-h-[566px] 
+              md:tw-h-[650px]
 
               lg:tw-static 
               lg:tw-w-auto 
               lg:tw-ml-0 
               lg:tw-mr-0 
               lg:tw-left-auto
+
+              tw-overflow-hidden
               ">
-              {% if product.handle == 'the-everyday' %}
-                {% assign third_image = product.images[2] %}
-                {% if third_image %}
-                  <div>
-                  
-                      <img 
-                        src="{{ third_image | image_url: width: 1000 }}" 
-                        alt="{{ third_image.alt | escape }}" 
-                        width="{{ third_image.width }}" 
-                        height="{{ third_image.height }}" 
-                        class="tw-w-full tw-rounded-[12px]" 
-                      />
-                    
-                  </div>
+              <div class="tw-flex tw-w-full tw-justify-between tw-absolute tw-px-[32px]">
+
+                <div 
+                  id="prev-btn"
+                  class="
+                  tw-w-[60px] tw-h-[60px] tw-bg-[#C4CAD4] tw-rounded-[50px] 
+                  tw-flex tw-flex-col tw-justify-center tw-items-center tw-cursor-pointer tw-select-none"
+                  style="user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none;">
+                  <img src="{{ "arrow-previous.svg" | asset_url }}" width="10" height="auto" style="pointer-events: none; user-select: none;">
+                </div>
+
+                <div 
+                  id="next-btn"
+                  class="
+                  tw-w-[60px] tw-h-[60px] tw-bg-[#C4CAD4] tw-rounded-[50px] 
+                  tw-flex tw-flex-col tw-justify-center tw-items-center tw-cursor-pointer tw-select-none"
+                  style="user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none;">
+                  <span><img src="{{ "arrow-next.svg" | asset_url }}" width="10" height="auto" style="pointer-events: none; user-select: none;"></span>
+                </div>
+              </div>
+              
+              <!-- Main Image Display -->
+              <div id="main-image-container" style="user-select: none; -webkit-user-select: none;">
+                {% if product.images.size > 0 %}
+                  <img 
+                    id="main-product-image"
+                    src="{{ product.images[0] | image_url: width: 1000 }}" 
+                    alt="{{ product.images[0].alt | escape }}" 
+                    width="{{ product.images[0].width }}" 
+                    height="{{ product.images[0].height }}" 
+                    class="tw-w-full tw-rounded-[12px] tw-select-none" 
+                    style="user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; pointer-events: auto;"
+                    draggable="false"
+                  />
                 {% endif %}
-              {% endif %}
+              </div>
             </div>
             
             <div class="tw-w-full tw-flex  tw-h-[80px] tw-justify-center tw-items-center tw-gap-[8px]">
-              <div class="tw-flex tw-w-[60px] tw-h-[60px] tw-bg-[#f0f0f0] tw-items-center tw-justify-center tw-text-[12px] tw-leading-none tw-overflow-hidden">
-                image
-              </div>
-              <div class="tw-flex tw-w-[60px] tw-h-[60px] tw-bg-[#f0f0f0] tw-items-center tw-justify-center tw-text-[12px] tw-leading-none tw-overflow-hidden">
-                image
-              </div>
-              <div class="tw-flex tw-w-[60px] tw-h-[60px] tw-bg-[#f0f0f0] tw-items-center tw-justify-center tw-text-[12px] tw-leading-none tw-overflow-hidden">
-                image
-              </div>
-              <div class="tw-flex tw-w-[60px] tw-h-[60px] tw-bg-[#f0f0f0] tw-items-center tw-justify-center tw-text-[12px] tw-leading-none tw-overflow-hidden">
-                image
-              </div>
+              {% for image in product.images limit: 4 %}
+                <div 
+                  class="tw-flex tw-w-[60px] tw-h-[60px] tw-bg-[#f0f0f0] tw-items-center tw-justify-center tw-text-[12px] tw-leading-none tw-overflow-hidden tw-rounded-[8px] tw-cursor-pointer tw-select-none thumbnail-image"
+                  data-image-index="{{ forloop.index0 }}"
+                  data-image-url="{{ image | image_url: width: 1000 }}"
+                  data-image-alt="{{ image.alt | escape }}"
+                  style="user-select: none; -webkit-user-select: none;"
+                >
+                  <img 
+                    src="{{ image | image_url: width: 60 }}" 
+                    alt="{{ image.alt | escape }}" 
+                    class="tw-w-full tw-h-full tw-object-cover tw-rounded-[8px] tw-select-none"
+                    style="pointer-events: none; user-select: none;"
+                    draggable="false"
+                    width="auto"
+                    height="auto"
+                  />
+                </div>
+              {% endfor %}
             </div>
             
           </div>
@@ -91,11 +119,37 @@
             <h2 class="tw-mt-[8px] lg:tw-text-[32px] tw-text-[24px] tw-font-semibold"> {{ product.price | money_without_trailing_zeros }} </h2>
           </div>
 
-          <div class="tw-text-[#383838] lg:tw-text-[15px] tw-text-[14px] tw-flex tw-items-center tw-gap-[8px]">
-            <img src="{{ "delivery-shipping.svg" | asset_url }}" width="18" height="auto">
-            Delivery <span class="tw-font-semibold tw-text-[black]">Thursday, July 17.</span>Order within <span class="tw-text-[#259E5B] tw-font-semibold">16 hrs 38mins</span>
-          </div>
+          {% comment %}
+            Calcula a data de entrega (7 dias úteis a partir de hoje)
+          {% endcomment %}
 
+          {% assign today = 'now' | date: '%s' %}
+          {% assign delivery_date = today %}
+          {% assign business_days_added = 0 %}
+          {% assign days_to_add = 7 %}
+
+          {% comment %} 
+            Loop para adicionar dias úteis 
+          {% endcomment %}
+          {% for i in (1..14) %}
+            {% if business_days_added < days_to_add %}
+              {% assign delivery_date = delivery_date | plus: 86400 %}
+              {% assign day_of_week = delivery_date | date: '%w' %}
+              {% if day_of_week != '0' and day_of_week != '6' %}
+                {% assign business_days_added = business_days_added | plus: 1 %}
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+
+          {% assign delivery_day = delivery_date | date: '%A' %}
+          {% assign delivery_month = delivery_date | date: '%B' %}
+          {% assign delivery_number = delivery_date | date: '%d' %}
+
+
+          <div class="tw-text-[#383838] lg:tw-text-[15px] tw-text-[13px] tw-flex tw-items-center tw-gap-[8px]">
+            <img src="{{ 'delivery-shipping.svg' | asset_url }}" width="18" height="auto" alt="Delivery">
+            Delivery <span class="tw-font-semibold tw-text-[black]">{{ delivery_day }}, {{ delivery_month }} {{ delivery_number }}.</span> Order within <span id="countdown" class="tw-text-[#259E5B] tw-font-semibold">16 hrs 38mins</span>
+          </div>
 
           <div id="short-description" class="tw-flex tw-flex-col tw-gap-[8px]">
             <p class="tw-font-semibold tw-text-black tw-text-[16px] lg:tw-text-[16px]">Elegant. Compact. Perfect for Snug Shoes.</p>
@@ -107,10 +161,10 @@
             <a class="tw-bg-[black] tw-w-full tw-py-[14px] tw-text-white tw-rounded-full tw-text-center tw-text-[18px]">
               Add to cart
             </a>
-            <div class="tw-flex tw-items-center tw-justify-center tw-gap-[4px] tw-text-[#505C72] tw-text-[14px]">
+            <div class="tw-flex tw-items-center tw-justify-center tw-gap-[8px] tw-text-[#505C72] tw-text-[14px]">
               <img src="{{ "secure-18.svg" | asset_url }}" width="18" height="auto" >
                Secure Checkout
-               <img src="{{ "payments.svg" | asset_url }}" width="auto" height="20" >
+               <img src="{{ "payments.svg" | asset_url }}" width="auto" height="20" class="tw-ml-[18px]">
   
              </div>
           </div>
@@ -123,7 +177,7 @@
               <br/> <br/>
               Setting the Everyday model apart is the lightweight-yet-sturdy custom contouring that supports every arch in your foot, the personalized engraving that declares your pair as truly yours, and the proprietary material blend optimized to provide constant coziness through the very last step of your day. Every day.
               <br/> <br/>
-              And thanks for Groov’s proprietary Fit-to-Shoe functionality, the Everyday can be made to fit perfectly in any pair of shoes that has removable insoles—and you can transfer a pair across all of your similarly-shaped shoes!
+              And thanks for Groov's proprietary Fit-to-Shoe functionality, the Everyday can be made to fit perfectly in any pair of shoes that has removable insoles—and you can transfer a pair across all of your similarly-shaped shoes!
               <br/> <br/>
               Comfortable, Convenient, and Consistent. For Each and Every Day.
             </p>
@@ -143,6 +197,32 @@
             </button>
           </div>
 
+
+
+          <div id="description" class="tw-relative">
+            <p class="tw-font-semibold tw-text-black tw-mb-[16px]">Description</p>
+            <p id="product-description-toggle-text" class="tw-leading-[24px] tw-line-clamp-[7]">
+              {{ product.description }}
+            </p>
+          
+            <!-- Gradiente -->
+            <div 
+              id="product-description-fade"
+              class="tw-h-[80px] tw-w-full tw-absolute tw-bottom-[56px]"
+              style="background: linear-gradient(180deg, rgba(255, 255, 255, 0.00) 11.11%, #FFF 100%);">
+            </div>
+          
+            <!-- Botão -->
+            <button 
+              id="product-description-toggle-btn"
+              class="tw-w-full tw-flex tw-justify-center tw-items-center tw-pt-[24px] tw-pb-[32px] tw-border-b tw-border-[#DCDCDC] tw-font-semibold tw-text-[black] gap-[8px]">
+              Show More <img src="{{ 'arrow-down.svg' | asset_url }}" width="auto" height="24" />
+            </button>
+          </div>
+
+
+
+          
           <div id="attribute-breakdown">
             <p class="tw-font-semibold tw-text-black">Attribute Breakdown</p>
             <img src="{{ "attribute-everyday.svg" | asset_url}}" width="589" height="auto" class="tw-mx-auto">
@@ -212,10 +292,6 @@
                 >
                   <button> <img src="{{  "btn-play-40.svg" | asset_url }}" width="50" height="50"> </button>
                 </div>
-
-
-
-                
 
               </div>
             </div>
@@ -300,649 +376,201 @@
 
             </div>
 
-            
+          <!-- Simple JavaScript para troca de imagens -->
           <script>
-            const paragraph = document.getElementById('product-description-toggle-text');
-            const fade = document.getElementById('product-description-fade');
-            const button = document.getElementById('product-description-toggle-btn');
-          
-            let expanded = false;
-          
-            button.addEventListener('click', () => {
-              expanded = !expanded;
-          
-              paragraph.classList.toggle('tw-line-clamp-[7]');
-              fade.style.display = expanded ? 'none' : 'block';
-              button.innerHTML = expanded 
-                ? 'Show Less <img src="{{ "arrow-up.svg" | asset_url }}" width="auto" height="24" />' 
-                : 'Show More <img src="{{ "arrow-down.svg" | asset_url }}" width="auto" height="24" />';
+            document.addEventListener('DOMContentLoaded', function() {
+              // Countdown (original)
+              function updateCountdown() {
+                const now = new Date();
+                const endOfDay = new Date(now);
+                endOfDay.setHours(23, 59, 59, 999);
+                
+                const timeLeft = endOfDay - now;
+                
+                if (timeLeft > 0) {
+                  const hours = Math.floor(timeLeft / (1000 * 60 * 60));
+                  const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                  
+                  const countdownElement = document.getElementById('countdown');
+                  if (countdownElement) {
+                    countdownElement.textContent = `${hours} hrs ${minutes} mins`;
+                  }
+                }
+              }
+              
+              updateCountdown();
+              setInterval(updateCountdown, 60000);
+
+              // Description toggle (original)
+              const paragraph = document.getElementById('product-description-toggle-text');
+              const fade = document.getElementById('product-description-fade');
+              const button = document.getElementById('product-description-toggle-btn');
+            
+              let expanded = false;
+            
+              if (button) {
+                button.addEventListener('click', () => {
+                  expanded = !expanded;
+            
+                  paragraph.classList.toggle('tw-line-clamp-[7]');
+                  fade.style.display = expanded ? 'none' : 'block';
+                  button.innerHTML = expanded 
+                    ? 'Show Less <img src="{{ "arrow-up.svg" | asset_url }}" width="auto" height="24" />' 
+                    : 'Show More <img src="{{ "arrow-down.svg" | asset_url }}" width="auto" height="24" />';
+                });
+              }
+
+              // ===== NOVA FUNCIONALIDADE: Troca de Imagens =====
+              const mainImage = document.getElementById('main-product-image');
+              const thumbnails = document.querySelectorAll('.thumbnail-image');
+              const nextBtn = document.getElementById('next-btn');
+              const prevBtn = document.getElementById('prev-btn');
+              
+              // Array com todas as imagens do produto - MODO SEGURO
+              const productImages = [];
+              {% for image in product.images %}
+              productImages.push({
+                url: "{{ image | image_url: width: 1000 }}",
+                alt: "{{ image.alt | escape }}"
+              });
+              {% endfor %}
+
+              let currentIndex = 0;
+
+              // Debug - verificar se elementos existem
+              console.log('Main image:', mainImage);
+              console.log('Thumbnails found:', thumbnails.length);
+              console.log('Product images:', productImages.length);
+              console.log('Next btn:', nextBtn);
+              console.log('Prev btn:', prevBtn);
+
+              // Função para trocar a imagem principal
+              function changeMainImage(index) {
+                console.log('Tentando trocar para índice:', index);
+                if (productImages[index] && mainImage) {
+                  mainImage.src = productImages[index].url;
+                  mainImage.alt = productImages[index].alt;
+                  currentIndex = index;
+                  console.log('Imagem trocada para:', productImages[index].url);
+                  
+                  // Atualizar thumbnail ativo
+                  thumbnails.forEach((thumb, i) => {
+                    thumb.classList.remove('tw-ring-2', 'tw-ring-[black]');
+                    if (i === index) {
+                      thumb.classList.add('tw-ring-2', 'tw-ring-[black]');
+                    }
+                  });
+                } else {
+                  console.log('Erro: imagem ou elemento não encontrado');
+                }
+              }
+
+              // Click nas thumbnails
+              thumbnails.forEach((thumbnail, index) => {
+                thumbnail.addEventListener('click', () => {
+                  console.log('Thumbnail clicada:', index);
+                  changeMainImage(index);
+                });
+              });
+
+              // Botão Next
+              if (nextBtn) {
+                nextBtn.addEventListener('click', (e) => {
+                  e.preventDefault();
+                  console.log('Next button clicado');
+                  const nextIndex = (currentIndex + 1) % productImages.length;
+                  changeMainImage(nextIndex);
+                });
+              }
+
+              // Botão Previous
+              if (prevBtn) {
+                prevBtn.addEventListener('click', (e) => {
+                  e.preventDefault();
+                  console.log('Previous button clicado');
+                  const prevIndex = currentIndex === 0 ? productImages.length - 1 : currentIndex - 1;
+                  changeMainImage(prevIndex);
+                });
+              }
+
+              // Definir primeira thumbnail como ativa
+              if (thumbnails.length > 0) {
+                thumbnails[0].classList.add('tw-ring-2', 'tw-ring-[black]');
+              }
+
+              // ===== FUNCIONALIDADE TOUCH/SWIPE PARA MOBILE =====
+              const imageContainer = document.getElementById('main-image-container');
+              let startX = 0;
+              let startY = 0;
+              let endX = 0;
+              let endY = 0;
+
+              if (imageContainer) {
+                // Touch start
+                imageContainer.addEventListener('touchstart', (e) => {
+                  startX = e.touches[0].clientX;
+                  startY = e.touches[0].clientY;
+                });
+
+                // Touch end
+                imageContainer.addEventListener('touchend', (e) => {
+                  endX = e.changedTouches[0].clientX;
+                  endY = e.changedTouches[0].clientY;
+                  
+                  // Calcular diferença
+                  const diffX = startX - endX;
+                  const diffY = startY - endY;
+                  
+                  // Verificar se foi um swipe horizontal (não vertical)
+                  if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+                    if (diffX > 0) {
+                      // Swipe para esquerda = próxima imagem
+                      console.log('Swipe left - próxima imagem');
+                      const nextIndex = (currentIndex + 1) % productImages.length;
+                      changeMainImage(nextIndex);
+                    } else {
+                      // Swipe para direita = imagem anterior
+                      console.log('Swipe right - imagem anterior');
+                      const prevIndex = currentIndex === 0 ? productImages.length - 1 : currentIndex - 1;
+                      changeMainImage(prevIndex);
+                    }
+                  }
+                });
+
+                // Prevenir scroll durante o swipe na imagem
+                imageContainer.addEventListener('touchmove', (e) => {
+                  e.preventDefault();
+                }, { passive: false });
+              }
             });
           </script>
-          
-          
 
         </div>
+
 
       </div>
     </div>
   </div>
 
-  {% comment %} 🟡 SECTION ICONS {% endcomment %}
-  <div class="tw-bg-[#F2F5FA] tw-pb-[32px] tw-pt-[128px]">
-    <div class="page-width">
-      
-      <!-- Título -->
-      <div 
-        class="
-          tw-justify-center 
-          tw-items-center 
-          tw-flex 
-          tw-flex-col 
-          tw-rounded-[18px]
-          tw-w-full 
-          tw-px-[24px]
-        ">
-          <h2 class="tw-font-semibold lg:tw-text-[48px] tw-text-[28px] tw-text-center lg:tw-w-[726px] tw-w-full tw-leading-tight">
-            The Everyday, by Groov – All-day comfort. Perfect fit.
-          </h2>
-      </div>
-  
-      <!-- Grid com 4 colunas -->
-      <div class="tw-grid tw-grid-cols-2 lg:tw-grid-cols-4 tw-gap-[22px] lg:tw-gap-[32px] tw-mt-[64px]">
-  
-        <!-- Coluna 1 -->
-        <div class="tw-flex tw-flex-col tw-items-center tw-gap-[32px]">
-          <div class="tw-flex tw-flex-col tw-items-center lg:tw-w-[60%] tw-w-[100%]">
-            <img src="{{ "new-icon-shoes.svg" | asset_url }}" alt="Icon 1" class="tw-w-[32px] tw-h-[32px]" width="32" height="32" />
-            <span class="tw-text-[16px] tw-mt-[14px] tw-text-center">Compatible with all shoes and sneakers</span>
-          </div>
-        </div>
-  
-        <!-- Coluna 2 -->
-        <div class="tw-flex tw-flex-col tw-items-center tw-gap-[32px]">
-          <div class="tw-flex tw-flex-col tw-items-center lg:tw-w-[70%] tw-w-[100%]">
-            <img src="{{ "new-icon-phone.svg" | asset_url }}" alt="Icon 3" class="tw-w-[32px] tw-h-[32px]" width="32" height="32" />
-            <span class="tw-text-[16px] tw-mt-[14px] tw-text-center">AI-Powered 3D Scanning for a Perfect Fit</span>
-          </div>
-    
-        </div>
-  
-        <!-- Coluna 3 -->
-        <div class="tw-flex tw-flex-col tw-items-center tw-gap-[32px]">
-          <div class="tw-flex tw-flex-col tw-items-center lg:tw-w-[60%] tw-w-[100%] ">
-            <img src="{{ "new-icon-breath.svg" | asset_url }}" alt="Icon 5" class="tw-w-[32px] tw-h-[32px]" width="32" height="32" />
-            <span class="tw-text-[16px] tw-mt-[14px] tw-text-center">Cushioned, supportive, and Breathable</span>
-          </div>
-          
-        </div>
-  
-        <!-- Coluna 4 -->
-        <div class="tw-flex tw-flex-col tw-items-center tw-gap-[32px]">
-          <div class="tw-flex tw-flex-col tw-items-center lg:tw-w-[40%] tw-w-[100%]">
-            <img src="{{ "new-icon-tools.svg" | asset_url }}" alt="Icon 7" class="tw-w-[32px] tw-h-[32px]" width="32" height="32" />
-            <span class="tw-text-[16px] tw-mt-[14px] tw-text-center">Custom Made.<br/>Every Pair.</span>
-          </div>
-        </div>
-  
-      </div>
-    </div>
-  </div>
 
-
-  {% comment %} 🟡 Grid Bento 01 {% endcomment %}
-  <div class=" tw-bg-[#F2F5FA] tw-pb-[64px] lg:tw-pb-[128px] tw-pt-[32px] lg:tw-pt-[32px]" >
-      <div class="page-width">
-        
-        <div class="tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 tw-gap-[22px] lg:tw-gap-[32px]">
-
-            <!-- Div 1 ocupa toda a altura da esquerda -->
-            <div class="tw-w-full tw-h-full tw-flex tw-items-center tw-justify-center tw-bg-[white] tw-p-[32px] tw-rounded-[12px]">
-                
-                <div class="tw-flex tw-flex-col tw-gap-[24px]">
-                  <img src="{{ "everyday-01-bento.png" | asset_url }}" alt="Legall" width="500" height="auto"  />
-                  <h3 class="tw-text-[24px] tw-w-[358px] tw-font-semibold "><span class="tw-text-[#28B0FF]">Custom-fit insoles</span> designed to match your rhythm—wherever life takes you.</h3>
-                </div>
-
-            </div>
-
-            <!-- Wrapper da coluna direita com duas divs empilhadas -->
-            <div class="tw-flex tw-flex-col tw-gap-[22px]">
-                <div class="tw-bg-[red] tw-h-[230px] tw-w-full tw-flex tw-items-center tw-justify-center tw-bg-[white] tw-rounded-[12px]">
-                  <img src="{{ "everyday-02-bento.png" | asset_url }}" alt="Legall" width="430" height="auto"  />
-                </div>
-                <div class="tw-bg-[red] tw-h-[400px] tw-w-full tw-flex tw-items-center tw-justify-center tw-bg-[white] tw-rounded-[12px]">
-                  <img src="{{ "everyday-03-bento.png" | asset_url }}" alt="Legall" width="440" height="auto"  />
-                </div>
-            </div>
-
-        </div>
-    
-
-      </div>
-  </div>
-
-  {% comment %} 🟡 Grid Bento 02 {% endcomment %}
-
-  <div class="tw-bg-[white] lg:tw-py-[128px] tw-py-[64px]">
-
-    <div class="page-width">
-
-        <div class="tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 tw-gap-[22px] lg:tw-gap-[32px]">
-    
-          <div class="lg:tw-h-[550px] tw-h-[440px] tw-bg-[#F2F5FA] tw-rounder-[24px] tw-overflow-hidden tw-flex tw-flex-col tw-justify-between tw-pt-[64px] tw-pl-[60px] tw-relative tw-rounded-[18px]">
-            <h2 class="tw-text-[28px]">
-              <span class="tw-text-[#575D69]">One Insole.</span> <br/> 
-              <span class="tw-font-semibold">Endless Possibilities.</span>
-            </h2>
-            <img src="{{ "insole-animation.png" | asset_url }}" width="auto" height="396" class="tw-absolute tw-bottom-0 tw-right-0" />
-          </div>
-        
-          <div class="lg:tw-h-[550px] tw-h-[440px] tw-bg-[#F2F5FA] tw-relative tw-rounded-[18px]">
-            <img src="{{ "von-miller-bento.png" | asset_url }}" width="auto" height="396" class="tw-absolute tw-bottom-0 tw-right-0" />
-          </div>
-        
-        </div>
-        
-
-        <div class="tw-grid tw-grid-cols-1 lg:tw-grid-cols-[1fr_2fr] tw-gap-[22px] lg:tw-gap-[32px] tw-mt-[32px]">
-
-          <div class="tw-h-[440px] tw-bg-[#F2F5FA] tw-flex tw-flex-col tw-justify-end tw-items-center tw-rounded-[18px]">
-            <img src="{{ "iphone-hand-bento.png" | asset_url }}" width="320" height="auto"/>
-          </div>
-        
-          <div class="tw-h-[440px] tw-bg-[#F2F5FA] tw-flex tw-justify-center tw-items-center tw-rounded-[18px] lg:tw-col-start-2">
-            <img src="{{ "iphone-insole-bento.png" | asset_url }}" width="520" height="auto" />
-          </div>
-        
-   
-     </div>
-      
-
-    </div>
-
-  </div>
-
-
-
-
-    {% comment %} 🟡 3 steps {% endcomment %}
-
-    <div class="
-      lg:tw-pt-[64px] tw-pt-[48px]
-      lg:tw-pb-[128px] tw-pb-[48px]
-      tw-bg-[#F2F5FA]" >
-      <div class="page-width">
-          <div class="tw-flex tw-flex-col tw-gap-[48px]">
-
-            <div class="tw-gap-[8px] tw-flex tw-flex-col tw-justify-center tw-items-center">
-              <p 
-                class="
-                tw-text-[#3E495C]
-                lg:tw-text-[24px]  tw-text-[18px]
-                ">
-                Your fit. Your style. Your Groovs.</p>
-              <h1 
-                class="
-                tw-text-[32px] 
-                lg:tw-text-[48px]
-                tw-font-semibold tw-text-[black]">Custom Fit Made Easy</h1>
-            </div>
-
-             
-            <div class="tw-grid tw-grid-cols-1 lg:tw-grid-cols-3 lg:tw-gap-[32px] tw-gap-[16px]">
-           
-           
-              {% comment %} card 1 {% endcomment %} 
-              <div class="
-                tw-flex tw-flex-col tw-gap-[32px] tw-bg-[white] tw-p-[32px] tw-rounded-[12px]
-                lg:tw-items-start tw-items-center 
-                ">
-                  <img src="{{ "icon-ai.svg" | asset_url }}" width="40" height="40">
-
-                  <div class="
-                    tw-flex tw-flex-col tw-gap-[8px]
-                    lg:tw-items-start lg:tw-text-left
-                    tw-items-center tw-text-center
-                    ">
-                    <h3 class="
-                      tw-w-[248px] 
-                      lg:tw-w-[188px]
-                      tw-text-[21px] 
-                      tw-font-semibold
-                      "
-                    
-                    >Scan your feet using your iPhone</h3>
-                    <p>Use the Groov app to scan your feet  with your iPhone, powered by our ShapeSense technology.</p>
-                  </div>
-              </div>
-
-                {% comment %} card 2 {% endcomment %} 
-                <div class="
-                  tw-flex tw-flex-col tw-gap-[32px] tw-bg-[white] tw-p-[32px] tw-rounded-[12px]
-                  lg:tw-items-start tw-items-center 
-                  ">
-                    <img src="{{ "icon-ai.svg" | asset_url }}" width="40" height="40">
-  
-                    <div class="
-                      tw-flex tw-flex-col tw-gap-[8px]
-                      lg:tw-items-start lg:tw-text-left
-                      tw-items-center tw-text-center
-                      ">
-                      <h3 class="
-                        tw-w-[248px] 
-                        lg:tw-w-[188px]
-                        tw-text-[21px] 
-                        tw-font-semibold
-                        "
-                      
-                      >Scan your feet using your iPhone</h3>
-                      <p>Use the Groov app to scan your feet  with your iPhone, powered by our ShapeSense technology.</p>
-                    </div>
-                </div>
-
-                  {% comment %} card 3 {% endcomment %} 
-              <div class="
-                tw-flex tw-flex-col tw-gap-[32px] tw-bg-[white] tw-p-[32px] tw-rounded-[12px]
-                lg:tw-items-start tw-items-center 
-                ">
-                  <img src="{{ "icon-ai.svg" | asset_url }}" width="40" height="40">
-
-                  <div class="
-                    tw-flex tw-flex-col tw-gap-[8px]
-                    lg:tw-items-start lg:tw-text-left
-                    tw-items-center tw-text-center
-                    ">
-                    <h3 class="
-                      tw-w-[248px] 
-                      lg:tw-w-[188px]
-                      tw-text-[21px] 
-                      tw-font-semibold
-                      "
-                    
-                    >Scan your feet using your iPhone</h3>
-                    <p>Use the Groov app to scan your feet  with your iPhone, powered by our ShapeSense technology.</p>
-                  </div>
-              </div>
-
-            </div>
-
-          </div>
-      </div>
-    </div>
-
-
-    {% comment %} 🟡 Banner Full image {% endcomment %}
-
-    
-    <div class="tw-relative tw-w-full tw-mx-auto">
-      <img src="{{ 'full-image.png' | asset_url }}" alt="" class="tw-w-full tw-h-auto tw-block" width="" height="" />
-    
-      <div class="tw-absolute tw-top-[76.4%] tw-left-[73.5%] tw-transform -tw-translate-x-1/2">
-        <img src="{{ 'full-image-card.svg' | asset_url }}" alt="" width="" height="">
-      </div>
-    </div>
-
-    {% comment %} 🔥 SWIPER GALLERY - OPTIMIZED FOR SHOPIFY {% endcomment %}
-    <style>
-      /* Reset e isolamento para evitar conflitos com o tema Shopify */
-      .shopify-swiper-container {
-        max-width: 1200px !important;
-        margin: 0 auto !important;
-        padding: 128px 20px !important;
-        position: relative !important;
-        overflow: visible !important;
-      }
-
-      .shopify-swiper-container * {
-        box-sizing: border-box !important;
-      }
-
-      .shopify-carousel-header {
-        text-align: center !important;
-        margin-bottom: 96px !important;
-      }
-
-      .shopify-carousel-title {
-        font-size: 53px !important;
-        font-weight: 700 !important;
-        color: #1a1a1a !important;
-        margin-bottom: 16px !important;
-        line-height: 1.1 !important;
-        font-family: inherit !important;
-      }
-
-      .shopify-carousel-description {
-        font-size: 18px !important;
-        color: #666 !important;
-        font-weight: 400 !important;
-        font-family: inherit !important;
-      }
-
-      /* Swiper específico para Shopify */
-      .shopify-swiper {
-        width: 100% !important;
-        padding: 0 10px !important;
-        overflow: visible !important;
-        position: relative !important;
-      }
-
-      .shopify-swiper .swiper-wrapper {
-        align-items: stretch !important;
-        position: relative !important;
-      }
-
-      .shopify-swiper .swiper-slide {
-        height: 350px !important;
-        background-color: #e1e5e9 !important;
-        border-radius: 16px !important;
-        cursor: pointer !important;
-        transition: all 0.3s ease !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        position: relative !important;
-        overflow: hidden !important;
-        flex-shrink: 0 !important;
-      }
-
-      .shopify-swiper .swiper-slide img {
-        width: 100% !important;
-        height: 100% !important;
-        object-fit: cover !important;
-        object-position: center !important;
-        border-radius: 16px !important;
-        transition: transform 0.3s ease !important;
-        display: block !important;
-      }
-
-      .shopify-swiper .swiper-slide:hover {
-        transform: translateY(-4px) !important;
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1) !important;
-      }
-
-      .shopify-swiper .swiper-slide:hover img {
-        transform: scale(1.02) !important;
-      }
-
-      /* Slide ativo */
-      .shopify-swiper .swiper-slide-active {
-        transform: scale(1.05) !important;
-        z-index: 2 !important;
-      }
-
-      .shopify-swiper .swiper-slide-active:hover {
-        transform: scale(1.05) translateY(-4px) !important;
-      }
-
-      /* Slides não ativos */
-      .shopify-swiper .swiper-slide:not(.swiper-slide-active) {
-        opacity: 0.7 !important;
-      }
-
-      /* Controles customizados */
-      .shopify-carousel-controls {
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        gap: 20px !important;
-        margin-top: 40px !important;
-        position: relative !important;
-        z-index: 10 !important;
-      }
-
-      .shopify-carousel-btn {
-        width: 44px !important;
-        height: 44px !important;
-        border: 2px solid #ddd !important;
-        background-color: white !important;
-        border-radius: 50% !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        cursor: pointer !important;
-        transition: all 0.3s ease !important;
-        color: #666 !important;
-        z-index: 10 !important;
-        position: relative !important;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
-        font-size: 0 !important;
-      }
-
-      .shopify-carousel-btn:hover {
-        border-color: #999 !important;
-        background-color: #f5f5f5 !important;
-        transform: scale(1.05) !important;
-        color: #333 !important;
-      }
-
-      .shopify-carousel-btn:active {
-        transform: scale(0.95) !important;
-      }
-
-      .shopify-carousel-btn svg {
-        width: 20px !important;
-        height: 20px !important;
-        pointer-events: none !important;
-      }
-
-      .shopify-carousel-counter {
-        font-size: 16px !important;
-        color: #666 !important;
-        font-weight: 500 !important;
-        min-width: 80px !important;
-        text-align: center !important;
-        font-family: inherit !important;
-      }
-
-      /* Esconder controles padrão do Swiper */
-      .shopify-swiper .swiper-button-next,
-      .shopify-swiper .swiper-button-prev {
-        display: none !important;
-      }
-
-      .shopify-swiper .swiper-pagination {
-        display: none !important;
-      }
-
-      /* Responsividade */
-      @media (max-width: 1024px) {
-        .shopify-carousel-title {
-          font-size: 42px !important;
-        }
-        
-        .shopify-swiper-container {
-          padding: 80px 20px !important;
-        }
-      }
-
-      @media (max-width: 768px) {
-        .shopify-swiper .swiper-slide {
-          height: 280px !important;
-        }
-        
-        .shopify-carousel-title {
-          font-size: 36px !important;
-        }
-        
-        .shopify-carousel-description {
-          font-size: 16px !important;
-        }
-        
-        .shopify-swiper-container {
-          padding: 60px 15px !important;
-        }
-      }
-
-      @media (max-width: 480px) {
-        .shopify-swiper-container {
-          padding: 64px 10px !important;
-          overflow: hidden !important;
-        }
-        
-        .shopify-swiper .swiper-slide {
-          height: 240px !important;
-        }
-        
-        .shopify-carousel-title {
-          font-size: 28px !important;
-        }
-        
-        .shopify-carousel-header {
-          margin-bottom: 40px !important;
-        }
-        
-        .shopify-swiper {
-          padding: 0 5px !important;
-        }
-        
-        .shopify-carousel-btn {
-          width: 40px !important;
-          height: 40px !important;
-        }
-        
-        .shopify-carousel-btn svg {
-          width: 16px !important;
-          height: 16px !important;
-        }
-      }
-    </style>
-
-    <!-- Swiper Gallery Section -->
-    <div class="tw-overflow-hidden tw-bg-[white]">
-      <div class="shopify-swiper-container">
-        <div class="shopify-carousel-header tw-flex tw-flex-col tw-items-center tw-gap-[16px] ">
-          <h1 class="lg:tw-text-[48px] tw-text-[32px] tw-font-semibold lg:tw-w-[561px] tw-w-full tw-leading-none">Feels like it was made for you. Because it was.</h1>
-          <p class="tw-text-[#3E495C] lg:tw-text-[18px] tw-text-[16px] tw-w-[390px]">Groov was built to fit your needs  - regardless of your pace and no matter your style.</p>
-        </div>
-  
-        <!-- Swiper -->
-        <div class="swiper shopify-swiper ">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <img src="{{ 'slide-01.png' | asset_url }}" alt="Product slide 1" loading="lazy" width="auto" height="auto" />
-            </div>
-            <div class="swiper-slide">
-              <img src="{{ 'slide-01.png' | asset_url }}" alt="Product slide 2" loading="lazy" width="auto" height="auto" />
-            </div>
-            <div class="swiper-slide">
-              <img src="{{ 'slide-01.png' | asset_url }}" alt="Product slide 3" loading="lazy" width="auto" height="auto" />
-            </div>
-            <div class="swiper-slide">
-              <img src="{{ 'slide-01.png' | asset_url }}" alt="Product slide 4" loading="lazy" width="auto" height="auto" />
-            </div>
-            <div class="swiper-slide">
-              <img src="{{ 'slide-01.png' | asset_url }}" alt="Product slide 5" loading="lazy" width="auto" height="auto" />
-            </div>
-            <div class="swiper-slide">
-              <img src="{{ 'slide-01.png' | asset_url }}" alt="Product slide 6" loading="lazy" width="auto" height="auto" />
-            </div>
-            <div class="swiper-slide">
-              <img src="{{ 'slide-01.png' | asset_url }}" alt="Product slide 7" loading="lazy" width="auto" height="auto" />
-            </div>
-            <div class="swiper-slide">
-              <img src="{{ 'slide-01.png' | asset_url }}" alt="Product slide 8" loading="lazy" width="auto" height="auto" />
-            </div>
-            <div class="swiper-slide">
-              <img src="{{ 'slide-01.png' | asset_url }}" alt="Product slide 9" loading="lazy" />
-            </div>
-            <div class="swiper-slide">
-              <img src="{{ 'slide-01.png' | asset_url }}" alt="Product slide 10" loading="lazy" />
-            </div>
-            <div class="swiper-slide">
-              <img src="{{ 'slide-01.png' | asset_url }}" alt="Product slide 11" loading="lazy" />
-            </div>
-            <div class="swiper-slide">
-              <img src="{{ 'slide-01.png' | asset_url }}" alt="Product slide 12" loading="lazy" />
-            </div>
-          </div>
-        </div>
-  
-        <!-- Controles customizados -->
-        <div class="shopify-carousel-controls">
-          <button class="shopify-carousel-btn shopify-swiper-button-prev" aria-label="Slide anterior">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <polyline points="15,18 9,12 15,6"></polyline>
-            </svg>
-          </button>
-          <span class="shopify-carousel-counter">
-            <span class="shopify-current-slide">1</span> / <span class="shopify-total-slides">12</span>
-          </span>
-          <button class="shopify-carousel-btn shopify-swiper-button-next" aria-label="Próximo slide">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <polyline points="9,6 15,12 9,18"></polyline>
-            </svg>
-          </button>
-        </div>
-      </div>
-    </div>
-
-
-
-      {% comment %} 🟡 CTA HANDS {% endcomment %}
-
-  <div style="background: linear-gradient(180deg, #F7FAFE 0%, #96C7F6 100%)">
-    <div class="page-width">
-      <div class="
-        tw-flex 
-        tw-flex-col 
-        tw-gap-[32px] 
-        tw-pt-[64px] 
-        lg:tw-pt-[128px]
-        tw-items-center ">
-        <div class="tw-flex tw-items-center tw-justify-center tw-flex-col tw-gap-[4px]">
-          <img src="{{ "reviews-yellow.svg" | asset_url }}" width="70" height="auto" class="tw-pb-[8px]">
-          <p class="lg:tw-text-[24px] tw-text-[18px] tw-font-extralight tw-text-[#3E495C] ">Plush. Cushy. A Hug for Your Feet.</p>
-          <h2 class="tw-text-black tw-font-semibold tw-text-[32px] lg:tw-text-[48px] tw-leading-none">Your Shoes.<span class="tw-text-[#11A5FB]">Reimagined.</span></h2>
-          <p class="tw-font-normal tw-text-[#3E495C] lg:tw-text-[24px] tw-text-[18px]">Just $149</p>
-        </div>
-        <img src="{{ "insole-big.png" | asset_url }}" width="600" height="auto">
-      </div>
-    </div>
-  </div>
-
+  {% case product.handle %}
+    {% when 'the-everyday' %}
+      {% render 'content-the-everyday' %}
+    {% when 'the-luxe' %}
+      {% render 'content-the-luxe' %}
+    {% when 'the-perfomance' %}
+      {% render 'content-perfomance' %}
+  {% endcase %}
 
   {% if product.handle == 'the-everyday' %}
-    <div class="tw-bg-[#F2F5FA]">
-      <div class="page-width">
-        
-        <div 
-          class="
-          tw-justify-center tw-items-center tw-flex tw-flex-col 
-          tw-pt-[48px] tw-pb-[48px]
-          lg:tw-pt-[128px] lg:tw-pb-[128px]
-          tw-max-w-[550px] tw-w-full tw-mx-auto
-          ">
-            <h4 class="tw-text-[#3E495C] lg:tw-text-[24px] tw-text-[18px]">How it works</h4>
-            <h1 class="tw-font-semibold tw-text-[32px] tw-text-center lg:tw-text-[48px] tw-leading-tight">Buy now. Scan in-app. Groov this week..</h1>
-            <p class="tw-text-[#475772] lg:tw-w-[419px] tw-w-full tw-text-center tw-text-[16px] lg:tw-text-[18px] tw-px-[12px]">Complete your scan in seconds post-checkout — your custom Groovs arrive in days.</p>
-            <img src="{{ "qrcode-home.svg" | asset_url }}" width="300" height="auto" />
-        </div>
-        
-  
-      </div>
-    </div>
+    {% comment %} DEVE APARECER SOMENTE NO PRODUTO the-everyday {% endcomment %}
+    {% comment %} <h1>{{ product.title }}</h1>
+    <div class="tw-font-normal tw-text-[black]">{{ product.description }}</div> {% endcomment %}
   {% endif %}
 
-  {% if product.handle == 'the-everyday' %}
-    <div class="tw-pb-[64px]">
-      <div class="page-width tw-grid tw-grid-cols-2 md:tw-grid-cols-3 tw-gap-[24px]">
+
   
-        {% for image in product.images %}
-          <img 
-            src="{{ image | image_url: width: 1000 }}" 
-            alt="{{ image.alt | escape }}" 
-            width="{{ image.width }}" 
-            height="{{ image.height }}" 
-            class="tw-w-full tw-rounded-[12px]" 
-          />
-        {% endfor %}
-  
-      </div>
-    </div>
-  {% endif %}
-  
-  <h1>{{ product.title }}</h1>
-  <div class="tw-font-normal tw-text-[black]">{{ product.description }}</div>
+
   
 </product-info>
 
