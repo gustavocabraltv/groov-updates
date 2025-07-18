@@ -1,0 +1,200 @@
+
+        <!-- ✅ VERSÃO CORRIGIDA -->
+        <div class="my-simple-swiper-container">
+            <div class="swiper my-simple-swiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="slide-content">Slide 1</div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="slide-content">Slide 2</div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="slide-content">Slide 3</div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="slide-content">Slide 4</div>
+                    </div>
+                </div>
+                
+                <!-- Controles do Swiper -->
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-scrollbar"></div>
+            </div>
+        </div>
+    
+        <style>
+            /* Container externo personalizado */
+            .my-simple-swiper-container {
+                width: 600px;
+                height: 300px;
+                margin: 50px auto;
+                padding: 20px;
+                background: #f5f5f5;
+                border-radius: 12px;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            }
+    
+            /* Swiper específico */
+            .my-simple-swiper {
+                width: 100% !important;
+                height: 100% !important;
+                border-radius: 8px;
+                overflow: hidden;
+            }
+    
+            /* Slides personalizados */
+            .my-simple-swiper .swiper-slide {
+                background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                color: white;
+                font-size: 24px;
+                font-weight: bold;
+                text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            }
+    
+            .my-simple-swiper .swiper-slide:nth-child(2n) {
+                background: linear-gradient(45deg, #f093fb 0%, #f5576c 100%);
+            }
+    
+            .my-simple-swiper .swiper-slide:nth-child(3n) {
+                background: linear-gradient(45deg, #4facfe 0%, #00f2fe 100%);
+            }
+    
+            .my-simple-swiper .swiper-slide:nth-child(4n) {
+                background: linear-gradient(45deg, #43e97b 0%, #38f9d7 100%);
+            }
+    
+            /* Conteúdo dos slides */
+            .slide-content {
+                text-align: center;
+                padding: 20px;
+            }
+    
+            /* Personalização dos controles */
+            .my-simple-swiper .swiper-button-prev,
+            .my-simple-swiper .swiper-button-next {
+                color: white;
+                background: rgba(0,0,0,0.3);
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                backdrop-filter: blur(10px);
+            }
+    
+            .my-simple-swiper .swiper-button-prev:hover,
+            .my-simple-swiper .swiper-button-next:hover {
+                background: rgba(0,0,0,0.5);
+                transform: scale(1.1);
+            }
+    
+            .my-simple-swiper .swiper-pagination-bullet {
+                background: white;
+                opacity: 0.5;
+            }
+    
+            .my-simple-swiper .swiper-pagination-bullet-active {
+                background: white;
+                opacity: 1;
+            }
+    
+            .my-simple-swiper .swiper-scrollbar {
+                background: rgba(255,255,255,0.3);
+            }
+    
+            .my-simple-swiper .swiper-scrollbar-drag {
+                background: white;
+            }
+    
+            /* Responsividade */
+            @media (max-width: 768px) {
+                .my-simple-swiper-container {
+                    width: 90%;
+                    height: 250px;
+                    margin: 20px auto;
+                    padding: 15px;
+                }
+    
+                .slide-content {
+                    font-size: 18px;
+                }
+            }
+        </style>
+  
+    
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // ✅ CORREÇÃO PRINCIPAL: Seletor deve ser .my-simple-swiper (não o container)
+                const swiper = new Swiper('.my-simple-swiper', {
+                    // Configurações básicas
+                    direction: 'horizontal',
+                    loop: true,
+                    autoplay: {
+                        delay: 3000,
+                        disableOnInteraction: false,
+                    },
+    
+                    // Efeitos
+                    effect: 'slide',
+                    speed: 600,
+    
+                    // Paginação
+                    pagination: {
+                        el: '.swiper-pagination',
+                        clickable: true,
+                        dynamicBullets: true,
+                    },
+    
+                    // Navegação
+                    navigation: {
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
+                    },
+    
+                    // Scrollbar
+                    scrollbar: {
+                        el: '.swiper-scrollbar',
+                        draggable: true,
+                    },
+    
+                    // Configurações de slides
+                    slidesPerView: 1,
+                    spaceBetween: 0,
+    
+                    // Callbacks para debug
+                    on: {
+                        init: function() {
+                            console.log('✅ Swiper inicializado com sucesso!');
+                        },
+                        slideChange: function() {
+                            console.log('🔄 Mudou para slide:', this.activeIndex);
+                        }
+                    },
+    
+                    // Acessibilidade
+                    a11y: {
+                        prevSlideMessage: 'Slide anterior',
+                        nextSlideMessage: 'Próximo slide',
+                    },
+    
+                    // Responsividade
+                    breakpoints: {
+                        768: {
+                            slidesPerView: 1,
+                            spaceBetween: 0,
+                        },
+                        1024: {
+                            slidesPerView: 1,
+                            spaceBetween: 0,
+                        },
+                    },
+                });
+    
+                // Log para verificar se funcionou
+                console.log('Swiper object:', swiper);
+            });
+        </script>

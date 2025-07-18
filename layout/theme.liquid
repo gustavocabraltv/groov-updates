@@ -8,6 +8,13 @@
     <meta name="theme-color" content="">
     <link rel="canonical" href="{{ canonical_url }}">
     <link rel="stylesheet" href="https://use.typekit.net/ifw0ozc.css">
+      <!-- Swiper JS -->
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+      />
+      
+      <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" async></script>
 
 
     {% comment %} {{ 'banner_public.css' | asset_url | stylesheet_tag }} {% endcomment %}
@@ -323,7 +330,7 @@
           <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@latest/bundled/lenis.js"></script>
     {%- endif -%}
  
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.css" defer="defer">
+
 
 
     <!-- Swiper -->
@@ -602,7 +609,7 @@
     {%- endif -%}
     <script src="{{ 'gsap.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'tabs.js' | asset_url }}" defer="defer"></script>
-    <script src="{{ 'reviews-slider.js' | asset_url }}" defer="defer"></script>
+    {% comment %} <script src="{{ 'reviews-slider.js' | asset_url }}" defer="defer"></script> {% endcomment %}
 
     <!-- Popup Wrap -->
     <div class="custom_popup_wrap">
@@ -1022,8 +1029,7 @@ if(form1){
       <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.js"></script>
     {% endif %} {% endcomment %}
  
-  <!-- Swiper JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.js"></script>
+
   </body>
     
 {%- comment -%}BEGIN audience11 script{%- endcomment -%}
