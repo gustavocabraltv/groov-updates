@@ -20,7 +20,7 @@
       </div>
   
       <!-- Grid com 4 colunas -->
-      <div class="tw-grid tw-grid-cols-2 lg:tw-grid-cols-4 tw-gap-[22px] lg:tw-gap-[32px] tw-mt-[64px]">
+      <div class="tw-grid tw-grid-cols-2 lg:tw-grid-cols-4 tw-gap-[22px] lg:tw-gap-[32px] tw-mt-[64px] tw-tracking-normal">
   
         <!-- Coluna 1 -->
         <div class="tw-flex tw-flex-col tw-items-center tw-gap-[32px]">
@@ -80,9 +80,16 @@
                   <img src="{{ "groov-perfomance-01.png" | asset_url }}" alt="Legall" width="600" height="auto"  />
                   <h3 
 
-                    class="lg:tw-text-[24px] tw-text-[24px] tw-w-[400px] tw-font-semibold 
-                    lg:tw-pl-[40px]
+                    class=" lg:tw-w-[400px] tw-w-full tw-font-semibold 
+
+                    lg:tw-text-[24px] 
+                    md: tw-tex-[32px]
+                    tw-text-[20px]
+                    
+                    lg:tw-pl-[40px] 
                     tw-pl-[24px]
+
+                    tw-pr-[24px]
                     ">
                     
                     <span class="tw-text-[#28B0FF]">Custom-fit insoles</span> designed to match your rhythm—wherever life takes you.</h3>
@@ -114,16 +121,35 @@
 
         <div class="tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 tw-gap-[22px] lg:tw-gap-[32px]">
     
-          <div class="lg:tw-h-[550px] tw-h-[440px] tw-bg-[#F2F5FA] tw-rounder-[24px] tw-overflow-hidden tw-flex tw-flex-col tw-justify-between tw-pt-[64px] tw-pl-[60px] tw-relative tw-rounded-[18px]">
-            <h2 class="tw-text-[28px]">
+          <div 
+            class="
+            tw-aspect-[4/4] tw-bg-[#F2F5FA] tw-relative tw-rounded-[18px] 
+            
+            tw-p-[32px]
+            lg:tw-p-[64px] 
+            
+            tw-overflow-hidden">
+
+            <h2 
+                class="
+                  {% comment %} mobile {% endcomment %}
+                  tw-text-[24px] 
+                  {% comment %} tablet {% endcomment %}
+                  md:tw-text-[28px]
+                  {% comment %} desktop {% endcomment %}
+                  lg:tw-text-[28px]
+
+                  "
+              
+              >
               <span class="tw-text-[#575D69]">One Insole.</span> <br/> 
               <span class="tw-font-semibold">Endless Possibilities.</span>
             </h2>
             <img src="{{ "insole-animation.png" | asset_url }}" width="auto" height="396" class="tw-absolute tw-bottom-0 tw-right-0" />
           </div>
         
-          <div class="lg:tw-h-[550px] tw-h-[440px] tw-bg-[#F2F5FA] tw-relative tw-rounded-[18px]">
-            <img src="{{ "von-miller-bento.png" | asset_url }}" width="auto" height="396" class="tw-absolute tw-bottom-0 tw-right-0" />
+          <div class="tw-aspect-[4/4] tw-bg-[#F2F5FA] tw-relative tw-rounded-[18px]">
+            <img src="{{ "von-miller-bento.png" | asset_url }}" class="tw-absolute tw-bottom-0 tw-right-0 tw-max-w-full tw-h-auto" width="" height="">
           </div>
         
         </div>
@@ -148,6 +174,34 @@
   </div>
 
 
+      {% comment %} 🟡 Testimonials {% endcomment %}
+
+      <div id='testimonial-highlight' 
+        class="
+        lg:tw-pt-[64px] tw-pt-[48px]
+        lg:tw-pb-[128px] tw-pb-[48px]
+        tw-bg-[#F9FBFD]" >
+        <div class="page-width">
+            <div class="tw-flex tw-flex-col tw-gap-[48px] tw-justify-center tw-items-center">
+  
+              <div class="tw-flex tw-flex-col gap-[4px] tw-items-center">
+                   <img src="{{  "ufc-fighter.png"  | asset_url}}" width="76" height="76" class="tw-mb-[8px]">
+                   <h3 class="tw-text-[18px] lg:tw-text-[21px] tw-font-bold"> @CharlesJohnson.</h3>
+                   <p>UFC Fighter</p>
+              </div>
+  
+              <h3 class="tw-text-[#232318] lg:tw-w-[610px] tw-w-full tw-text-center tw-leading-relaxed tw-tracking-norma
+                lg:tw-text-[24px] 
+                md:tw-text-[24px] 
+                tw-text-[18px]
+                ">
+                My Groovs relieved my plantar fasciitis and got me out of a walking boot in the lead-up to my UFC debut. Ensuring I feel great on my feet lets ne put in the work needed to show up strong on fight night.
+              </h3>
+  
+            </div>
+        </div>
+      </div>
+
 
 
     {% comment %} 🟡 3 steps {% endcomment %}
@@ -155,11 +209,16 @@
     <div class="
       lg:tw-pt-[64px] tw-pt-[48px]
       lg:tw-pb-[128px] tw-pb-[48px]
-      tw-bg-[#F2F5FA]" >
+      tw-bg-[#F9FBFD]
+      tw-tracking-normal
+      
+      
+        ">
       <div class="page-width">
+        
           <div class="tw-flex tw-flex-col tw-gap-[48px]">
 
-            <div class="tw-gap-[8px] tw-flex tw-flex-col tw-justify-center tw-items-center">
+            <div class="tw-gap-[18px] tw-flex tw-flex-col tw-justify-center tw-items-center">
               <p 
                 class="
                 tw-text-[#3E495C]
@@ -174,18 +233,20 @@
             </div>
 
              
-            <div class="tw-grid tw-grid-cols-1 lg:tw-grid-cols-3 lg:tw-gap-[32px] tw-gap-[16px]">
+            <div class="tw-grid tw-grid-cols-1 lg:tw-grid-cols-3 lg:tw-gap-[32px] tw-gap-[16px] tw-tracking-normal">
            
            
               {% comment %} card 1 {% endcomment %} 
-              <div class="
-                tw-flex tw-flex-col tw-gap-[32px] tw-bg-[white] tw-p-[32px] tw-rounded-[12px]
+              <div class=" tw-bg-[white]
+                tw-flex tw-flex-col tw-gap-[32px]   tw-p-[50px] lg:tw-p-[32px] tw-rounded-[12px]
                 lg:tw-items-start tw-items-center 
-                ">
+                "
+
+                style="box-shadow: 0px 17px 32px 0px rgba(76, 81, 89, 0.06);" >
                   <img src="{{ "icon-ai.svg" | asset_url }}" width="40" height="40">
 
                   <div class="
-                    tw-flex tw-flex-col tw-gap-[8px]
+                    tw-flex tw-flex-col tw-gap-[18px]
                     lg:tw-items-start lg:tw-text-left
                     tw-items-center tw-text-center
                     ">
@@ -194,58 +255,66 @@
                       lg:tw-w-[188px]
                       tw-text-[21px] 
                       tw-font-semibold
+                      tw-leading-none
                       "
                     
                     >Scan your feet using your iPhone</h3>
-                    <p>Use the Groov app to scan your feet  with your iPhone, powered by our ShapeSense technology.</p>
+                    <p class="tw-text-[#5E6774]">Use the Groov app to scan your feet with your iPhone, powered by our ShapeSense technology.</p>
                   </div>
               </div>
 
                 {% comment %} card 2 {% endcomment %} 
-                <div class="
-                  tw-flex tw-flex-col tw-gap-[32px] tw-bg-[white] tw-p-[32px] tw-rounded-[12px]
+                <div class=" tw-bg-[white]
+                  tw-flex tw-flex-col tw-gap-[32px]  tw-p-[50px] lg:tw-p-[32px] tw-rounded-[12px]
                   lg:tw-items-start tw-items-center 
-                  ">
-                    <img src="{{ "icon-ai.svg" | asset_url }}" width="40" height="40">
+                  "
+                  style="box-shadow: 0px 17px 32px 0px rgba(76, 81, 89, 0.06);"
+                    >
+                      <img src="{{ "icon-choose.svg" | asset_url }}" width="40" height="40">
   
-                    <div class="
-                      tw-flex tw-flex-col tw-gap-[8px]
-                      lg:tw-items-start lg:tw-text-left
-                      tw-items-center tw-text-center
-                      ">
-                      <h3 class="
-                        tw-w-[248px] 
-                        lg:tw-w-[188px]
-                        tw-text-[21px] 
-                        tw-font-semibold
-                        "
-                      
-                      >Scan your feet using your iPhone</h3>
-                      <p>Use the Groov app to scan your feet  with your iPhone, powered by our ShapeSense technology.</p>
+                      <div class="
+                        tw-flex tw-flex-col tw-gap-[18px]
+                        lg:tw-items-start lg:tw-text-left
+                        tw-items-center tw-text-center
+                        " >
+                                <h3 class="
+                                  tw-w-[248px] 
+                                  lg:tw-w-[188px]
+                                  tw-text-[21px] 
+                                  tw-font-semibold
+                                  tw-leading-none
+                                  "
+                                
+                                
+                                >Choose Your Model & Finish</h3>
+                                <p class="tw-text-[#5E6774]">Pick the perfect model and finish for your lifestyle — with free engraving to make it truly yours</p>
                     </div>
                 </div>
 
                   {% comment %} card 3 {% endcomment %} 
-              <div class="
-                tw-flex tw-flex-col tw-gap-[32px] tw-bg-[white] tw-p-[32px] tw-rounded-[12px]
+              <div class=" tw-bg-[white]
+                tw-flex tw-flex-col tw-gap-[32px] tw-rounded-[12px]
                 lg:tw-items-start tw-items-center 
-                ">
-                  <img src="{{ "icon-ai.svg" | asset_url }}" width="40" height="40">
+
+                tw-p-[50px] lg:tw-p-[32px]
+                "
+                style="box-shadow: 0px 17px 32px 0px rgba(76, 81, 89, 0.06);">
+                  <img src="{{ "icon-shipping.svg" | asset_url }}" width="40" height="40">
 
                   <div class="
-                    tw-flex tw-flex-col tw-gap-[8px]
+                    tw-flex tw-flex-col tw-gap-[18px]
                     lg:tw-items-start lg:tw-text-left
                     tw-items-center tw-text-center
                     ">
                     <h3 class="
-                      tw-w-[248px] 
-                      lg:tw-w-[188px]
+                      tw-w-[210px] 
+                      lg:tw-w-[195px]
                       tw-text-[21px] 
                       tw-font-semibold
-                      "
-                    
-                    >Scan your feet using your iPhone</h3>
-                    <p>Use the Groov app to scan your feet  with your iPhone, powered by our ShapeSense technology.</p>
+                      tw-leading-none
+                      " > Get them delivered in under a week</h3>
+
+                    <p class="tw-text-[#5E6774]">Your custom Groovs are made to order and delivered straight to your door in just a few days.</p>
                   </div>
               </div>
 
@@ -577,7 +646,7 @@
         <div class="tw-flex tw-items-center tw-justify-center tw-flex-col tw-gap-[4px]">
           <img src="{{ "reviews-yellow.svg" | asset_url }}" width="70" height="auto" class="tw-pb-[8px]">
           <p class="lg:tw-text-[24px] tw-text-[18px] tw-font-extralight tw-text-[#3E495C] ">Plush. Cushy. A Hug for Your Feet.</p>
-          <h2 class="tw-text-black tw-font-semibold tw-text-[32px] lg:tw-text-[48px] tw-leading-none">Your Shoes.<span class="tw-text-[#11A5FB]">Reimagined.</span></h2>
+          <h2 class="tw-text-black tw-font-semibold tw-text-[32px] lg:tw-text-[48px] tw-leading-non tw-text-center tw-leading-none">Your Shoes.<span class="tw-text-[#11A5FB]"> Reimagined.</span></h2>
           <p class="tw-font-normal tw-text-[#3E495C] lg:tw-text-[24px] tw-text-[18px]">Just $149</p>
         </div>
         <img src="{{ "insole-big.png" | asset_url }}" width="600" height="auto">
