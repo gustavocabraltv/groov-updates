@@ -569,7 +569,7 @@ details-modal.header__search {
     padding-top: 3px;
     padding-bottom: 3px;
     /* margin-top: 10px; */
-    width: 96%;
+    width: 100%;
   }
 }
 /* header css end */
@@ -1201,7 +1201,7 @@ p {
 }
 
   .header__icon--menu {
-    padding-left: 10px !important;
+    /* padding-left: 10px !important; */
 }
   .header__heading-logo {
     height: auto;

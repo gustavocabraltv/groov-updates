@@ -1,8 +1,30 @@
+<style>
+  /* Oculta os dois primeiros parágrafos */
+  #product-description-toggle-text > p:nth-child(1),
+  #product-description-toggle-text > p:nth-child(2) {
+    display: none;
+  }
+
+  /* Adiciona margem apenas entre os <p> visíveis, sem afetar o primeiro visível */
+  #product-description-toggle-text > p + p {
+    margin-top: 12px;
+  }
+
+  /* Remove margem do primeiro visível após os dois ocultos (caso herde de algum lugar) */
+  #product-description-toggle-text > p:nth-child(3) {
+    margin-top: 0 !important;
+  }
+</style>
+
+
 <product-info
   id="MainProduct-{{ section.id }}"
   class="section-{{ section.id }}-padding"
   data-section="{{ section.id }}"
 >
+  
+
+
 
   <div class="tw-bg-[white] tw-tracking-normal lg:tw-pt-[128px] tw-pt-[59px]">
 
@@ -152,8 +174,8 @@
           </div>
 
           <div id="short-description" class="tw-flex tw-flex-col tw-gap-[8px]">
-            <p class="tw-font-semibold tw-text-black tw-text-[16px] lg:tw-text-[16px]">Elegant. Compact. Perfect for Snug Shoes.</p>
-            <p class="tw-font-normal tw-text-[#4D5056] tw-text-[16px] lg:tw-text-[16px] ">Your custom pair of The Luxe, by Groov is crafted with a thin finish that tapers before the toes for an easy fit in even your tightest shoes (and those that don't have removable insoles).</p>
+            <p class="tw-font-semibold tw-text-black tw-text-[16px] lg:tw-text-[16px]">{{ product.metafields.custom.groov_heading }}</p>
+            <p class="tw-font-normal tw-text-[#4D5056] tw-text-[16px] lg:tw-text-[16px] ">{{ product.metafields.custom.groov_description }}</p>
 
           </div>
 
@@ -170,7 +192,7 @@
           </div>
 
 
-          <div id="description" class="tw-relative">
+          {% comment %} <div id="description" class="tw-relative">
             <p class="tw-font-semibold tw-text-black tw-mb-[16px]">Description</p>
             <p id="product-description-toggle-text" class="tw-leading-[24px] tw-line-clamp-[7]">
               Designed for ultimate comfort in any shoe, each pair is tailored to your unique footprint using 3D foot mapping on an iPhone, for a flawless fit that feels like it was made just for you—because it was.
@@ -195,16 +217,33 @@
               class="tw-w-full tw-flex tw-justify-center tw-items-center tw-pt-[24px] tw-pb-[32px] tw-border-b tw-border-[#DCDCDC] tw-font-semibold tw-text-[black] gap-[8px]">
               Show More <img src="{{ 'arrow-down.svg' | asset_url }}" width="auto" height="24" />
             </button>
-          </div>
+          </div> {% endcomment %}
 
 
 
           <div id="description" class="tw-relative">
             <p class="tw-font-semibold tw-text-black tw-mb-[16px]">Description</p>
-            <p id="product-description-toggle-text" class="tw-leading-[24px] tw-line-clamp-[7]">
+
+
+            {% comment %} 
+             <div id="product-description-toggle-text" class="tw-leading-[24px] tw-line-clamp-[7] tw-space-y-[12px]">
               {{ product.description }}
-            </p>
+            </div>
+            
+           {% endcomment %}
+
+           <div 
+            id="product-description-toggle-text" 
+            class="tw-leading-[24px] tw-line-clamp-[5]"
+          >
+            {{ product.description }}
+          </div>
           
+
+        
+
+
+
             <!-- Gradiente -->
             <div 
               id="product-description-fade"
@@ -218,6 +257,29 @@
               class="tw-w-full tw-flex tw-justify-center tw-items-center tw-pt-[24px] tw-pb-[32px] tw-border-b tw-border-[#DCDCDC] tw-font-semibold tw-text-[black] gap-[8px]">
               Show More <img src="{{ 'arrow-down.svg' | asset_url }}" width="auto" height="24" />
             </button>
+          </div>
+
+          <div>
+            <h1>Texto</h1>
+            
+  
+
+            <p>Heading (metafield): {{ product.metafields.custom.groov_heading }}</p>
+            <br/>
+            <p>Description (metafield): {{ product.metafields.custom.groov_description }}</p>
+            {% comment %} <p>Heading (metafield): {{ product.metafields.custom.groov_heading | default: "NADA" }}</p>
+            <p>Description (metafield): {{ product.metafields.custom.groov_description | default: "NADA" }}</p> {% endcomment %}
+            
+            {% for block in section.blocks %}
+              {% if block.type == 'groov_content' %}
+                <div class='block--mobile'> 
+                  <span>{{ block.settings.groov_heading }}</span>
+                  <span>{{ block.settings.groov_description }}</span>
+                </div>
+              {% endif %}
+            {% endfor %}
+
+
           </div>
 
 
@@ -412,7 +474,7 @@
                 button.addEventListener('click', () => {
                   expanded = !expanded;
             
-                  paragraph.classList.toggle('tw-line-clamp-[7]');
+                  paragraph.classList.toggle('tw-line-clamp-[5]');
                   fade.style.display = expanded ? 'none' : 'block';
                   button.innerHTML = expanded 
                     ? 'Show Less <img src="{{ "arrow-up.svg" | asset_url }}" width="auto" height="24" />' 
@@ -552,6 +614,8 @@
     </div>
   </div>
 
+
+  
 
   {% case product.handle %}
     {% when 'the-everyday' %}
@@ -721,27 +785,36 @@ document.addEventListener('DOMContentLoaded', function() {
 
 {% schema %}
 {
-  "name": "Main Product Clean",
-  "tag": "section",
-  "class": "section",
-  "settings": [
+  "name": "Main Product",
+  "settings": [],
+  "blocks": [
     {
-      "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "Hello World"
-    },
+      "type": "groov_content",
+      "name": "Groov Content",
+      "settings": [
+        {
+          "type": "text",
+          "id": "groov_heading",
+          "label": "Groov Heading",
+          "default": "Elegant. Compact. Perfect for Snug Shoes."
+        },
+        {
+          "type": "textarea",
+          "id": "groov_description",
+          "label": "Groov Description",
+          "default": "Your custom pair of The Luxe, by Groov is crafted with a thin finish that tapers before the toes for an easy fit in even your tightest shoes (and those that don't have removable insoles)."
+        }
+      ]
+    }
+  ],
+  "presets": [
     {
-      "type": "textarea",
-      "id": "description",
-      "label": "Description",
-      "default": "Esta é uma section limpa para começar do zero!"
-    },
-    {
-      "type": "text",
-      "id": "heading_3",
-      "label": "Heading 3 (How it Works)",
-      "default": "Start your journey today!"
+      "name": "Main Product",
+      "blocks": [
+        {
+          "type": "groov_content"
+        }
+      ]
     }
   ]
 }

@@ -1,5 +1,15 @@
 {{ 'section-main-page.css' | asset_url | stylesheet_tag }}
 
+{% if page.handle == 'faq-02' %}
+  <style>
+    h1.main-page-title {
+      display: none;
+    }
+  </style>
+{% endif %}
+
+
+
 {%- style -%}
   .section-{{ section.id }}-padding {
     padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
@@ -21,6 +31,17 @@
   <div class="rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
     {{ page.content }}
   </div>
+
+
+
+</div>
+
+<div>
+  
+    {% if page.handle == 'faq-02' %}
+      {% render 'faq-custom-snippet' %}
+    {% endif %}
+
 </div>
 
 {% schema %}

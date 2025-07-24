@@ -1,19 +1,50 @@
 <style>
   #MainContent{
     background: #F3F3F6;
+    margin-top: -70px;
   }
+
+  @media (max-width: 481px) { 
+    #MainContent{
+      background: #F3F3F6;
+      margin-top: -32px;
+    }
+  }
+  
     .main-image {
       display: none;
-      margin-top: -100px;
+      margin-top: -300px;
     }
 </style>
  
 
-<div class="tw-mt-[-48px]">
+{% comment %} <div class="tw-mt-[-48px]">
   {% render 'content-banner' %}
+</div> {% endcomment %}
+
+
+  <div class="">
+    {% render 'content-banner-example' %}
+  </div>
+
+
+<div class="tw-mt-[64px]">
+  <div class="page-width">
+    <h1 class="lg:tw-text-[48px] tw-text-[32px] tw-font-semibold tw-pb-[18px]">
+      Shop Groov
+    </h1>
+    <p 
+        class="
+        tw-flex lg:tw-text-[18px] tw-text-[#464F59] 
+        lg:tw-w-[60%] tw-w-full tw-text-[16px]
+        tw-tracking-normal
+        ">
+      Each pair is tailored to your unique footprint using 3D foot mapping on an iPhone, for a flawless fit that feels like it was made just for you—because it was
+    </p>
+
+  </div>
 </div>
 
-{% render 'content-banner-example' %}
  
  <div class="tw-pt-[64px] tw-pb-[64px]">
 

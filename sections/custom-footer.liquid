@@ -1,8 +1,7 @@
 <style>
-.custom-footer-section{
+{% comment %} .custom-footer-section{
   padding-top:50px;
   padding-bottom:50px;
-  /* background:#D0E6F7; */
 }
 .index section.custom-footer-section {
   display: none;
@@ -67,39 +66,115 @@ span.copy_right_content {
             flex-direction:column;
             gap:15px;
           }
+        } {% endcomment %}
+        .hr-vertical {
+          width: 1px;
+          height: 20px;
+          background: #C0C4CC;
+          display: inline-block;
+          margin: 0 8px;
+          color: 000000;
         }
 </style>
 
-<section class="custom-footer-section" style="background-color: {{ section.settings.bg_color }}">
-  <div class="page-width">
-    <div class="main-wrapper">
-      <div class="first-div">
-        <img
-          src="https://cdn.shopify.com/s/files/1/0716/2606/4183/files/groov-footer-logo.png?v=1738045027"
-          class="footer-logo"
-        >
-      </div>
-      <div class="second-div">
-        <div class="menu-box">
-          <div class="menu-list-wrap">
-            {% comment %}
-                            {% for link in section.settings.menu2.links %}
-              <a class="menu-title" href="{{ link.url }}">{{ link.title }}</a>
-                            {% endfor %}
-            {% endcomment %}
-            <a href="/pages/faqs" class="menu-title">FAQs</a>
-            <a href="/policies/privacy-policy" class="menu-title">PRIVACY POLICY</a>
-            <a href="/pages/contact" class="menu-title">CONTACT US</a>
-            <a  href="#"class="menu-title">ACCESSIBILITY</a>
+{% comment %} 
+ 
+    <section class="custom-footer-section" style="background-color: {{ section.settings.bg_color }}">
+      <div class="page-width">
+        <div class="main-wrapper">
+          <div class="first-div">
+            <img
+              src="https://cdn.shopify.com/s/files/1/0716/2606/4183/files/groov-footer-logo.png?v=1738045027"
+              class="footer-logo"
+              width=""
+              height=""
+
+            >
+          </div>
+          <div class="second-div">
+            <div class="menu-box">
+              <div class="menu-list-wrap">
+                {% comment %}
+                                {% for link in section.settings.menu2.links %}
+                  <a class="menu-title" href="{{ link.url }}">{{ link.title }}</a>
+                                {% endfor %}
+                {% endcomment %}
+                <a href="/pages/faqs" class="menu-title">FAQs</a>
+                <a href="/policies/privacy-policy" class="menu-title">PRIVACY POLICY</a>
+                <a href="/pages/contact" class="menu-title">CONTACT US</a>
+                <a  href="#"class="menu-title">ACCESSIBILITY</a>
+              </div>
+            </div>
+          </div>
+          <div class="third-div">
+            <div class="copy-right"><span class="copy_right_content">&COPY;</span>Groov 2025</div>
           </div>
         </div>
       </div>
-      <div class="third-div">
-        <div class="copy-right"><span class="copy_right_content">&COPY;</span>Groov 2025</div>
+    </section> 
+
+{% endcomment %}
+
+
+<section class="tw-bg-[white]">
+  <div class="page-width">
+    <div class="">
+
+
+      <div class="tw-justify-between tw-items-center tw-flex tw-py-[16px]">
+        <img src="{{ "footer-logo.png" | asset_url }}" width="128" height="auto" />
+        <img class="lg:tw-hidden" src="{{ "download-apple.svg" | asset_url }}" width="146" height="auto" />
+
+        <div class="lg:tw-flex tw-gap-[48px] tw-hidden tw-text-[#292D34] tw-tracking-none">
+          <div class="tw-flex tw-gap-[8px] tw-text-[16px]"><img src="{{  "phone-icon.svg" | asset_url }}" width="24" height="24"> 24/7 support</div>
+          <div class="hr-vertical" aria-hidden="true">&nbsp;</div>
+          <div class="tw-flex tw-gap-[8px] tw-text-[16px]"><img src="{{  "secure-icon.svg" | asset_url }}" width="24" height="24"> Safe Checkout</div>
+          <div class="hr-vertical" aria-hidden="true">&nbsp;</div>
+          <div class="tw-flex tw-gap-[8px] tw-text-[16px]"><img src="{{  "ai-phone.svg" | asset_url }}" width="24" height="24"> AI-Powered </div>
+          <div class="hr-vertical" aria-hidden="true">&nbsp;</div>
+          <div class="tw-flex tw-gap-[8px] tw-text-[16px]"><img src="{{  "box-icon.svg" | asset_url }}" width="24" height="24"> Delivered in 7 days</div>
+
+
+        </div>
       </div>
+
+
+      <div 
+        class="tw-flex tw-flex-wrap tw-justify-between tw-items-center tw-py-[16px] tw-text-[13px] tw-text-black ">
+      
+        <!-- Esquerda: bandeiras -->
+        <div class="tw-w-full lg:tw-w-auto tw-flex tw-justify-start">
+          <img src="{{ "credit-cards.svg" | asset_url }}" width="214" height="auto" class="tw-hidden lg:tw-block" />
+        </div>
+      
+        <!-- Direita: links -->
+        <div class="tw-w-full lg:tw-w-auto tw-flex tw-items-center tw-justify-between lg:tw-justify-end tw-flex-wrap tw-gap-x-[8px] lg:tw-mt-0">
+          <a href="/pages/faqs">FAQs</a>
+          <div class="hr-vertical" aria-hidden="true">&nbsp;</div>
+          <a href="/policies/privacy-policy">Privacy Policy</a>
+          <div class="hr-vertical" aria-hidden="true">&nbsp;</div>
+          <a href="/pages/contact">Contact Us</a>
+          <div class="hr-vertical" aria-hidden="true">&nbsp;</div>
+          <a href="#">Accessibility</a>
+        </div>
+      </div>
+      
+
+
+      <div class="tw-justify-between tw-items-center tw-flex tw-py-[16px]">
+       
+        <img src="{{ "credit-cards.svg" | asset_url }}" width="214" height="auto" class="lg:tw-hidden">
+        <img src="{{ "download-apple.svg" | asset_url }}" width="146" height="auto" class="tw-hidden lg:tw-block">
+         <p class="tw-text-[#5F6671]">©Groov 2025</p>
+
+      </div>
+
+
     </div>
   </div>
 </section>
+
+
 
 {% schema %}
   {

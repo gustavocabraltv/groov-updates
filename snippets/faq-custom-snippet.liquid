@@ -1,0 +1,133 @@
+<div class="tw-bg-[white] tw-h-dvh tw-w-full tw-pt-[70px]">
+    <div class="page-width">
+      <div class="tw-flex tw-flex-col tw-gap-[32px]">
+  
+        <!-- Header -->
+        <div class="tw-flex tw-flex-col tw-justify-center tw-gap-[8px] tw-items-center tw-text-center tw-leading-none">
+          <p class="tw-text-[#4076FF] tw-text-[18px]">Groov - FAQ</p>
+          <h1 class="lg:tw-text-[44px] tw-text-[32px] tw-text-[#171B23] tw-font-semibold">Frequently asked questions</h1>
+          <h4 class="tw-text-[#494E57] lg:tw-text-[18px] tw-text-[16px]">Need help with something? Here are our most frequently asked questions.</h4>
+        </div>
+  
+        <!-- Tabs -->
+        <div class="
+            tw-flex tw-justify-center tw-space-x-2 tw-mb-8 tw-bg-[#F8F8F8] tw-w-fit tw-px-[2px] tw-py-[2px] tw-rounded-lg
+            tw-mx-auto
+            ">
+          <button 
+            class="tw-px-4 tw-py-2 tw-rounded-lg tw-text-black tw-font-medium tw-text-[16px] tw-border tw-border-gray-300 tw-bg-white tw-shadow-sm"
+            onclick="switchTab('about')"
+            id="tab-about"
+          >
+            About Groovs
+          </button>
+          <button 
+            class="tw-px-4 tw-py-2 tw-rounded-lg tw-text-black tw-font-medium tw-text-[16px] tw-border tw-border-transparent"
+            onclick="switchTab('orders')"
+            id="tab-orders"
+          >
+            Orders & Support
+          </button>
+        </div>
+  
+        <!-- About Groovs FAQs -->
+        <div id="faq-about" class="tw-w-full tw-mx-auto tw-divide-y tw-divide-gray-200 tw-tracking-normal">
+          <!-- FAQ Item -->
+          <div class="tw-py-[24px]">
+            <button class="tw-flex tw-justify-between tw-items-center tw-w-full" onclick="toggleFaq(this)">
+              <span class="lg:tw-text-[18px] tw-text-[17px] tw-font-medium tw-text-[#101828] tw-text-left">
+                Does Groov partner with athletic teams or organizations?
+              </span>
+              <span class="tw-text-xl tw-text-[#101828] faq-icon">+</span>
+            </button>
+            <div class="tw-mt-6 lg:tw-text-[18px] tw-text-[16px] tw-text-[#495464] tw-hidden faq-content">
+              Yes, we do! We love bringing teams into the fold to help them get that competitive advantage that Groov offers.<br />
+              And we would love to chat further – contact us at 
+              <a href="mailto:we@groov.me" class="tw-text-blue-600 tw-underline">we@groov.me</a>
+            </div>
+          </div>
+  
+          <!-- FAQ Item -->
+          <div class="tw-py-[24px]">
+            <button class="tw-flex tw-justify-between tw-items-center tw-w-full" onclick="toggleFaq(this)">
+              <span class="lg:tw-text-[18px] tw-text-[17px] tw-font-medium tw-text-[#101828] tw-text-left">
+                Does Groov work with shoe brands or footwear retailers?
+              </span>
+              <span class="tw-text-xl tw-text-[#101828] faq-icon">+</span>
+            </button>
+            <div class="tw-mt-6 lg:tw-text-[18px] tw-text-[16px] tw-text-[#495464] tw-hidden faq-content">
+              Yes! We’ve partnered with footwear retailers to elevate their customer experience and performance insights.
+            </div>
+          </div>
+        </div>
+  
+        <!-- Orders & Support FAQs -->
+        <div id="faq-orders" class="tw-w-full tw-mx-auto tw-divide-y tw-divide-gray-200 tw-tracking-normal tw-hidden">
+          <!-- FAQ Item -->
+          <div class="tw-py-[24px]">
+            <button class="tw-flex tw-justify-between tw-items-center tw-w-full" onclick="toggleFaq(this)">
+              <span class="lg:tw-text-[18px] tw-text-[17px] tw-font-medium tw-text-[#101828] tw-text-left">
+                Where is my order?
+              </span>
+              <span class="tw-text-xl tw-text-[#101828] faq-icon">+</span>
+            </button>
+            <div class="tw-mt-6 lg:tw-text-[18px] tw-text-[16px] tw-text-[#495464] tw-hidden faq-content">
+              You’ll receive a tracking link by email once your order is shipped. If you haven’t, contact us at 
+              <a href="mailto:support@groov.me" class="tw-text-blue-600 tw-underline">support@groov.me</a>.
+            </div>
+          </div>
+  
+          <!-- FAQ Item -->
+          <div class="tw-py-[24px]">
+            <button class="tw-flex tw-justify-between tw-items-center tw-w-full" onclick="toggleFaq(this)">
+              <span class="lg:tw-text-[18px] tw-text-[17px] tw-font-medium tw-text-[#101828] tw-text-left">
+                How can I return my product?
+              </span>
+              <span class="tw-text-xl tw-text-[#101828] faq-icon">+</span>
+            </button>
+            <div class="tw-mt-6 lg:tw-text-[18px] tw-text-[16px] tw-text-[#495464] tw-hidden faq-content">
+              Returns are accepted within 30 days of purchase. Email us and we’ll guide you through the process.
+            </div>
+          </div>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+  
+  <!-- JavaScript -->
+  <script>
+    function toggleFaq(button) {
+      const content = button.nextElementSibling;
+      const icon = button.querySelector('.faq-icon');
+      const isOpen = !content.classList.contains('tw-hidden');
+  
+      if (isOpen) {
+        content.classList.add('tw-hidden');
+        icon.textContent = '+';
+      } else {
+        content.classList.remove('tw-hidden');
+        icon.textContent = '–';
+      }
+    }
+  
+    function switchTab(tabId) {
+      const tabs = ['about', 'orders'];
+  
+      tabs.forEach(id => {
+        const tabBtn = document.getElementById('tab-' + id);
+        const faqSection = document.getElementById('faq-' + id);
+  
+        if (id === tabId) {
+          tabBtn.classList.add('tw-bg-white', 'tw-border-gray-300', 'tw-shadow-sm');
+          tabBtn.classList.remove('tw-border-transparent');
+          faqSection.classList.remove('tw-hidden');
+        } else {
+          tabBtn.classList.remove('tw-bg-white', 'tw-border-gray-300', 'tw-shadow-sm');
+          tabBtn.classList.add('tw-border-transparent');
+          faqSection.classList.add('tw-hidden');
+        }
+      });
+    }
+  </script>
+  
