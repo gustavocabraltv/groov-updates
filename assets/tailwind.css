@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* ANIMAÇÕES CUSTOMIZADAS */
+@layer utilities {
+    @keyframes marquee-loop {
+      0% {
+        transform: translateX(0%);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+  
+    .tw-marquee-track {
+      animation: marquee-loop 30s linear infinite;
+    }
+  }
+  

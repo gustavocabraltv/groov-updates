@@ -227,10 +227,12 @@
 
     .wireframe__heading {
 
-        font-size: var(  --font-heading-2-desktop);
+        {% comment %} font-size: var(  --font-heading-2-desktop); {% endcomment %}
+        font-size: 48px;
+        line-height: normal;
         color: var(--text-title);
         margin-bottom: 64px;
-        font-weight: 600;
+        font-weight: 300;
     }
 
     .wireframe__benefits {
@@ -410,7 +412,10 @@
   <div class="page-width-own">
     <div class="wireframe__inner">
       <div class="wireframe__content-left">
-        <h1 class="wireframe__heading">{{ section.settings.heading }}</h1>
+        {% comment %} <h1 class="wireframe__heading tw-max-w-[600px]">{{ section.settings.heading }}</h1> {% endcomment %}
+        <h1 class="wireframe__heading tw-max-w-[600px]">
+          Built by science, with <span class="tw-text-[#1D9CF0] tw-font-semibold">performance, protection and comfort</span> in mind
+        </h1>
 
         <div class="wireframe__benefits">
           <div class="wireframe__benefit">

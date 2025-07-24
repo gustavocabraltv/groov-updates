@@ -633,154 +633,214 @@
   {% endif %}
 
 
-  
 
-  
+ 
 </product-info>
 
+<div 
+  id="sticky-cart"
+  class="tw-fixed tw-bottom-0 tw-w-full tw-bg-[white] tw-z-50 tw-py-[16px] tw-transform tw-translate-y-full tw-transition-transform tw-duration-300 tw-ease-in-out tw-opacity-0"
+  style="box-shadow: 0 -3px 32px 0 rgba(31, 38, 51, 0.07)">
+  
+  <div class="page-width">
+    <div class="tw-flex tw-justify-between tw-items-center">
+      <p class="tw-text-[16px] tw-text-[#3f454f] tw-tracking-normal">{{ product.title }}</p>
+
+      <div class="tw-flex tw-gap-[24px] tw-items-center">
+        <p class="tw-text-[18px] tw-font-semibold tw-text-black">{{ product.price | money_without_trailing_zeros }}</p>
+        <a class="tw-bg-[black] tw-px-[24px] tw-py-[10px] tw-text-white tw-rounded-full tw-text-center lg:tw-text-[18px] tw-text-[16px] hover:tw-bg-gray-800 tw-transition-colors">
+          Add to cart
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Aguarda um pouco para garantir que o Swiper está carregado
-    setTimeout(function() {
-        if (typeof Swiper !== 'undefined') {
-            const shopifySwiper = new Swiper('.shopify-swiper', {
-                // Configurações para scroll infinito
-                loop: true,
-                centeredSlides: true,
-                slidesPerView: 5,
-                slidesPerGroup: 1,
-                spaceBetween: 20,
-                grabCursor: true,
-                loopFillGroupWithBlank: true,
-                loopedSlides: 6,
-                loopAdditionalSlides: 2,
-                
-                // Breakpoints para responsividade
-                breakpoints: {
-                    // Mobile pequeno
-                    320: {
-                        slidesPerView: 1.5,
-                        spaceBetween: 12,
-                        centeredSlides: true,
-                        loopedSlides: 3,
-                    },
-                    // Mobile
-                    480: {
-                        slidesPerView: 2.5,
-                        spaceBetween: 15,
-                        centeredSlides: true,
-                        loopedSlides: 4,
-                    },
-                    // Tablet
-                    768: {
-                        slidesPerView: 3,
-                        spaceBetween: 15,
-                        centeredSlides: true,
-                        loopedSlides: 4,
-                    },
-                    // Desktop pequeno
-                    1024: {
-                        slidesPerView: 4,
-                        spaceBetween: 20,
-                        centeredSlides: true,
-                        loopedSlides: 5,
-                    },
-                    // Desktop
-                    1200: {
-                        slidesPerView: 3,
-                        spaceBetween: 20,
-                        centeredSlides: true,
-                        loopedSlides: 4,
-                    }
-                },
+  document.addEventListener('DOMContentLoaded', function() {
+      const stickyCart = document.getElementById('sticky-cart');
+      const scrollThreshold = 1000;
+      let isVisible = false;
+  
+      function handleScroll() {
+          const scrollY = window.scrollY;
+          
+          if (scrollY >= scrollThreshold && !isVisible) {
+              // Mostrar o cart
+              stickyCart.classList.remove('tw-translate-y-full', 'tw-opacity-0');
+              stickyCart.classList.add('tw-translate-y-0', 'tw-opacity-100');
+              isVisible = true;
+          } else if (scrollY < scrollThreshold && isVisible) {
+              // Esconder o cart - FORÇA as classes para garantir transição suave
+              stickyCart.classList.remove('tw-translate-y-0', 'tw-opacity-100');
+              stickyCart.classList.add('tw-translate-y-full', 'tw-opacity-0');
+              isVisible = false;
+          }
+      }
+  
+      // Versão com requestAnimationFrame mais controlada
+      let ticking = false;
+      
+      function requestTick() {
+          if (!ticking) {
+              ticking = true;
+              requestAnimationFrame(() => {
+                  handleScroll();
+                  ticking = false;
+              });
+          }
+      }
+  
+      window.addEventListener('scroll', requestTick);
+  });
+  </script>
 
-                // Navegação customizada
-                navigation: {
-                    nextEl: '.shopify-swiper-button-next',
-                    prevEl: '.shopify-swiper-button-prev',
-                },
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+      // Aguarda um pouco para garantir que o Swiper está carregado
+      setTimeout(function() {
+          if (typeof Swiper !== 'undefined') {
+              const shopifySwiper = new Swiper('.shopify-swiper', {
+                  // Configurações para scroll infinito
+                  loop: true,
+                  centeredSlides: true,
+                  slidesPerView: 5,
+                  slidesPerGroup: 1,
+                  spaceBetween: 20,
+                  grabCursor: true,
+                  loopFillGroupWithBlank: true,
+                  loopedSlides: 6,
+                  loopAdditionalSlides: 2,
+                  
+                  // Breakpoints para responsividade
+                  breakpoints: {
+                      // Mobile pequeno
+                      320: {
+                          slidesPerView: 1.5,
+                          spaceBetween: 12,
+                          centeredSlides: true,
+                          loopedSlides: 3,
+                      },
+                      // Mobile
+                      480: {
+                          slidesPerView: 2.5,
+                          spaceBetween: 15,
+                          centeredSlides: true,
+                          loopedSlides: 4,
+                      },
+                      // Tablet
+                      768: {
+                          slidesPerView: 3,
+                          spaceBetween: 15,
+                          centeredSlides: true,
+                          loopedSlides: 4,
+                      },
+                      // Desktop pequeno
+                      1024: {
+                          slidesPerView: 4,
+                          spaceBetween: 20,
+                          centeredSlides: true,
+                          loopedSlides: 5,
+                      },
+                      // Desktop
+                      1200: {
+                          slidesPerView: 3,
+                          spaceBetween: 20,
+                          centeredSlides: true,
+                          loopedSlides: 4,
+                      }
+                  },
 
-                // Configurações de comportamento
-                speed: 600,
-                allowTouchMove: true,
-                touchRatio: 1,
-                touchAngle: 45,
-                simulateTouch: true,
-                loopFillGroupWithBlank: true,
-                watchOverflow: true,
-                normalizeSlideIndex: true,
-                
-                // Keyboard navigation
-                keyboard: {
-                    enabled: true,
-                    onlyInViewport: true,
-                },
+                  // Navegação customizada
+                  navigation: {
+                      nextEl: '.shopify-swiper-button-next',
+                      prevEl: '.shopify-swiper-button-prev',
+                  },
 
-                // Eventos
-                on: {
-                    init: function() {
-                        updateShopifyCounter(this);
-                    },
-                    slideChange: function() {
-                        updateShopifyCounter(this);
-                    }
-                }
-            });
+                  // Configurações de comportamento
+                  speed: 600,
+                  allowTouchMove: true,
+                  touchRatio: 1,
+                  touchAngle: 45,
+                  simulateTouch: true,
+                  loopFillGroupWithBlank: true,
+                  watchOverflow: true,
+                  normalizeSlideIndex: true,
+                  
+                  // Keyboard navigation
+                  keyboard: {
+                      enabled: true,
+                      onlyInViewport: true,
+                  },
 
-            // Função para atualizar contador no modo loop
-            function updateShopifyCounter(swiperInstance) {
-                const currentSlideEl = document.querySelector('.shopify-current-slide');
-                const totalSlidesEl = document.querySelector('.shopify-total-slides');
-                
-                if (currentSlideEl && totalSlidesEl) {
-                    // Pega o número total de slides originais (sem duplicatas do loop)
-                    const originalSlides = document.querySelectorAll('.shopify-swiper .swiper-slide:not(.swiper-slide-duplicate)');
-                    const totalSlides = originalSlides.length;
-                    
-                    // Usa realIndex para obter o índice real do slide ativo
-                    const currentIndex = swiperInstance.realIndex + 1;
-                    
-                    currentSlideEl.textContent = currentIndex;
-                    totalSlidesEl.textContent = totalSlides;
-                }
-            }
+                  // Eventos
+                  on: {
+                      init: function() {
+                          updateShopifyCounter(this);
+                      },
+                      slideChange: function() {
+                          updateShopifyCounter(this);
+                      }
+                  }
+              });
 
-            // Adiciona eventos personalizados para melhor UX
-            shopifySwiper.on('touchStart', function() {
-                document.body.style.overflow = 'hidden';
-            });
+              // Função para atualizar contador no modo loop
+              function updateShopifyCounter(swiperInstance) {
+                  const currentSlideEl = document.querySelector('.shopify-current-slide');
+                  const totalSlidesEl = document.querySelector('.shopify-total-slides');
+                  
+                  if (currentSlideEl && totalSlidesEl) {
+                      // Pega o número total de slides originais (sem duplicatas do loop)
+                      const originalSlides = document.querySelectorAll('.shopify-swiper .swiper-slide:not(.swiper-slide-duplicate)');
+                      const totalSlides = originalSlides.length;
+                      
+                      // Usa realIndex para obter o índice real do slide ativo
+                      const currentIndex = swiperInstance.realIndex + 1;
+                      
+                      currentSlideEl.textContent = currentIndex;
+                      totalSlidesEl.textContent = totalSlides;
+                  }
+              }
 
-            shopifySwiper.on('touchEnd', function() {
-                document.body.style.overflow = '';
-            });
+              // Adiciona eventos personalizados para melhor UX
+              shopifySwiper.on('touchStart', function() {
+                  document.body.style.overflow = 'hidden';
+              });
 
-            // Adiciona suporte a gestos avançados
-            let startY = 0;
-            shopifySwiper.on('touchStart', function(swiper, event) {
-                startY = event.touches[0].clientY;
-            });
+              shopifySwiper.on('touchEnd', function() {
+                  document.body.style.overflow = '';
+              });
 
-            shopifySwiper.on('touchMove', function(swiper, event) {
-                const currentY = event.touches[0].clientY;
-                const diff = Math.abs(currentY - startY);
-                
-                // Se o movimento vertical for maior que horizontal, permite scroll da página
-                if (diff > 50) {
-                    swiper.allowTouchMove = false;
-                } else {
-                    swiper.allowTouchMove = true;
-                }
-            });
+              // Adiciona suporte a gestos avançados
+              let startY = 0;
+              shopifySwiper.on('touchStart', function(swiper, event) {
+                  startY = event.touches[0].clientY;
+              });
 
-            shopifySwiper.on('touchEnd', function() {
-                shopifySwiper.allowTouchMove = true;
-            });
+              shopifySwiper.on('touchMove', function(swiper, event) {
+                  const currentY = event.touches[0].clientY;
+                  const diff = Math.abs(currentY - startY);
+                  
+                  // Se o movimento vertical for maior que horizontal, permite scroll da página
+                  if (diff > 50) {
+                      swiper.allowTouchMove = false;
+                  } else {
+                      swiper.allowTouchMove = true;
+                  }
+              });
 
-        } else {
-            console.warn('Swiper não está disponível. Certifique-se de que a biblioteca Swiper está carregada.');
-        }
-    }, 100);
-});
+              shopifySwiper.on('touchEnd', function() {
+                  shopifySwiper.allowTouchMove = true;
+              });
+
+          } else {
+              console.warn('Swiper não está disponível. Certifique-se de que a biblioteca Swiper está carregada.');
+          }
+      }, 100);
+
+  });
 </script>
 
 {% schema %}
