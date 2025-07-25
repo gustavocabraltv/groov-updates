@@ -1,0 +1,200 @@
+<div class="
+    tw-relative 
+    tw-w-screen 
+    tw-left-1/2 
+    tw-ml-[-50vw] 
+    tw-mr-[-50vw] 
+    tw-max-w-none 
+    tw-flex 
+    tw-justify-center 
+    tw-items-center 
+    tw-h-[347px] 
+    tw-bg-[#F5F5F7] 
+    tw-rounded-[12px] 
+    
+    tw-p-[100px]
+
+    lg:tw-h-[566px] 
+    md:tw-h-[650px]
+
+    lg:tw-static 
+    lg:tw-w-auto 
+    lg:tw-ml-0 
+    lg:tw-mr-0 
+    lg:tw-left-auto
+
+    tw-overflow-hidden
+    ">
+    <div class="tw-flex tw-w-full tw-justify-between tw-absolute tw-px-[32px]">
+
+      <div 
+        id="prev-btn"
+        class="
+        tw-w-[60px] tw-h-[60px] tw-bg-[#C4CAD4] tw-rounded-[50px] 
+        tw-flex tw-flex-col tw-justify-center tw-items-center tw-cursor-pointer tw-select-none"
+        style="user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none;">
+        <img src="{{ "arrow-previous.svg" | asset_url }}" width="10" height="auto" style="pointer-events: none; user-select: none;">
+      </div>
+
+      <div 
+        id="next-btn"
+        class="
+        tw-w-[60px] tw-h-[60px] tw-bg-[#C4CAD4] tw-rounded-[50px] 
+        tw-flex tw-flex-col tw-justify-center tw-items-center tw-cursor-pointer tw-select-none"
+        style="user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none;">
+        <span><img src="{{ "arrow-next.svg" | asset_url }}" width="10" height="auto" style="pointer-events: none; user-select: none;"></span>
+      </div>
+    </div>
+    
+    <!-- Main Image Display -->
+    <div id="main-image-container" style="user-select: none; -webkit-user-select: none;">
+      {% if product.images.size > 0 %}
+        <img 
+          id="main-product-image"
+          src="{{ product.images[0] | image_url: width: 1000 }}" 
+          alt="{{ product.images[0].alt | escape }}" 
+          width="{{ product.images[0].width }}" 
+          height="{{ product.images[0].height }}" 
+          class="tw-w-full tw-rounded-[12px] tw-select-none" 
+          style="user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; pointer-events: auto;"
+          draggable="false"
+        />
+      {% endif %}
+    </div>
+  </div>
+  
+  <div class="tw-w-full tw-flex  tw-h-[80px] tw-justify-center tw-items-center tw-gap-[8px]">
+    {% for image in product.images limit: 4 %}
+      <div 
+        class="tw-flex tw-w-[60px] tw-h-[60px] tw-bg-[#f0f0f0] tw-items-center tw-justify-center tw-text-[12px] tw-leading-none tw-overflow-hidden tw-rounded-[8px] tw-cursor-pointer tw-select-none thumbnail-image"
+        data-image-index="{{ forloop.index0 }}"
+        data-image-url="{{ image | image_url: width: 1000 }}"
+        data-image-alt="{{ image.alt | escape }}"
+        style="user-select: none; -webkit-user-select: none;"
+      >
+        <img 
+          src="{{ image | image_url: width: 60 }}" 
+          alt="{{ image.alt | escape }}" 
+          class="tw-w-full tw-h-full tw-object-cover tw-rounded-[8px] tw-select-none"
+          style="pointer-events: none; user-select: none;"
+          draggable="false"
+          width="auto"
+          height="auto"
+        />
+      </div>
+    {% endfor %}
+  </div>
+
+
+  
+  
+ <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // ===== FUNCIONALIDADE: Troca de Imagens =====
+        const mainImage = document.getElementById('main-product-image');
+        const thumbnails = document.querySelectorAll('.thumbnail-image');
+        const nextBtn = document.getElementById('next-btn');
+        const prevBtn = document.getElementById('prev-btn');
+        
+        // Array com todas as imagens do produto
+        const productImages = [];
+        {% for image in product.images %}
+        productImages.push({
+          url: "{{ image | image_url: width: 1000 }}",
+          alt: "{{ image.alt | escape }}"
+        });
+        {% endfor %}
+      
+        let currentIndex = 0;
+      
+        // Função para trocar a imagem principal
+        function changeMainImage(index) {
+          if (productImages[index] && mainImage) {
+            mainImage.src = productImages[index].url;
+            mainImage.alt = productImages[index].alt;
+            currentIndex = index;
+            
+            // Atualizar thumbnail ativo
+            thumbnails.forEach((thumb, i) => {
+              thumb.classList.remove('tw-ring-2', 'tw-ring-[black]');
+              if (i === index) {
+                thumb.classList.add('tw-ring-2', 'tw-ring-[black]');
+              }
+            });
+          }
+        }
+      
+        // Click nas thumbnails
+        thumbnails.forEach((thumbnail, index) => {
+          thumbnail.addEventListener('click', () => {
+            changeMainImage(index);
+          });
+        });
+      
+        // Botão Next
+        if (nextBtn) {
+          nextBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const nextIndex = (currentIndex + 1) % productImages.length;
+            changeMainImage(nextIndex);
+          });
+        }
+      
+        // Botão Previous
+        if (prevBtn) {
+          prevBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const prevIndex = currentIndex === 0 ? productImages.length - 1 : currentIndex - 1;
+            changeMainImage(prevIndex);
+          });
+        }
+      
+        // Definir primeira thumbnail como ativa
+        if (thumbnails.length > 0) {
+          thumbnails[0].classList.add('tw-ring-2', 'tw-ring-[black]');
+        }
+      
+        // ===== FUNCIONALIDADE TOUCH/SWIPE PARA MOBILE =====
+        const imageContainer = document.getElementById('main-image-container');
+        let startX = 0;
+        let startY = 0;
+        let endX = 0;
+        let endY = 0;
+      
+        if (imageContainer) {
+          // Touch start
+          imageContainer.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            startY = e.touches[0].clientY;
+          });
+      
+          // Touch end
+          imageContainer.addEventListener('touchend', (e) => {
+            endX = e.changedTouches[0].clientX;
+            endY = e.changedTouches[0].clientY;
+            
+            // Calcular diferença
+            const diffX = startX - endX;
+            const diffY = startY - endY;
+            
+            // Verificar se foi um swipe horizontal (não vertical)
+            if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+              if (diffX > 0) {
+                // Swipe para esquerda = próxima imagem
+                const nextIndex = (currentIndex + 1) % productImages.length;
+                changeMainImage(nextIndex);
+              } else {
+                // Swipe para direita = imagem anterior
+                const prevIndex = currentIndex === 0 ? productImages.length - 1 : currentIndex - 1;
+                changeMainImage(prevIndex);
+              }
+            }
+          });
+      
+          // Prevenir scroll durante o swipe na imagem
+          imageContainer.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+          }, { passive: false });
+        }
+      });
+ </script>

@@ -1013,7 +1013,7 @@ p {
   font-family: "Proxima Nova";
 }
 .custom-product-form {
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
 }
 @media (max-width:768px){
   .owl-theme .owl-nav.disabled+.owl-dots {

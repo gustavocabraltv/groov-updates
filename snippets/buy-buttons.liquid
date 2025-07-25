@@ -100,41 +100,47 @@
               assign quantity_rule_soldout = true
             endif
           -%}
-          <button
-            id="ProductSubmitButton-{{ section_id }}"
-            type="submit"
-            name="add"
-            {% if template contains 'luxe' or template contains 'response' or template contains 'everyday' or template contains 'von' %}
-            style="display: none"
-            {% endif %}
-            class="product-form__submit button button--full-width {% if show_dynamic_checkout %}button--secondary{% else %}button--primary{% endif %}"
-            {% if product.selected_or_first_available_variant.available == false
-              or quantity_rule_soldout
-              or product.selected_or_first_available_variant == null
-            %}
-              disabled
-            {% endif %}
-          > 
-            <span>
-              {%- if product.selected_or_first_available_variant == null -%}
-                {{ 'products.product.unavailable' | t }}
-              {%- elsif product.selected_or_first_available_variant.available == false or quantity_rule_soldout -%}
-                {{ 'products.product.sold_out' | t }}
-              {%- else -%}
-                {{ 'products.product.add_to_cart' | t }}
-              {%- endif -%}
-            </span>
-            {%- render 'loading-spinner' -%}
-            
-            <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
-              {%- render 'price',
-                product: product,
-                use_variant: true,
-                show_badges: true,
-                price_class: 'price--large'
-              -%}
-            </div>
-          </button>
+
+
+          {% comment %} ADD TO CART HERE {% endcomment %}
+   
+            <button
+              id="ProductSubmitButton-{{ section_id }}"
+              type="submit"
+              name="add"
+              {% if template contains 'luxe' or template contains 'response' or template contains 'everyday' or template contains 'von' %}
+              style="display: none"
+              {% endif %}
+              class="product-form__submit button button--full-width {% if show_dynamic_checkout %}button--secondary{% else %}button--primary{% endif %}"
+              {% if product.selected_or_first_available_variant.available == false
+                or quantity_rule_soldout
+                or product.selected_or_first_available_variant == null
+              %}
+                disabled
+              {% endif %} > 
+              <span>
+                {%- if product.selected_or_first_available_variant == null -%}
+                  {{ 'products.product.unavailable' | t }}
+                {%- elsif product.selected_or_first_available_variant.available == false or quantity_rule_soldout -%}
+                  {{ 'products.product.sold_out' | t }}
+                {%- else -%}
+                  {{ 'products.product.add_to_cart' | t }}
+                {%- endif -%}
+              </span>
+              {%- render 'loading-spinner' -%}
+              
+              <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
+                {%- render 'price',
+                  product: product,
+                  use_variant: true,
+                  show_badges: true,
+                  price_class: 'price--large'
+                -%}
+              </div>
+            </button>
+     
+
+        
          {% if template contains 'luxe' or template contains 'response' or template contains 'everyday' or template contains 'von' %}
           <div
             class="custom-product-form button button--full-width"
@@ -150,14 +156,14 @@
             </span>
             {%- render 'loading-spinner' -%}
             
-            <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
+            {% comment %} <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
               {%- render 'price',
                 product: product,
                 use_variant: true,
                 show_badges: true,
                 price_class: 'price--large'
               -%}
-            </div>
+            </div> {% endcomment %}
           </div>
           {% endif %}
         </div>
