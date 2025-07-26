@@ -2206,6 +2206,26 @@ video {
     width: 100%;
   }
 
+  .lg\:tw-w-\[455px\] {
+    width: 455px;
+  }
+
+  .lg\:tw-w-\[550px\] {
+    width: 550px;
+  }
+
+  .lg\:tw-w-\[480px\] {
+    width: 480px;
+  }
+
+  .lg\:tw-w-\[490px\] {
+    width: 490px;
+  }
+
+  .lg\:tw-w-\[520px\] {
+    width: 520px;
+  }
+
   .lg\:tw-max-w-\[750px\] {
     max-width: 750px;
   }
@@ -2374,6 +2394,10 @@ video {
 
   .lg\:tw-text-\[72px\] {
     font-size: 72px;
+  }
+
+  .lg\:tw-text-\[40px\] {
+    font-size: 40px;
   }
 
   .lg\:tw-leading-none {
