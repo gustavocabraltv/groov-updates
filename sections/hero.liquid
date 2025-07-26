@@ -678,7 +678,7 @@
     height="auto"
   >
   <div class="video-container">
-    <video
+    {% comment %} <video
       muted
       playsinline="true"
       webkit-playsinline="true"
@@ -686,7 +686,17 @@
       class="video-scroll__player"
       data-mobile-src="{{ 'footage-mobile.mp4' | asset_url }}"
       data-desktop-src="{{ 'footage.mp4' | asset_url }}"
-    >
+    > {% endcomment %}
+
+      <video
+        muted
+        playsinline="true"
+        webkit-playsinline="true"
+        preload="auto"
+        class="video-scroll__player"
+        data-mobile-src="https://cdn.shopify.com/videos/c/o/v/e31f7383d853414ba3512f32895e51ae.mp4"
+        data-desktop-src="https://cdn.shopify.com/videos/c/o/v/e9adf3494a0640aca403c5fb8b0cc7b3.mp4"
+      >
       <!-- Fontes de vídeo serão definidas via JavaScript -->
     </video>
   </div>
