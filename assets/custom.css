@@ -713,13 +713,14 @@ cart-items dl.product-properties {
   margin: 0 auto;
   padding-top: 7px;
 }
-.product__info-wrapper .nickname-popup {
+.product__info-wrappe r .nickname-popup {
   display: flex;
   align-items: flex-start;
   flex-direction: column;
   justify-content: center;
   position: absolute;
-  background: #fff;
+  background: white;
+  min-width: 380px;
   /* height: 150px; */
   width: 100%;
   max-width: 440px;
