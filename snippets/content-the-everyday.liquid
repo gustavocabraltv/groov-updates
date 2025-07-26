@@ -377,13 +377,13 @@
         gap: 20px !important;
         margin-top: 40px !important;
         position: relative !important;
-        z-index: 10 !important;
+        z-index: 2 !important;
       }
 
       .shopify-carousel-btn {
         width: 44px !important;
         height: 44px !important;
-        border: 2px solid #ddd !important;
+        {% comment %} border: 2px solid #ddd !important; {% endcomment %}
         background-color: white !important;
         border-radius: 50% !important;
         display: flex !important;
@@ -394,7 +394,7 @@
         color: #666 !important;
         z-index: 10 !important;
         position: relative !important;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+        {% comment %} box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important; {% endcomment %}
         font-size: 0 !important;
       }
 
@@ -418,7 +418,7 @@
       .shopify-carousel-counter {
         font-size: 16px !important;
         color: #666 !important;
-        font-weight: 500 !important;
+        font-weight: 600 !important;
         min-width: 80px !important;
         text-align: center !important;
         font-family: inherit !important;
@@ -550,19 +550,22 @@
         <!-- Controles customizados -->
         <div class="shopify-carousel-controls">
           <button class="shopify-carousel-btn shopify-swiper-button-prev" aria-label="Slide anterior">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            {% comment %} <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <polyline points="15,18 9,12 15,6"></polyline>
-            </svg>
+            </svg> {% endcomment %}
+            <img src="{{ "back-slide.svg" | asset_url }}" width="24" height="24">
           </button>
           <span class="shopify-carousel-counter">
             <span class="shopify-current-slide">1</span> / <span class="shopify-total-slides">12</span>
           </span>
           <button class="shopify-carousel-btn shopify-swiper-button-next" aria-label="Próximo slide">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            {% comment %} <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <polyline points="9,6 15,12 9,18"></polyline>
-            </svg>
+            </svg> {% endcomment %}
+            <img src="{{ "next-slide.svg" | asset_url }}" width="24" height="24">
           </button>
         </div>
+
       </div>
     </div>
 

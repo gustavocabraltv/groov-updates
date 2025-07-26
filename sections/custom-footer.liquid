@@ -116,7 +116,9 @@ span.copy_right_content {
 {% endcomment %}
 
 
-<section class="tw-bg-[white]">
+<section class="tw-bg-[white] tw-border-t-[0.5px] tw-border-[#f5f5f5]"
+  style="box-shadow: 0 -24px 32px 0 rgba(0, 0, 0, 0.02);"
+>
   <div class="page-width">
     <div class="">
 
@@ -140,7 +142,10 @@ span.copy_right_content {
 
 
       <div 
-        class="tw-flex tw-flex-wrap tw-justify-between tw-items-center tw-py-[16px] tw-text-[13px] tw-text-black ">
+        class="tw-flex tw-flex-wrap tw-justify-between tw-items-center  tw-text-[13px] tw-text-black
+            tw-border-t-[1px] tw-border-b-[0.5px] tw-border-[#e3e8f074]  
+            tw-py-[32px]
+        ">
       
         <!-- Esquerda: bandeiras -->
         <div class="tw-w-full lg:tw-w-auto tw-flex tw-justify-start">
@@ -149,7 +154,7 @@ span.copy_right_content {
       
         <!-- Direita: links -->
         <div class="tw-w-full lg:tw-w-auto tw-flex tw-items-center tw-justify-between lg:tw-justify-end tw-flex-wrap tw-gap-x-[8px] lg:tw-mt-0">
-          <a href="/pages/faqs">FAQs</a>
+          <a href="/pages/faq-02">FAQs</a>
           <div class="hr-vertical" aria-hidden="true">&nbsp;</div>
           <a href="/policies/privacy-policy">Privacy Policy</a>
           <div class="hr-vertical" aria-hidden="true">&nbsp;</div>
@@ -164,7 +169,10 @@ span.copy_right_content {
       <div class="tw-justify-between tw-items-center tw-flex tw-py-[16px]">
        
         <img src="{{ "credit-cards.svg" | asset_url }}" width="214" height="auto" class="lg:tw-hidden">
-        <img src="{{ "download-apple.svg" | asset_url }}" width="146" height="auto" class="tw-hidden lg:tw-block">
+       
+        <a href="https://apps.apple.com/nz/app/groov-custom-insoles/id6733245939">
+          <img src="{{ "download-apple.svg" | asset_url }}" width="146" height="auto" class="tw-hidden lg:tw-block">
+        </a>
          <p class="tw-text-[#5F6671]">©Groov 2025</p>
 
       </div>

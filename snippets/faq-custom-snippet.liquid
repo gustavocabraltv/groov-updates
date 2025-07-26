@@ -1,133 +1,391 @@
-<div class="tw-bg-[white] tw-h-dvh tw-w-full tw-pt-[70px]">
-    <div class="page-width">
-      <div class="tw-flex tw-flex-col tw-gap-[32px]">
-  
-        <!-- Header -->
-        <div class="tw-flex tw-flex-col tw-justify-center tw-gap-[8px] tw-items-center tw-text-center tw-leading-none">
-          <p class="tw-text-[#4076FF] tw-text-[18px]">Groov - FAQ</p>
-          <h1 class="lg:tw-text-[44px] tw-text-[32px] tw-text-[#171B23] tw-font-semibold">Frequently asked questions</h1>
-          <h4 class="tw-text-[#494E57] lg:tw-text-[18px] tw-text-[16px]">Need help with something? Here are our most frequently asked questions.</h4>
-        </div>
-  
-        <!-- Tabs -->
-        <div class="
-            tw-flex tw-justify-center tw-space-x-2 tw-mb-8 tw-bg-[#F8F8F8] tw-w-fit tw-px-[2px] tw-py-[2px] tw-rounded-lg
-            tw-mx-auto
-            ">
-          <button 
-            class="tw-px-4 tw-py-2 tw-rounded-lg tw-text-black tw-font-medium tw-text-[16px] tw-border tw-border-gray-300 tw-bg-white tw-shadow-sm"
-            onclick="switchTab('about')"
-            id="tab-about"
-          >
-            About Groovs
+<style>
+  @media screen and(max-width: 481px) {
+    .faq-content { padding-right: 12px;}
+    }
+
+  .faq-content {
+    padding-right: 96px;
+  }
+
+
+  }
+</style>
+
+<div class="tw-bg-[white] tw-w-full tw-pt-[70px] tw-pb-[128px]">
+  <div class="page-width">
+    <div class="tw-flex tw-flex-col tw-gap-[32px] lg:tw-px-[300px] tw-px-[0px]">
+      <!-- Header -->
+      <div class="tw-flex tw-flex-col tw-justify-center tw-gap-[8px] tw-items-center tw-text-center tw-leading-none">
+        <p class="tw-text-[#4076FF] tw-text-[18px]">Groov - FAQ</p>
+        <h1 class="lg:tw-text-[44px] tw-text-[32px] tw-text-[#171B23] tw-font-semibold">Frequently asked questions</h1>
+        <h4 class="tw-text-[#494E57] lg:tw-text-[18px] tw-text-[16px]">
+          Need help with something? Here are our most frequently asked questions.
+        </h4>
+      </div>
+
+      <!-- Tabs -->
+      <div
+        class="
+          tw-flex tw-justify-center tw-space-x-2 tw-mb-8 tw-bg-[#F8F8F8] tw-w-fit tw-px-[2px] tw-py-[2px] tw-rounded-lg
+          tw-mx-auto
+        "
+      >
+        <button
+          class="tw-px-4 tw-py-2 tw-rounded-lg tw-text-black tw-font-medium tw-text-[16px] tw-border tw-border-gray-300 tw-bg-white tw-shadow-sm"
+          onclick="switchTab('about')"
+          id="tab-about"
+        >
+          About Groovs
+        </button>
+        <button
+          class="tw-px-4 tw-py-2 tw-rounded-lg tw-text-black tw-font-medium tw-text-[16px] tw-border tw-border-transparent"
+          onclick="switchTab('orders')"
+          id="tab-orders"
+        >
+          Orders & Support
+        </button>
+      </div>
+
+      <!-- About Groovs FAQs -->
+      <div id="faq-about" class="tw-w-full tw-mx-auto tw-divide-y tw-divide-gray-200 tw-tracking-normal">
+        <!-- FAQ Item -->
+        <div class="tw-py-[24px]">
+          <button class="tw-flex tw-justify-between tw-items-center tw-w-full" onclick="toggleFaq(this)">
+            <span class="lg:tw-text-[18px] tw-text-[17px] tw-font-medium tw-text-[#101828] tw-text-left">
+              What are Groovs?
+            </span>
+            <span class="tw-text-[24px] tw-text-[#101828] faq-icon">+</span>
           </button>
-          <button 
-            class="tw-px-4 tw-py-2 tw-rounded-lg tw-text-black tw-font-medium tw-text-[16px] tw-border tw-border-transparent"
-            onclick="switchTab('orders')"
-            id="tab-orders"
-          >
-            Orders & Support
+          <div class="tw-mt-6 lg:tw-text-[18px] tw-text-[16px] tw-text-[#495464] tw-hidden faq-content">
+            Groovs are fully-custom insoles made with personalized biometric data to optimize the interface between your
+            feet and your shoes. Made with luxury materials for high-performance, Groovs maximize comfort, endurance,
+            and support to alleviate pain, improve stability, and help you be at your best, day in and day out.
+          </div>
+        </div>
+
+        <!-- FAQ Item -->
+        <div class="tw-py-[24px]">
+          <button class="tw-flex tw-justify-between tw-items-center tw-w-full" onclick="toggleFaq(this)">
+            <span class="lg:tw-text-[18px] tw-text-[17px] tw-font-medium tw-text-[#101828] tw-text-left">
+              Why do my feet hurt and how can Groovs help?
+            </span>
+            <span class="tw-text-[24px] tw-text-[#101828] faq-icon">+</span>
           </button>
-        </div>
-  
-        <!-- About Groovs FAQs -->
-        <div id="faq-about" class="tw-w-full tw-mx-auto tw-divide-y tw-divide-gray-200 tw-tracking-normal">
-          <!-- FAQ Item -->
-          <div class="tw-py-[24px]">
-            <button class="tw-flex tw-justify-between tw-items-center tw-w-full" onclick="toggleFaq(this)">
-              <span class="lg:tw-text-[18px] tw-text-[17px] tw-font-medium tw-text-[#101828] tw-text-left">
-                Does Groov partner with athletic teams or organizations?
-              </span>
-              <span class="tw-text-xl tw-text-[#101828] faq-icon">+</span>
-            </button>
-            <div class="tw-mt-6 lg:tw-text-[18px] tw-text-[16px] tw-text-[#495464] tw-hidden faq-content">
-              Yes, we do! We love bringing teams into the fold to help them get that competitive advantage that Groov offers.<br />
-              And we would love to chat further – contact us at 
-              <a href="mailto:we@groov.me" class="tw-text-blue-600 tw-underline">we@groov.me</a>
-            </div>
-          </div>
-  
-          <!-- FAQ Item -->
-          <div class="tw-py-[24px]">
-            <button class="tw-flex tw-justify-between tw-items-center tw-w-full" onclick="toggleFaq(this)">
-              <span class="lg:tw-text-[18px] tw-text-[17px] tw-font-medium tw-text-[#101828] tw-text-left">
-                Does Groov work with shoe brands or footwear retailers?
-              </span>
-              <span class="tw-text-xl tw-text-[#101828] faq-icon">+</span>
-            </button>
-            <div class="tw-mt-6 lg:tw-text-[18px] tw-text-[16px] tw-text-[#495464] tw-hidden faq-content">
-              Yes! We’ve partnered with footwear retailers to elevate their customer experience and performance insights.
-            </div>
+          <div class="tw-mt-6 lg:tw-text-[18px] tw-text-[16px] tw-text-[#495464] tw-hidden faq-content">
+            Your feet didn't evolve to be put in shoes. Shoes force your feet into unnaturally static positions, causing
+            arches to collapse and develop pressure points. Groovs use high-precision scanning and proprietary AI to
+            create fully-custom insoles that optimize your foot positioning – like a hug for your foot.
           </div>
         </div>
-  
-        <!-- Orders & Support FAQs -->
-        <div id="faq-orders" class="tw-w-full tw-mx-auto tw-divide-y tw-divide-gray-200 tw-tracking-normal tw-hidden">
-          <!-- FAQ Item -->
-          <div class="tw-py-[24px]">
-            <button class="tw-flex tw-justify-between tw-items-center tw-w-full" onclick="toggleFaq(this)">
-              <span class="lg:tw-text-[18px] tw-text-[17px] tw-font-medium tw-text-[#101828] tw-text-left">
-                Where is my order?
-              </span>
-              <span class="tw-text-xl tw-text-[#101828] faq-icon">+</span>
-            </button>
-            <div class="tw-mt-6 lg:tw-text-[18px] tw-text-[16px] tw-text-[#495464] tw-hidden faq-content">
-              You’ll receive a tracking link by email once your order is shipped. If you haven’t, contact us at 
-              <a href="mailto:support@groov.me" class="tw-text-blue-600 tw-underline">support@groov.me</a>.
-            </div>
-          </div>
-  
-          <!-- FAQ Item -->
-          <div class="tw-py-[24px]">
-            <button class="tw-flex tw-justify-between tw-items-center tw-w-full" onclick="toggleFaq(this)">
-              <span class="lg:tw-text-[18px] tw-text-[17px] tw-font-medium tw-text-[#101828] tw-text-left">
-                How can I return my product?
-              </span>
-              <span class="tw-text-xl tw-text-[#101828] faq-icon">+</span>
-            </button>
-            <div class="tw-mt-6 lg:tw-text-[18px] tw-text-[16px] tw-text-[#495464] tw-hidden faq-content">
-              Returns are accepted within 30 days of purchase. Email us and we’ll guide you through the process.
-            </div>
+
+        <!-- FAQ Item -->
+        <div class="tw-py-[24px]">
+          <button class="tw-flex tw-justify-between tw-items-center tw-w-full" onclick="toggleFaq(this)">
+            <span class="lg:tw-text-[18px] tw-text-[17px] tw-font-medium tw-text-[#101828] tw-text-left">
+              What makes Groovs different from over-the-counter insoles?
+            </span>
+            <span class="tw-text-[24px] tw-text-[#101828] faq-icon">+</span>
+          </button>
+          <div class="tw-mt-6 lg:tw-text-[18px] tw-text-[16px] tw-text-[#495464] tw-hidden faq-content">
+            Groovs are fully custom, whereas over-the-counter insoles are one-size-fits-most. Unlike generic insoles
+            that provide only cushion, Groovs deliver true support with cushion, flexibility, and responsiveness – all
+            perfectly fitted to your specific feet and shoes.
           </div>
         </div>
-  
+
+        <!-- FAQ Item -->
+        <div class="tw-py-[24px]">
+          <button class="tw-flex tw-justify-between tw-items-center tw-w-full" onclick="toggleFaq(this)">
+            <span class="lg:tw-text-[18px] tw-text-[17px] tw-font-medium tw-text-[#101828] tw-text-left">
+              What makes Groovs different from orthotics?
+            </span>
+            <span class="tw-text-[24px] tw-text-[#101828] faq-icon">+</span>
+          </button>
+          <div class="tw-mt-6 lg:tw-text-[18px] tw-text-[16px] tw-text-[#495464] tw-hidden faq-content">
+            Groovs bring footwear personalization out of the medical system and into your shoes. While orthotics are
+            medical devices made to correct deformities, Groovs are footwear optimization – thinner, lighter, and
+            compatible with existing shoes, delivered without medical hassle.
+          </div>
+        </div>
+
+        <!-- FAQ Item -->
+        <div class="tw-py-[24px]">
+          <button class="tw-flex tw-justify-between tw-items-center tw-w-full" onclick="toggleFaq(this)">
+            <span class="lg:tw-text-[18px] tw-text-[17px] tw-font-medium tw-text-[#101828] tw-text-left">
+              Do I need Groovs?
+            </span>
+            <span class="tw-text-[24px] tw-text-[#101828] faq-icon">+</span>
+          </button>
+          <div class="tw-mt-6 lg:tw-text-[18px] tw-text-[16px] tw-text-[#495464] tw-hidden faq-content">
+            Groovs benefit anyone who wears shoes, particularly those seeking relief from discomfort associated with
+            long hours standing, flat feet, high arches, or plantar fasciitis. Like sleeping on a good mattress, we
+            believe everyone deserves to experience proper foot support.
+          </div>
+        </div>
+
+        <!-- FAQ Item -->
+        <div class="tw-py-[24px]">
+          <button class="tw-flex tw-justify-between tw-items-center tw-w-full" onclick="toggleFaq(this)">
+            <span class="lg:tw-text-[18px] tw-text-[17px] tw-font-medium tw-text-[#101828] tw-text-left">
+              What kind of footwear does Groov work with?
+            </span>
+            <span class="tw-text-[24px] tw-text-[#101828] faq-icon">+</span>
+          </button>
+          <div class="tw-mt-6 lg:tw-text-[18px] tw-text-[16px] tw-text-[#495464] tw-hidden faq-content">
+            Groovs can be tailored to most shoes, from sneakers to flats and cleats to loafers. We recommend
+            shoe-specific fit for pointed-toe or uniquely shaped footwear. Unfortunately, Groovs aren't yet available
+            for open-toed shoes or high heels (>1 inch).
+          </div>
+        </div>
+
+        <!-- FAQ Item -->
+        <div class="tw-py-[24px]">
+          <button class="tw-flex tw-justify-between tw-items-center tw-w-full" onclick="toggleFaq(this)">
+            <span class="lg:tw-text-[18px] tw-text-[17px] tw-font-medium tw-text-[#101828] tw-text-left">
+              Do Groovs help athletic performance?
+            </span>
+            <span class="tw-text-[24px] tw-text-[#101828] faq-icon">+</span>
+          </button>
+          <div class="tw-mt-6 lg:tw-text-[18px] tw-text-[16px] tw-text-[#495464] tw-hidden faq-content">
+            Yes! By maximizing comfort and support while minimizing fatigue, Groovs help you work harder for longer. The
+            hug-like fit eliminates gaps that zap power and reduce precision, while the semi-rigid interior catalyzes
+            energy transfer for more explosiveness.
+          </div>
+        </div>
+
+        <!-- FAQ Item -->
+        <div class="tw-py-[24px]">
+          <button class="tw-flex tw-justify-between tw-items-center tw-w-full" onclick="toggleFaq(this)">
+            <span class="lg:tw-text-[18px] tw-text-[17px] tw-font-medium tw-text-[#101828] tw-text-left">
+              How often should I wear my Groovs?
+            </span>
+            <span class="tw-text-[24px] tw-text-[#101828] faq-icon">+</span>
+          </button>
+          <div class="tw-mt-6 lg:tw-text-[18px] tw-text-[16px] tw-text-[#495464] tw-hidden faq-content">
+            Whenever you're wearing shoes! There's no such thing as "wearing your Groovs too much." Order multiple pairs
+            for different shoes, or use one general-purpose pair and move it between shoes as needed.
+          </div>
+        </div>
+
+        <!-- FAQ Item -->
+        <div class="tw-py-[24px]">
+          <button class="tw-flex tw-justify-between tw-items-center tw-w-full" onclick="toggleFaq(this)">
+            <span class="lg:tw-text-[18px] tw-text-[17px] tw-font-medium tw-text-[#101828] tw-text-left">
+              Will I feel the benefits immediately?
+            </span>
+            <span class="tw-text-[24px] tw-text-[#101828] faq-icon">+</span>
+          </button>
+          <div class="tw-mt-6 lg:tw-text-[18px] tw-text-[16px] tw-text-[#495464] tw-hidden faq-content">
+            Yes! Benefits like improved support and stability can be felt almost immediately. Comfort increases with
+            every step as your feet relax into proper position. Rarely, first-time insole users may need a brief
+            breaking-in period.
+          </div>
+        </div>
+
+        <!-- FAQ Item -->
+        <div class="tw-py-[24px]">
+          <button class="tw-flex tw-justify-between tw-items-center tw-w-full" onclick="toggleFaq(this)">
+            <span class="lg:tw-text-[18px] tw-text-[17px] tw-font-medium tw-text-[#101828] tw-text-left">
+              How long do Groovs last?
+            </span>
+            <span class="tw-text-[24px] tw-text-[#101828] faq-icon">+</span>
+          </button>
+          <div class="tw-mt-6 lg:tw-text-[18px] tw-text-[16px] tw-text-[#495464] tw-hidden faq-content">
+            Groovs' lifespan is measured in miles, not time. We typically recommend replacing them as often as you
+            replace your shoes. For heavy daily use, replace annually. Best practice is to get new scans and Groovs
+            every five years as feet naturally change with age.
+          </div>
+        </div>
+      </div>
+
+      <!-- Orders & Support FAQs -->
+      <div id="faq-orders" class="tw-w-full tw-mx-auto tw-divide-y tw-divide-gray-200 tw-tracking-normal tw-hidden">
+        <!-- FAQ Item -->
+        <div class="tw-py-[24px]">
+          <button class="tw-flex tw-justify-between tw-items-center tw-w-full" onclick="toggleFaq(this)">
+            <span class="lg:tw-text-[18px] tw-text-[17px] tw-font-medium tw-text-[#101828] tw-text-left">
+              How do I get Groovs?
+            </span>
+            <span class="tw-text-[24px] tw-text-[#101828] faq-icon">+</span>
+          </button>
+          <div class="tw-mt-6 lg:tw-text-[18px] tw-text-[16px] tw-text-[#495464] tw-hidden faq-content">
+            Download our free app from the AppStore and use our proprietary ShapeSense 3D scanning technology to scan
+            your feet from your iOS device. The app guides you through scanning, ordering, and tracking – all from home.
+          </div>
+        </div>
+
+        <!-- FAQ Item -->
+        <div class="tw-py-[24px]">
+          <button class="tw-flex tw-justify-between tw-items-center tw-w-full" onclick="toggleFaq(this)">
+            <span class="lg:tw-text-[18px] tw-text-[17px] tw-font-medium tw-text-[#101828] tw-text-left">
+              How long does it take to get Groovs?
+            </span>
+            <span class="tw-text-[24px] tw-text-[#101828] faq-icon">+</span>
+          </button>
+          <div class="tw-mt-6 lg:tw-text-[18px] tw-text-[16px] tw-text-[#495464] tw-hidden faq-content">
+            You can expect your custom Groovs to arrive within roughly 7 days from when you place your order. As
+            on-demand manufacturers of fully-custom products, we're pretty proud of that turnaround time!
+          </div>
+        </div>
+
+        <!-- FAQ Item -->
+        <div class="tw-py-[24px]">
+          <button class="tw-flex tw-justify-between tw-items-center tw-w-full" onclick="toggleFaq(this)">
+            <span class="lg:tw-text-[18px] tw-text-[17px] tw-font-medium tw-text-[#101828] tw-text-left">
+              Do I have to get the app?
+            </span>
+            <span class="tw-text-[24px] tw-text-[#101828] faq-icon">+</span>
+          </button>
+          <div class="tw-mt-6 lg:tw-text-[18px] tw-text-[16px] tw-text-[#495464] tw-hidden faq-content">
+            Yes, all orders are placed through the app since our ShapeSense scanning technology powers the production of
+            personalized pairs. Account-holders can create secondary profiles for those without iOS devices or who
+            prefer not to download the app.
+          </div>
+        </div>
+
+        <!-- FAQ Item -->
+        <div class="tw-py-[24px]">
+          <button class="tw-flex tw-justify-between tw-items-center tw-w-full" onclick="toggleFaq(this)">
+            <span class="lg:tw-text-[18px] tw-text-[17px] tw-font-medium tw-text-[#101828] tw-text-left">
+              How do I know if I scanned my feet correctly?
+            </span>
+            <span class="tw-text-[24px] tw-text-[#101828] faq-icon">+</span>
+          </button>
+          <div class="tw-mt-6 lg:tw-text-[18px] tw-text-[16px] tw-text-[#495464] tw-hidden faq-content">
+            The app includes detailed step-by-step instructions, tutorial videos, and both Self Scan and Assisted Scan
+            options. We generally recommend Assisted Scan for ease of use. If you need help, contact us at
+            <a href="mailto:you@groov.me" class="tw-text-blue-600 tw-underline">you@groov.me</a>.
+          </div>
+        </div>
+
+        <!-- FAQ Item -->
+        <div class="tw-py-[24px]">
+          <button class="tw-flex tw-justify-between tw-items-center tw-w-full" onclick="toggleFaq(this)">
+            <span class="lg:tw-text-[18px] tw-text-[17px] tw-font-medium tw-text-[#101828] tw-text-left">
+              Where does Groov ship to?
+            </span>
+            <span class="tw-text-[24px] tw-text-[#101828] faq-icon">+</span>
+          </button>
+          <div class="tw-mt-6 lg:tw-text-[18px] tw-text-[16px] tw-text-[#495464] tw-hidden faq-content">
+            We offer free shipping to all 50 U.S. states and internationally to: Belgium, Canada, Switzerland, Czechia,
+            Germany, Denmark, Spain, Finland, France, UK, Hong Kong, Ireland, Israel, Italy, Japan, South Korea,
+            Malaysia, Netherlands, Norway, New Zealand, Poland, Portugal, Sweden, Singapore, UAE, Austria, and
+            Australia.
+          </div>
+        </div>
+
+        <!-- FAQ Item -->
+        <div class="tw-py-[24px]">
+          <button class="tw-flex tw-justify-between tw-items-center tw-w-full" onclick="toggleFaq(this)">
+            <span class="lg:tw-text-[18px] tw-text-[17px] tw-font-medium tw-text-[#101828] tw-text-left">
+              Are Groovs covered by insurance and/or HSA/FSA?
+            </span>
+            <span class="tw-text-[24px] tw-text-[#101828] faq-icon">+</span>
+          </button>
+          <div class="tw-mt-6 lg:tw-text-[18px] tw-text-[16px] tw-text-[#495464] tw-hidden faq-content">
+            Groov doesn't directly accept insurance, but you can use your HSA/FSA plan to purchase Groovs with pre-tax
+            income.
+          </div>
+        </div>
+
+        <!-- FAQ Item -->
+        <div class="tw-py-[24px]">
+          <button class="tw-flex tw-justify-between tw-items-center tw-w-full" onclick="toggleFaq(this)">
+            <span class="lg:tw-text-[18px] tw-text-[17px] tw-font-medium tw-text-[#101828] tw-text-left">
+              How can I track my order?
+            </span>
+            <span class="tw-text-[24px] tw-text-[#101828] faq-icon">+</span>
+          </button>
+          <div class="tw-mt-6 lg:tw-text-[18px] tw-text-[16px] tw-text-[#495464] tw-hidden faq-content">
+            Once shipped, you'll receive an email with tracking information. You can also check order status in the app
+            anytime. If you don't receive tracking info or have questions, contact us at
+            <a href="mailto:you@groov.me" class="tw-text-blue-600 tw-underline">you@groov.me</a>.
+          </div>
+        </div>
+
+        <!-- FAQ Item -->
+        <div class="tw-py-[24px]">
+          <button class="tw-flex tw-justify-between tw-items-center tw-w-full" onclick="toggleFaq(this)">
+            <span class="lg:tw-text-[18px] tw-text-[17px] tw-font-medium tw-text-[#101828] tw-text-left">
+              What is Groov's return policy?
+            </span>
+            <span class="tw-text-[24px] tw-text-[#101828] faq-icon">+</span>
+          </button>
+          <div class="tw-mt-6 lg:tw-text-[18px] tw-text-[16px] tw-text-[#495464] tw-hidden faq-content">
+            Customer satisfaction is our reason for existing. Given the custom nature of our product, we assess issues
+            case-by-case. While we don't offer full refunds for simply changing your mind, you can count on expedited
+            replacements if anything goes wrong with production or delivery.
+          </div>
+        </div>
+
+        <!-- FAQ Item -->
+        <div class="tw-py-[24px]">
+          <button class="tw-flex tw-justify-between tw-items-center tw-w-full" onclick="toggleFaq(this)">
+            <span class="lg:tw-text-[18px] tw-text-[17px] tw-font-medium tw-text-[#101828] tw-text-left">
+              Can I change or cancel my order after placing it?
+            </span>
+            <span class="tw-text-[24px] tw-text-[#101828] faq-icon">+</span>
+          </button>
+          <div class="tw-mt-6 lg:tw-text-[18px] tw-text-[16px] tw-text-[#495464] tw-hidden faq-content">
+            We start production immediately, so we can't guarantee post-order changes or cancellations. Contact us and
+            we'll do our best to assist. Once production begins, cancellation inquiries go through our return and
+            replacement process.
+          </div>
+        </div>
+
+        <!-- FAQ Item -->
+        <div class="tw-py-[24px]">
+          <button class="tw-flex tw-justify-between tw-items-center tw-w-full" onclick="toggleFaq(this)">
+            <span class="lg:tw-text-[18px] tw-text-[17px] tw-font-medium tw-text-[#101828] tw-text-left">
+              How do I get in touch for support or partnerships?
+            </span>
+            <span class="tw-text-[24px] tw-text-[#101828] faq-icon">+</span>
+          </button>
+          <div class="tw-mt-6 lg:tw-text-[18px] tw-text-[16px] tw-text-[#495464] tw-hidden faq-content">
+            For customer support: <a href="mailto:you@groov.me" class="tw-text-blue-600 tw-underline">you@groov.me</a
+            ><br>
+            For business inquiries and partnerships:
+            <a href="mailto:we@groov.me" class="tw-text-blue-600 tw-underline">we@groov.me</a><br>
+            We're open to collaborations that help people feel great on their feet!
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  
-  <!-- JavaScript -->
-  <script>
-    function toggleFaq(button) {
-      const content = button.nextElementSibling;
-      const icon = button.querySelector('.faq-icon');
-      const isOpen = !content.classList.contains('tw-hidden');
-  
-      if (isOpen) {
-        content.classList.add('tw-hidden');
-        icon.textContent = '+';
+</div>
+
+<!-- JavaScript -->
+<script>
+  function toggleFaq(button) {
+    const content = button.nextElementSibling;
+    const icon = button.querySelector('.faq-icon');
+    const isOpen = !content.classList.contains('tw-hidden');
+
+    if (isOpen) {
+      content.classList.add('tw-hidden');
+      icon.textContent = '+';
+    } else {
+      content.classList.remove('tw-hidden');
+      icon.textContent = '–';
+    }
+  }
+
+  function switchTab(tabId) {
+    const tabs = ['about', 'orders'];
+
+    tabs.forEach((id) => {
+      const tabBtn = document.getElementById('tab-' + id);
+      const faqSection = document.getElementById('faq-' + id);
+
+      if (id === tabId) {
+        tabBtn.classList.add('tw-bg-white', 'tw-border-gray-300', 'tw-shadow-sm');
+        tabBtn.classList.remove('tw-border-transparent');
+        faqSection.classList.remove('tw-hidden');
       } else {
-        content.classList.remove('tw-hidden');
-        icon.textContent = '–';
+        tabBtn.classList.remove('tw-bg-white', 'tw-border-gray-300', 'tw-shadow-sm');
+        tabBtn.classList.add('tw-border-transparent');
+        faqSection.classList.add('tw-hidden');
       }
-    }
-  
-    function switchTab(tabId) {
-      const tabs = ['about', 'orders'];
-  
-      tabs.forEach(id => {
-        const tabBtn = document.getElementById('tab-' + id);
-        const faqSection = document.getElementById('faq-' + id);
-  
-        if (id === tabId) {
-          tabBtn.classList.add('tw-bg-white', 'tw-border-gray-300', 'tw-shadow-sm');
-          tabBtn.classList.remove('tw-border-transparent');
-          faqSection.classList.remove('tw-hidden');
-        } else {
-          tabBtn.classList.remove('tw-bg-white', 'tw-border-gray-300', 'tw-shadow-sm');
-          tabBtn.classList.add('tw-border-transparent');
-          faqSection.classList.add('tw-hidden');
-        }
-      });
-    }
-  </script>
-  
+    });
+  }
+</script>

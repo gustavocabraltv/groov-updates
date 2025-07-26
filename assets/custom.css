@@ -450,16 +450,20 @@ details[open] .modal-overlay:after{
 
 /* header css start */
 .header-wrapper{
+  /* margin-top: -3px; */
+  margin-top: 0px;
   width: 100% !important;
-  border-bottom: 0; */
+  border-bottom: 0; 
+
   /* background: #d5e6f8 !important; */
 }
 header.header {
    /* border-radius: 50px;  */
   /* border: 0.5px solid #D0D7DE; */
-  background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(60px); 
+  background: rgba(255, 255, 255, 0.48);
+  backdrop-filter: blur(12px); 
   /* backdrop-filter aplicável */
+  /* AQUI backdrop-filter AQUI */
   display: flex;
   justify-content: flex-start;
   padding-top: 2px;
@@ -583,7 +587,7 @@ details-modal.header__search {
     left: 5px;
   }
   header.header {
-    padding-top: 3px;
+    padding-top: 1px;
     padding-bottom: 3px;
     /* margin-top: 10px; */
     width: 100%;
