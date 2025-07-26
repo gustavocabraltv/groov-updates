@@ -713,7 +713,7 @@ cart-items dl.product-properties {
   margin: 0 auto;
   padding-top: 7px;
 }
-.product__info-wrappe r .nickname-popup {
+.product__info-wrapper .nickname-popup {
   display: flex;
   align-items: flex-start;
   flex-direction: column;
