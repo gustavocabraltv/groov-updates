@@ -111,7 +111,7 @@
 
   .footer__bottom {
       position: absolute;
-      opacity: 1; /* Inicialmente oculto */
+      opacity: 0; /* Inicialmente oculto */
       {% comment %} transform: translateY(20px); /* Preparado para animar para cima */ {% endcomment %}
       bottom: 0;
       {% comment %} background: pink; {% endcomment %}
@@ -127,7 +127,7 @@
   }
 
   .footer__bottom.is-visible {
-      opacity: 1;
+      opacity: 0;
       transform: translateY(0);
   }
 
@@ -177,7 +177,7 @@
       }
 </style>
 
-<div class="footer tw-hidden">
+<div class="footer">
   <div class="footer__inner">
     <h1 class="footer__title">The future of footwear has arrived</h1>
     <a href="https://apps.apple.com/app/apple-store/id6733245939?pt=125813518&ct=webinstall&mt=8" class="appstore-btn">
@@ -203,7 +203,7 @@
         <a href="/pages/contact" class="footer__link">Contact Us</a>
       </nav>
 
-      <span class="footer__copyright">© Groov 2025</span>
+      <span class="footer__copyright">© Groov 2025s</span>
     </div>
   </div>
 </div>
