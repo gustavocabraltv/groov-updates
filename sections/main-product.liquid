@@ -311,10 +311,26 @@
           </div>
 
           <!-- Resto do conteúdo mantido igual... -->
-          <div id="attribute-breakdown">
-            <p class="tw-font-semibold tw-text-black">Attribute Breakdown</p>
-            <img src="{{ "attribute-everyday.svg" | asset_url}}" width="589" height="auto" class="tw-mx-auto">
-          </div>
+          {% assign attribute_image = '' %}
+
+
+          {% case product.handle %}
+            {% when 'the-performance' %}
+              {% assign attribute_image = 'attribute-response.png' %}
+            {% when 'the-everyday' %}
+              {% assign attribute_image = 'attribute-everyday.png' %}
+            {% when 'the-luxe' %}
+              {% assign attribute_image = 'attribute-theluxe.png' %}
+          {% endcase %}
+
+
+          
+          {% if attribute_image != '' %}
+            <div id="attribute-breakdown">
+              <p class="tw-font-semibold tw-text-black">Attribute Breakdown</p>
+              <img src="{{ attribute_image | asset_url }}" width="589" height="auto" class="tw-mx-auto">
+            </div>
+          {% endif %}
 
            <div id="testimonialss">
             <p class="tw-font-semibold tw-text-black tw-mb-[18px]">What are people saying?</p>
