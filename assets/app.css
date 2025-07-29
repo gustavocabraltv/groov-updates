@@ -1791,6 +1791,10 @@ video {
   letter-spacing: 0em;
 }
 
+.tw-tracking-wider {
+  letter-spacing: 0.05em;
+}
+
 .tw-text-\[\#046CC8\] {
   --tw-text-opacity: 1;
   color: rgb(4 108 200 / var(--tw-text-opacity, 1));
