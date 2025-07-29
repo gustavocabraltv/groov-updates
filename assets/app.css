@@ -2457,6 +2457,14 @@ video {
     padding-top: 96px;
   }
 
+  .lg\:tw-pb-\[32px\] {
+    padding-bottom: 32px;
+  }
+
+  .lg\:tw-pl-\[64px\] {
+    padding-left: 64px;
+  }
+
   .lg\:tw-text-left {
     text-align: left;
   }
