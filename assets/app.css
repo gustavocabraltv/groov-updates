@@ -776,6 +776,14 @@ video {
   margin-top: 8px;
 }
 
+.tw-mb-\[6px\] {
+  margin-bottom: 6px;
+}
+
+.tw-mb-\[4px\] {
+  margin-bottom: 4px;
+}
+
 .tw-line-clamp-\[5\] {
   overflow: hidden;
   display: -webkit-box;
