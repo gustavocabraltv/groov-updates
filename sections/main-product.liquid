@@ -337,50 +337,53 @@
             </div>
           {% endif %}
 
-          <div id="testimonialss">
-            <p class="tw-font-semibold tw-text-black tw-mb-[18px]">What are people saying?</p>
-            <div id="testimonial-new" class="tw-flex tw-p-[24px] tw-flex-col tw-bg-[#F5F5F7] tw-w-full tw-gap-[24px] tw-rounded-[8px]">
-              
-              {% assign testimonial_image = '' %}
-              {% assign testimonial_name = '' %}
-              {% assign testimonial_role = '' %}
-              {% assign testimonial_text = '' %}
+          {% if product.handle == 'the-everyday' or product.handle == 'the-perfomance' or product.handle == 'the-luxe' %}
+            <div id="testimonialss">
+              <p class="tw-font-semibold tw-text-black tw-mb-[18px]">What are people saying?</p>
+              <div id="testimonial-new" class="tw-flex tw-p-[24px] tw-flex-col tw-bg-[#F5F5F7] tw-w-full tw-gap-[24px] tw-rounded-[8px]">
+                
+                {% assign testimonial_image = '' %}
+                {% assign testimonial_name = '' %}
+                {% assign testimonial_role = '' %}
+                {% assign testimonial_text = '' %}
           
-              {% case product.handle %}
-                {% when 'the-everyday' %}
-                  {% assign testimonial_image = 'person.png' %}
-                  {% assign testimonial_name = 'Elizabeth' %}
-                  {% assign testimonial_role = 'Filmmaker & Activist' %}
-                  {% assign testimonial_text = "OMG. <span class='tw-text-black tw-font-semibold'>It's like I'm walking on clouds!</span> I've tried both medical orthotics and off-the-shelf inserts in the past and neither came close to being as comfortable as my Groovs." %}
+                {% case product.handle %}
+                  {% when 'the-everyday' %}
+                    {% assign testimonial_image = 'person.png' %}
+                    {% assign testimonial_name = 'Elizabeth' %}
+                    {% assign testimonial_role = 'Filmmaker & Activist' %}
+                    {% assign testimonial_text = "OMG. <span class='tw-text-black tw-font-semibold'>It's like I'm walking on clouds!</span> I've tried both medical orthotics and off-the-shelf inserts in the past and neither came close to being as comfortable as my Groovs." %}
           
-                {% when 'the-perfomance' %}
-                  {% assign testimonial_image = 'person-2.png' %}
-                  {% assign testimonial_name = 'Jason' %}
-                  {% assign testimonial_role = 'Student-Athlete' %}
-                  {% assign testimonial_text = "These Vans I have are flat footed and the Groovs make them feel like running shoes!" %}
+                  {% when 'the-perfomance' %}
+                    {% assign testimonial_image = 'person-2.png' %}
+                    {% assign testimonial_name = 'Jason' %}
+                    {% assign testimonial_role = 'Student-Athlete' %}
+                    {% assign testimonial_text = "These Vans I have are flat footed and the Groovs make them feel like running shoes!" %}
           
-                {% when 'the-luxe' %}
-                  {% assign testimonial_image = 'person-3.png' %}
-                  {% assign testimonial_name = 'Kerry' %}
-                  {% assign testimonial_role = 'Activist' %}
-                  {% assign testimonial_text = "These are life transformers!!! How have I been walking without them? Used them all over Italy last week and never even thought of switching out my dress shoes for sneakers! Thank you thank you!" %}
-              {% endcase %}
+                  {% when 'the-luxe' %}
+                    {% assign testimonial_image = 'person-3.png' %}
+                    {% assign testimonial_name = 'Kerry' %}
+                    {% assign testimonial_role = 'Activist' %}
+                    {% assign testimonial_text = "These are life transformers!!! How have I been walking without them? Used them all over Italy last week and never even thought of switching out my dress shoes for sneakers! Thank you thank you!" %}
+                {% endcase %}
           
-              <div class="tw-flex tw-justify-between">
-                <div class="tw-flex tw-gap-[8px]">
-                  <img src="{{ testimonial_image | asset_url }}" width="32" height="32" class="tw-w-[32px] tw-h-[32px]">
-                  <div class="tw-flex tw-flex-col tw-justify-center">
-                    <p class="tw-text-black tw-text-[14px] tw-leading-tight">{{ testimonial_name }}</p>
-                    <p class="tw-text-[#4A526F] tw-text-[12px] tw-leading-tight">{{ testimonial_role }}</p>
+                <div class="tw-flex tw-justify-between">
+                  <div class="tw-flex tw-gap-[8px]">
+                    <img src="{{ testimonial_image | asset_url }}" width="32" height="32" class="tw-w-[32px] tw-h-[32px]">
+                    <div class="tw-flex tw-flex-col tw-justify-center">
+                      <p class="tw-text-black tw-text-[14px] tw-leading-tight">{{ testimonial_name }}</p>
+                      <p class="tw-text-[#4A526F] tw-text-[12px] tw-leading-tight">{{ testimonial_role }}</p>
+                    </div>
                   </div>
+                  <img src="{{ 'reviews-blue.svg' | asset_url }}" width="93" height="auto">
                 </div>
-                <img src="{{ 'reviews-blue.svg' | asset_url }}" width="93" height="auto">
+                <p class="tw-text-[15px] tw-text-[#4A526F]">
+                  {{ testimonial_text }}
+                </p>
               </div>
-              <p class="tw-text-[15px] tw-text-[#4A526F]">
-                {{ testimonial_text }}
-              </p>
             </div>
-          </div>
+          {% endif %}
+          
           
 
            
@@ -464,7 +467,7 @@
 
           <div
             id="quiz"
-            class="tw-flex tw-row tw-bg-[#F5F5F7] tw-px-[18px] tw-py-[14px] tw-w-full tw-gap-[14px] tw-items-center tw-rounded-[8px] " >
+            class=" tw-hidden tw-row tw-bg-[#F5F5F7] tw-px-[18px] tw-py-[14px] tw-w-full tw-gap-[14px] tw-items-center tw-rounded-[8px] " >
             <img src="{{  "support-groov.png"  | asset_url}}" width="40" height="40" class="tw-w-[40px] tw-h-[40px]">
             <div class="tw-flex tw-flex-col tw-h-fit">
               <p class="tw-text-[#2F2F39] tw-text-[14px] tw-font-semibold">Not sure which insole is right for you?</p>
