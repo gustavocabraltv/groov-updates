@@ -1589,6 +1589,11 @@ video {
   padding-bottom: 8px;
 }
 
+.tw-py-\[18px\] {
+  padding-top: 18px;
+  padding-bottom: 18px;
+}
+
 .tw-pb-\[128px\] {
   padding-bottom: 128px;
 }
