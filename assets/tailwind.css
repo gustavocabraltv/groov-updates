@@ -4,6 +4,17 @@
 
 /* ANIMAÇÕES CUSTOMIZADAS */
 @layer utilities {
+
+  .tw-bg-mobile-gradient {
+    background: linear-gradient(180deg, #BAE4FD 0%, rgba(186, 228, 253, 0) 100%);
+  }
+
+  @media (min-width: 1024px) {
+    .tw-bg-desktop-white {
+      background: white;
+    }
+  }
+
     @keyframes marquee-loop {
       0% {
         transform: translateX(0%);

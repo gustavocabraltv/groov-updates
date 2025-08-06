@@ -73,27 +73,50 @@
   }
 
 
-
+  {% comment %} 
+   BANNER 01 
+   {% endcomment %}
   .banner-desktop-01 {
     background-image: url('{{ "banner-01.png" | asset_url }}');
   }
 
   @media (max-width: 767px) {
     .banner-desktop-01 {
-      background-image: url('{{ "banner-01-mobile.png" | asset_url }}');
-    }
+      background-image: url('{{ "banner-01-mobile.png" | asset_url }}'); 
+      }
     }
 
-            .banner-desktop-02 {
+     {% comment %} 
+   BANNER 02
+   {% endcomment %}
+
+    .banner-desktop-02 {
                 background-image: url('{{ "banner-02.png" | asset_url }}');
-            }
+    }
 
-            @media (max-width: 767px) {
-            .banner-desktop-02 {
-                background-image: url('{{ "banner-02-mobile.png" | asset_url }}');
-                }
-            }
+    @media (max-width: 767px) {
+       .banner-desktop-02 {
+       background-image: url('{{ "banner-02-mobile.png" | asset_url }}');
+       }
+     }
+
+
+      {% comment %} 
+      BANNER 03
+      {% endcomment %}
+
+     .banner-desktop-03 {
+      background-image: url('{{ "banner-03.png" | asset_url }}');
+      }
+
+      @media (max-width: 767px) {
+      .banner-desktop-03 {
+      background-image: url('{{ "banner-03-mobile.png" | asset_url }}');
+      }
+      }
                 
+
+
 
     .swiper-pagination { 
         
@@ -101,12 +124,12 @@
         border-radius: 50px;
         display: flex;
         width: fit-content!important;
-
      
         position: absolute!important;
         left: 50%!important;
         transform: translateX(-50%)!important;
-        margin-bottom: 16px;
+        margin-bottom: 8px;
+        background: rgba(255, 255, 255, 0.48);
     }
 
   }
@@ -139,7 +162,7 @@
                           lg:tw-items-start
                           lg:tw-text-left
                           ">
-                          <p class="tw-text-white  tw-mb-[16px]">NEW ARRIVAL</p>
+                          <p class="tw-text-white  tw-mb-[16px]">Plush. Cushy. A Hug for Your Feet.                          </p>
                           <h2 
                               class="tw-text-white tw-text-[40px] lg:tw-text-[48px] tw-leading-none 
                               tw-text-center
@@ -159,6 +182,50 @@
     
           </div>
       </div>
+
+      <div class="swiper-slide">
+        <div 
+            class="tw-bg-blue tw-full tw-h-full tw-bg-cover tw-bg-bottom banner-desktop-03"
+            
+        >
+          <div class="page-width tw-h-full lg:!tw-pl-[130px] tw-pl-[0px]">
+                <div class="tw-w-full tw-h-full tw-flex">
+                    <div 
+                        class="
+                        tw-flex 
+                        tw-flex-col 
+                        tw-justify-start 
+                        tw-items-center 
+                        tw-w-full 
+                        tw-text-center
+                        tw-pt-[32px]
+
+                        lg:tw-justify-center
+                        lg:tw-items-start
+                        lg:tw-text-left
+                        ">
+                        <p class="tw-text-[#4A402C] tw-mb-[16px] tw-text-[16px]">Elegant. Compact. Perfect for Snug Shoes.</p>
+                        <h2 
+                            class="tw-text-[#4A402C] tw-text-[40px] lg:tw-text-[48px] tw-leading-none 
+                            tw-text-center
+                            lg:tw-text-left
+                            tw-mb-[18px]
+                            
+                            ">The Luxe, by Groov</h2>
+                        <p class="tw-text-[#4A402C]">Just $149</p>
+                        <a 
+                            href="/products/the-luxe"
+                            class="
+                            tw-mt-[40px] tw-font-normal tw-text-[16px] tw-bg-[black] tw-py-[8px] tw-px-[32px] tw-text-white tw-rounded-full">Buy Now
+                        </a>
+                    </div>
+                  
+                </div>
+            </div>
+
+        </div>
+     </div>
+
   
       <div class="swiper-slide">
           <div 
@@ -181,7 +248,7 @@
                           lg:tw-items-start
                           lg:tw-text-left
                           ">
-                          <p class="tw-text-[#53ABF9] tw-mb-[16px]">NEW ARRIVAL</p>
+                          <p class="tw-text-[#53ABF9] tw-mb-[16px]">Sleek. Fast. Ready for Blast-Off.</p>
                           <h2 
                               class="tw-text-white tw-text-[40px] lg:tw-text-[48px] tw-leading-none 
                               tw-text-center
@@ -201,6 +268,8 @@
   
           </div>
       </div>
+
+
   
   
   
@@ -221,7 +290,7 @@
 
 
     
-    <div class="swiper-pagination tw-bg-[rgb(255,255,255)] lg:!tw-hidden tw-block "></div>
+    <div class="swiper-pagination lg:!tw-hidden tw-block "></div>
   </div>
 </div>
 

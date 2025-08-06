@@ -337,29 +337,57 @@
             </div>
           {% endif %}
 
-           <div id="testimonialss">
+          <div id="testimonialss">
             <p class="tw-font-semibold tw-text-black tw-mb-[18px]">What are people saying?</p>
             <div id="testimonial-new" class="tw-flex tw-p-[24px] tw-flex-col tw-bg-[#F5F5F7] tw-w-full tw-gap-[24px] tw-rounded-[8px]">
-                <div class="tw-flex tw-justify-between">
-                   <div class="tw-flex tw-gap-[8px]">
-                      <img src="{{ "person.png" | asset_url }}" width="32" height="32" class="tw-w-[32px] tw-h-[32px]">
-                      <div class="tw-flex tw-flex-col tw-justify-center">
-                        <p class="tw-text-black tw-text-[14px] tw-leading-tight">Elizabeth</p>
-                        <p class="tw-text-[#4A526F] tw-text-[12px] tw-leading-tight">Filmmaker & Activist</p>
-                      </div>
-                   </div>
-                    <img src="{{ "reviews-blue.svg" | asset_url }}" width="93" height="auto">
+              
+              {% assign testimonial_image = '' %}
+              {% assign testimonial_name = '' %}
+              {% assign testimonial_role = '' %}
+              {% assign testimonial_text = '' %}
+          
+              {% case product.handle %}
+                {% when 'the-everyday' %}
+                  {% assign testimonial_image = 'person.png' %}
+                  {% assign testimonial_name = 'Elizabeth' %}
+                  {% assign testimonial_role = 'Filmmaker & Activist' %}
+                  {% assign testimonial_text = "OMG. <span class='tw-text-black tw-font-semibold'>It's like I'm walking on clouds!</span> I've tried both medical orthotics and off-the-shelf inserts in the past and neither came close to being as comfortable as my Groovs." %}
+          
+                {% when 'the-perfomance' %}
+                  {% assign testimonial_image = 'person-2.png' %}
+                  {% assign testimonial_name = 'Jason' %}
+                  {% assign testimonial_role = 'Student-Athlete' %}
+                  {% assign testimonial_text = "These Vans I have are flat footed and the Groovs make them feel like running shoes!" %}
+          
+                {% when 'the-luxe' %}
+                  {% assign testimonial_image = 'person-3.png' %}
+                  {% assign testimonial_name = 'Kerry' %}
+                  {% assign testimonial_role = 'Activist' %}
+                  {% assign testimonial_text = "These are life transformers!!! How have I been walking without them? Used them all over Italy last week and never even thought of switching out my dress shoes for sneakers! Thank you thank you!" %}
+              {% endcase %}
+          
+              <div class="tw-flex tw-justify-between">
+                <div class="tw-flex tw-gap-[8px]">
+                  <img src="{{ testimonial_image | asset_url }}" width="32" height="32" class="tw-w-[32px] tw-h-[32px]">
+                  <div class="tw-flex tw-flex-col tw-justify-center">
+                    <p class="tw-text-black tw-text-[14px] tw-leading-tight">{{ testimonial_name }}</p>
+                    <p class="tw-text-[#4A526F] tw-text-[12px] tw-leading-tight">{{ testimonial_role }}</p>
+                  </div>
                 </div>
-                <p class="tw-text-[15px] tw-text-[#4A526F]">
-                  OMG. <span class="tw-text-black tw-font-semibold">It's like I'm walking on clouds.</span> I've tried both medical orthotics and off-the-shelf inserts in the past and neither came close to being as comfortable as my Groovs
-                </p>
+                <img src="{{ 'reviews-blue.svg' | asset_url }}" width="93" height="auto">
+              </div>
+              <p class="tw-text-[15px] tw-text-[#4A526F]">
+                {{ testimonial_text }}
+              </p>
             </div>
-           </div>
+          </div>
+          
 
            
            <div id="testimonial-videos">
             <p class="tw-font-semibold tw-text-black tw-mb-[18px]">Join our happy customers</p>
             <div class="tw-grid tw-grid-cols-3 tw-gap-[20px]">
+              {% comment %} 💠 Video 01 {% endcomment %}
               <div
                 data-video="video-01"
                 class="
@@ -370,25 +398,25 @@
               >
                 <button><img src="{{  "btn-play-40.svg" | asset_url }}" width="50" height="50"></button>
               </div>
-
+               {% comment %} 💠 Video 02 {% endcomment %}
               <div
                 data-video="video-02"
                 class="
                   tw-h-[215px] tw-w-full tw-flex tw-justify-center tw-items-center tw-rounded-[8px]
                   tw-bg-cover tw-bg-center
                 "
-                style="background-image: url({{ 'video-02.png' | asset_url }})"
+                style="background-image: url({{ 'video-02-new.png' | asset_url }})"
               >
                 <button><img src="{{  "btn-play-40.svg" | asset_url }}" width="50" height="50"></button>
               </div>
-
+               {% comment %} 💠 Video 03 {% endcomment %}
               <div
                 data-video="video-03"
                 class="
                   tw-h-[215px] tw-w-full tw-flex tw-justify-center tw-items-center tw-rounded-[8px]
                   tw-bg-cover tw-bg-center
                 "
-                style="background-image: url({{ 'video-03.png' | asset_url }})"
+                style="background-image: url({{ 'video-03-new.png' | asset_url }})"
               >
                 <button><img src="{{  "btn-play-40.svg" | asset_url }}" width="50" height="50"></button>
               </div>
@@ -617,9 +645,10 @@
   document.addEventListener('DOMContentLoaded', function() {
     // URLs dos vídeos
     const videoUrls = {
-      'video-01': 'https://groov.me/cdn/shop/t/73/assets/groov.mp4?v=98447544743343531271750155813',
-      'video-02': 'https://groov.me/cdn/shop/t/73/assets/groov.mp4?v=98447544743343531271750155813',
-      'video-03': 'https://groov.me/cdn/shop/t/73/assets/groov.mp4?v=98447544743343531271750155813',
+      'video-01': 'https://cdn.shopify.com/videos/c/o/v/2af2ab8f13f64420b03b43a8d84f7c7c.mp4',
+      'video-02': 'https://cdn.shopify.com/videos/c/o/v/b762a40af53040ccbc29f290b41b5a2b.mp4',
+      'video-03': 'https://cdn.shopify.com/videos/c/o/v/c6342e454bd44c8cb26cabc65f3abd25.mp4',
+      {% comment %} How it Works {% endcomment %}
       'video-04': 'https://groov.me/cdn/shop/t/73/assets/groov.mp4?v=98447544743343531271750155813'
     };
   
