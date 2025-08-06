@@ -1272,6 +1272,11 @@ video {
   border-top-right-radius: 12px;
 }
 
+.tw-rounded-b-\[0px\] {
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+
 .tw-border {
   border-width: 1px;
 }
@@ -1592,6 +1597,11 @@ video {
 .tw-py-\[18px\] {
   padding-top: 18px;
   padding-bottom: 18px;
+}
+
+.tw-px-\[28px\] {
+  padding-left: 28px;
+  padding-right: 28px;
 }
 
 .tw-pb-\[128px\] {
