@@ -819,6 +819,10 @@ video {
   display: flex;
 }
 
+.\!tw-flex {
+  display: flex !important;
+}
+
 .tw-grid {
   display: grid;
 }

@@ -1,0 +1,84 @@
+
+<div class="tw-col-span-1">
+    <div class="tw-flex tw-flex-col tw-items-start tw-justify-start lg:tw-justify-end tw-relative tw-bg-[black] lg:tw-h-[550px] tw-h-[400px] tw-rounded-t-[12px] tw-overflow-hidden tw-p-[32px] tw-gap-[24px]">
+      <!-- Mobile (até 767px) -->
+      <img
+        src="{{ 'bg-gift-mobile.png' | asset_url }}"
+        alt="bg-gift-mobile"
+        class="tw-block md:tw-hidden tw-absolute tw-top-0 tw-left-0 tw-w-full tw-h-auto tw-object-contain tw-z-0"
+        height=""
+        width=""
+      >
+
+      <!-- Tablet e Desktop (a partir de 768px) -->
+      <img
+        src="{{ 'bg-gift.png' | asset_url }}"
+        alt="bg-gift-desktop"
+        class="tw-hidden md:tw-block tw-absolute tw-top-0 tw-left-0 tw-w-full tw-h-auto tw-object-contain tw-z-0"
+        height=""
+        width=""
+      >
+
+      <!-- RIGHT - CONTENT -->
+
+      <div class="tw-z-[2] tw-flex tw-flex-col tw-items-start ">
+        <p class="tw-text-white lg:tw-text-[18px] tw-text-[16px] tw-pb-[12px]">Fully custom. Fully effortless.</p>
+        <h1 class="tw-text-white tw-text-[32px] lg:tw-text-[48px] lg:tw-leading-none tw-leading-none tw-pb-[16px]">
+          Seeking the<br>
+          perfect gift?
+        </h1>
+        <a
+          href="/products/rise-ai-giftcard"
+          class="
+                            tw-font-normal tw-text-[16px] tw-bg-[#1C67F3] tw-py-[8px] tw-px-[32px] tw-text-white tw-rounded-full
+          "
+          >Buy Now</a
+        >
+      </div>
+    </div>
+
+    {% comment %} BOTTOM SPECIFIC {% endcomment %}
+    <div
+      class="
+        tw-flex
+
+        tw-mt-[-1px]
+        tw-py-[24px]
+
+        lg:tw-px-[32px]
+        tw-px-[24px]
+
+        tw-items-center
+        tw-tracking-normal
+        tw-justify-between
+        tw-bg-[#000]
+
+        tw-rounded-b-[12px]
+      "
+    >
+      <div class="tw-flex tw-justify-center tw-items-center tw-gap-[14px] lg:tw-flex-row tw-flex-col lg:tw-text-left tw-text-center">
+        <img src="{{"icon-engraving.svg" | asset_url }}" width="auto" height="28">
+
+        <div class="tw-flex tw-flex-col tw-leading-none tw-gap-[4px]">
+          <p class="tw-text-[12px] lg:tw-text-[14px] tw-font-regular tw-text-white">Free Engraving</p>
+          <p class="tw-text-[11px] lg:tw-text-[13px] tw-text-[#717171]">Make it yours</p>
+        </div>
+      </div>
+
+      <div class="tw-flex tw-justify-center tw-items-center tw-gap-[14px] lg:tw-flex-row tw-flex-col lg:tw-text-left tw-text-center">
+        <img src="{{"icon-ai-white.svg" | asset_url }}" width="auto" height="25">
+        <div class="tw-flex tw-flex-col tw-leading-none tw-gap-[4px]">
+          <p class="tw-text-[12px] lg:tw-text-[14px] tw-font-regular tw-text-white">AI Powered</p>
+          <p class="tw-text-[11px] lg:tw-text-[13px] tw-text-[#717171]">3D iPhone Scan</p>
+        </div>
+      </div>
+
+      <div class="tw-flex tw-justify-center tw-items-center tw-gap-[14px] lg:tw-flex-row tw-flex-col lg:tw-text-left tw-text-center">
+        <img src="{{"shoes-white.svg" | asset_url }}" width="auto" height="27">
+        <div class="tw-flex tw-flex-col tw-leading-none tw-gap-[4px]">
+          <p class="tw-text-[12px] lg:tw-text-[14px] tw-font-regular tw-text-white">Compatible Fit</p>
+          <p class="tw-text-[11px] lg:tw-text-[13px] tw-text-[#717171]">All shoes & sneakers</p>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,361 @@
+<!-- Swiper CSS -->
+{% comment %} <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"> {% endcomment %}
+
+
+<style>
+
+
+
+
+
+  .swiper-button-next {
+    margin-right: 32px;
+    width: fit-content!important;
+  }
+  .swiper-button-prev {
+    margin-left: 32px;
+    width: fit-content!important;
+  }
+
+
+      .swiper-button-next,
+      .swiper-button-prev {
+          {% comment %} display: none!important; {% endcomment %}
+          {% comment %} display: flex!important; {% endcomment %}
+          
+      }
+  .swiper {
+    width: 100%;
+    height: 420px;
+    position: relative;
+  }
+
+  @media screen and (max-width: 481px) {
+    .swiper { 
+      height: 650px;
+    }
+  }
+
+  .swiper-slide {
+    background: #ddd;
+    
+  }
+
+
+
+
+  .swiper-button-next {
+    right: 10px;
+
+  }
+
+  .swiper-button-prev {
+    left: 10px;
+  }
+  .swiper-button-next::after {
+    display: none!important;
+  }
+
+  .swiper-button-prev::after {
+    display: none!important;
+  }
+
+
+  {% comment %} 
+   BANNER 01 
+   {% endcomment %}
+  .banner-desktop-01 {
+    background-image: url('{{ "banner-01.png" | asset_url }}');
+  }
+
+  @media (max-width: 767px) {
+    .banner-desktop-01 {
+      background-image: url('{{ "banner-01-mobile.webp" | asset_url }}'); 
+      }
+    }
+
+     {% comment %} 
+   BANNER 02
+   {% endcomment %}
+
+    .banner-desktop-02 {
+                background-image: url('{{ "banner-02.png" | asset_url }}');
+    }
+
+    @media (max-width: 767px) {
+       .banner-desktop-02 {
+       background-image: url('{{ "banner-02-mobile.png" | asset_url }}');
+       }
+     }
+
+
+      {% comment %} 
+      BANNER 03
+      {% endcomment %}
+
+     .banner-desktop-03 {
+      background-image: url('{{ "banner-03.png" | asset_url }}');
+      }
+
+      @media (max-width: 767px) {
+      .banner-desktop-03 {
+      background-image: url('{{ "banner-03-mobile.png" | asset_url }}');
+      }
+      }
+                
+
+
+
+      
+
+/* Substitua o CSS do pagination existente por este: */
+
+/* Bullet inativo (tamanho padrão) */
+.swiper-pagination-bullet {
+  width: 10px !important;
+  height: 10px !important;
+  background-color: #C3C4C7;
+
+  transition: all 0.9s ease !important;
+  {% comment %} Controla a velocidade do 10px to 40px {% endcomment %}
+
+
+  position: relative !important;
+  overflow: hidden !important;
+  border-radius: 50px !important;
+  opacity: 1!important;
+}
+
+/* Bullet ativo (largura expandida) */
+.swiper-pagination-bullet-active {
+  width: 40px !important;
+  height: 10px !important;
+  border-radius: 5px !important;
+  {% comment %} background-color: rgba(255, 255, 255, 0.3) !important; {% endcomment %}
+  
+  position: relative !important;
+}
+
+/* Animação de preenchimento do bullet ativo */
+.swiper-pagination-bullet-active::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0;
+  {% comment %} background-color: #1C67F3; {% endcomment %}
+  background-color: black;
+  
+  border-radius: 5px;
+  animation: fillProgress 3s linear forwards;
+}
+
+/* Keyframe para a animação de preenchimento */
+@keyframes fillProgress {
+  0% { width: 0; }
+  100% { width: 100%; }
+}
+
+/* Container do pagination (mantenha o existente e adicione gap) */
+.swiper-pagination { 
+  padding: 8px 18px !important;
+  border-radius: 50px !important;
+  display: flex !important;
+  width: fit-content !important;
+  position: absolute !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  margin-bottom: 8px !important;
+  background: rgb(255 255 255 / 35%);
+  {% comment %} gap: 8px !important; {% endcomment %}
+   /* Esta linha é nova - adiciona espaçamento entre os bullets */
+}
+
+
+
+  }
+</style>
+
+<!-- Swiper HTML -->
+<div class="tw-max-w-[1300px]  tw-mx-auto lg:tw-pt-[32px] tw-pt-[0px]  ">
+  <div class="swiper mySwiper lg:tw-rounded-[12px] tw-rounded-[0px] tw-overflow-hidden">
+    <div class="swiper-wrapper">
+      
+  
+      <div class="swiper-slide">
+          <div 
+              class="tw-bg-blue tw-full tw-h-full tw-bg-cover tw-bg-center banner-desktop-02"
+              
+              >
+              <div class="page-width tw-h-full lg:!tw-pl-[130px] tw-pl-[0px]">
+                  <div class="tw-w-full tw-h-full tw-flex">
+                      <div 
+                          class="
+                          tw-flex 
+                          tw-flex-col 
+                          tw-justify-start 
+                          tw-items-center 
+                          tw-w-full 
+                          tw-text-center
+                          tw-pt-[32px]
+    
+                          lg:tw-justify-center
+                          lg:tw-items-start
+                          lg:tw-text-left
+                          ">
+                          <p class="tw-text-white  tw-mb-[16px]">Plush. Cushy. A Hug for Your Feet.                          </p>
+                          <h2 
+                              class="tw-text-white tw-text-[40px] lg:tw-text-[48px] tw-leading-none 
+                              tw-text-center
+                              lg:tw-text-left
+                              tw-mb-[18px]
+                              ">The Everyday,<br/> by Groov</h2>
+                          <p class="tw-text-[white]">Just $149</p>
+                          <a 
+                              href="/products/the-everyday"
+                              class="
+                              tw-mt-[40px] tw-font-normal tw-text-[16px] tw-bg-black tw-py-[8px] tw-px-[32px] tw-text-white tw-rounded-full">Buy Now
+                          </a>
+                      </div>
+                    
+                  </div>
+              </div>
+    
+          </div>
+      </div>
+
+      <div class="swiper-slide">
+        <div 
+            class="tw-bg-blue tw-full tw-h-full tw-bg-cover tw-bg-bottom banner-desktop-03"
+            
+        >
+          <div class="page-width tw-h-full lg:!tw-pl-[130px] tw-pl-[0px]">
+                <div class="tw-w-full tw-h-full tw-flex">
+                    <div 
+                        class="
+                        tw-flex 
+                        tw-flex-col 
+                        tw-justify-start 
+                        tw-items-center 
+                        tw-w-full 
+                        tw-text-center
+                        tw-pt-[32px]
+
+                        lg:tw-justify-center
+                        lg:tw-items-start
+                        lg:tw-text-left
+                        ">
+                        <p class="tw-text-[#4A402C] tw-mb-[16px] tw-text-[16px]">Elegant. Compact. Perfect for Snug Shoes.</p>
+                        <h2 
+                            class="tw-text-[#4A402C] tw-text-[40px] lg:tw-text-[48px] tw-leading-none 
+                            tw-text-center
+                            lg:tw-text-left
+                            tw-mb-[18px]
+                            
+                            ">The Luxe, by Groov</h2>
+                        <p class="tw-text-[#4A402C]">Just $149</p>
+                        <a 
+                            href="/products/the-luxe"
+                            class="
+                            tw-mt-[40px] tw-font-normal tw-text-[16px] tw-bg-[black] tw-py-[8px] tw-px-[32px] tw-text-white tw-rounded-full">Buy Now
+                        </a>
+                    </div>
+                  
+                </div>
+            </div>
+
+        </div>
+     </div>
+
+  
+      <div class="swiper-slide">
+          <div 
+              class="tw-bg-blue tw-full tw-h-full tw-bg-cover tw-bg-center banner-desktop-01"
+              
+          >
+            <div class="page-width tw-h-full lg:!tw-pl-[130px] tw-pl-[0px]">
+                  <div class="tw-w-full tw-h-full tw-flex">
+                      <div 
+                          class="
+                          tw-flex 
+                          tw-flex-col 
+                          tw-justify-start 
+                          tw-items-center 
+                          tw-w-full 
+                          tw-text-center
+                          tw-pt-[32px]
+  
+                          lg:tw-justify-center
+                          lg:tw-items-start
+                          lg:tw-text-left
+                          ">
+                          <p class="tw-text-[#53ABF9] tw-mb-[16px]">Sleek. Fast. Ready for Blast-Off.</p>
+                          <h2 
+                              class="tw-text-white tw-text-[40px] lg:tw-text-[48px] tw-leading-none 
+                              tw-text-center
+                              lg:tw-text-left
+                              tw-mb-[18px]
+                              ">The Response,<br/> by Groov</h2>
+                          <p class="tw-text-[white]">Just $149</p>
+                          <a 
+                              href="/products/the-perfomance"
+                              class="
+                              tw-mt-[40px] tw-font-normal tw-text-[16px] tw-bg-white tw-py-[8px] tw-px-[32px] tw-text-black tw-rounded-full">Buy Now
+                          </a>
+                      </div>
+                    
+                  </div>
+              </div>
+  
+          </div>
+      </div>
+
+
+  
+  
+  
+  
+    </div>
+  <!-- Navigation arrows -->
+  <div class="swiper-button-prev !tw-hidden lg:!tw-flex">
+    <div class="tw-w-[50px] tw-h-[50px] tw-rounded-full tw-bg-[white]  tw-flex tw-justify-center tw-items-center">
+      <img src="{{  'previous-arrow.svg' | asset_url }}" width="10" height="auto">
+    </div>
+  </div>
+  
+  <div class="swiper-button-next !tw-hidden lg:!tw-flex">
+    <div class="tw-w-[50px] tw-h-[50px] tw-rounded-full tw-bg-[white] tw-flex tw-justify-center tw-items-center">
+      <img src="{{  'next-arrow.svg' | asset_url }}" width="10" height="auto">
+    </div>
+  </div>
+
+
+    
+    <div class="swiper-pagination lg:!tw-hidden tw-block "></div>
+  </div>
+</div>
+
+<!-- Swiper JS -->
+{% comment %} <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script> {% endcomment %}
+
+{% javascript %}
+  document.addEventListener("DOMContentLoaded", function () {
+    const swiper = new Swiper('.mySwiper', {
+      autoplay: {
+        delay: 3000,
+      },
+      loop: true,
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      slidesPerView: 1,
+      spaceBetween: 10,
+    });
+  });
+{% endjavascript %}

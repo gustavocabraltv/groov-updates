@@ -1,337 +1,43 @@
 <style>
-  #MainContent{
-    background: #F3F3F6;
+  #MainContent {
+    background: #f3f3f6;
     margin-top: -70px;
   }
 
-  @media (max-width: 481px) { 
-    #MainContent{
-      background: #F3F3F6;
+  @media (max-width: 481px) {
+    #MainContent {
+      background: #f3f3f6;
       margin-top: -40px;
     }
   }
-  
-    .main-image {
-      display: none;
-      margin-top: -300px;
-    }
+
+  .main-image {
+    display: none;
+    margin-top: -300px;
+  }
 </style>
- 
 
-{% comment %} <div class="tw-mt-[-48px]">
-  {% render 'content-banner' %}
-</div> {% endcomment %}
-
-
-  <div class="">
-    {% render 'content-banner-shop-all-2' %}
-  </div>
-
+<div class="">
+  {% render 'content-banner-shop-all-3' %}
+</div>
 
 <div class="tw-mt-[64px]">
   <div class="page-width">
-    <h1 class="lg:tw-text-[48px] tw-text-[32px] tw-font-semibold tw-pb-[12px]">
-      Get Your Groovs Now!
-    </h1>
-    <p 
-        class="
-        tw-flex lg:tw-text-[18px] tw-text-[#464F59] 
-        lg:tw-w-[650px] tw-w-full tw-text-[16px]
-        tw-tracking-normal
-        ">
-      Each pair is tailored to your unique footprint using 3D foot mapping on an iPhone, for a flawless fit that feels like it was made just for you — because it was.
+    <h1 class="lg:tw-text-[48px] tw-text-[32px] tw-font-semibold tw-pb-[12px]">Get Your Groovs Now!</h1>
+    <p class="tw-flex lg:tw-text-[18px] tw-text-[#464F59] lg:tw-w-[650px] tw-w-full tw-text-[16px] tw-tracking-normal">
+      Each pair is tailored to your unique footprint using 3D foot mapping on an iPhone, for a flawless fit that feels
+      like it was made just for you — because it was.
     </p>
-
   </div>
 </div>
 
- 
- <div class="tw-pt-[64px] lg:tw-pb-[64px] tw-pb-[32px]">
-
-    <!-- STYLE 2  -->
+<div class="tw-pt-[64px] lg:tw-pb-[64px] tw-pb-[32px]">
   <div class="tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 tw-gap-10 page-width !tw-mb-12">
-
-    <!-- LEFT -->
-    <div class="tw-col-span-1">
-
-      <div class="tw-flex tw-flex-col tw-justify-between tw-bg-white lg:tw-h-[550px] tw-h-[500px] tw-rounded-t-[12px] tw-overflow-hidden tw-p-[32px]">
-
-        <!-- Conteúdo principal azul -->
-        <div class="tw-flex-1 tw-flex tw-flex-col tw-items-center tw-justify-center tw-gap-[24px] tw-w-full">
-
-          <div class="tw-bg-[#EFF4FE] tw-text-black tw-rounded-full tw-px-6 tw-py-2 tw-flex tw-w-fit tw-text-[12px] tw-font-semibold tw-gap-[12px]">
-            <img src="{{ "popular.svg"| asset_url }}" width="16" height="16">
-            Most popular
-          </div>
-
-          <div>
-            <h2 class="tw-text-[24px] tw-font-medium tw-mb-[4px]">The Everyday, by Groov</h2>
-            <p class="tw-text-[#464F59] tw-text-[16px] tw-tracking-normal tw-text-center">Plush. Cushy. A Hug for Your Feet</p>
-          </div>
-
-          <div class="tw-text-black tw-text-[18px] tw-flex tw-items-center  tw-font-semibold">
-            $149
-            <a 
-              href="/products/the-everyday"
-              class="
-              tw-font-normal tw-text-[16px] tw-ml-[16px] tw-bg-[#1C67F3] tw-py-[8px] tw-px-[32px] tw-text-white tw-rounded-full">Buy Now</a>
-            </div>
-
-        </div>
-
-        <!-- Bloco vermelho no fim -->
-  
-       <img 
-          src="{{ 'everyday-new.png' | asset_url }}" 
-          alt="Hero Image" 
-          width="auto" 
-          height="auto" 
-          class="tw-h-[250px] tw-w-auto tw-object-contain">
-      </div>
-
-
-      {% comment %} Attribute Footer {% endcomment %}
-      <div 
-        class="
-          tw-flex 
-          tw-py-[24px] 
-          
-
-          lg:tw-pl-[32px]
-          lg:tw-pr-[56px]
-
-
-
-          tw-px-[32px] 
-
-          tw-items-center 
-          tw-tracking-normal 
-          tw-justify-between 
-          tw-bg-[#FAFAFB] 
-          tw-rounded-b-[12px]">
-
-        <div class="tw-flex tw-justify-center tw-items-center tw-gap-[12px]"> 
-          <img src="{{"plush-item.png" | asset_url }}" width="auto" height="auto" class="tw-h-[22px] tw-w-[22px]">
-          <p class="tw-black tw-font-semibold tw-text-[14px] lg:tw-text-[14px] tw-text-black">Plush</p>
-        </div>
-      
-        <span class="tw-w-[1px] tw-h-[24px] tw-bg-[#E5E5E5] tw-inline-block tw-self-center" aria-hidden="true"></span>
-      
-        <div class="tw-flex tw-justify-center tw-items-center tw-gap-[14px]"> 
-          <img src="{{"box-gray.svg" | asset_url }}" width="auto" height="28">
-          <div class="tw-flex tw-flex-col tw-leading-none tw-gap-[4px]">
-            <p class="tw-text-[14px] lg:tw-text-[14px] tw-font-semibold tw-text-black">Free Delivery</p>
-            <p class="tw-text-[13px] lg:tw-text-[13px] tw-text-[#717B8D]">Within 7 days</p>
-          </div>
-        </div>
-      
-      </div>
-
-      
-      
-
-      
-
-    </div>
-
-
-
-    <!-- RIGHT -->
-
-    <div class="tw-col-span-1">
-
-      <div class="tw-flex tw-flex-col tw-items-start tw-justify-start lg:tw-justify-end tw-relative tw-bg-[black] lg:tw-h-[550px] tw-h-[400px] tw-rounded-t-[12px] tw-overflow-hidden tw-p-[32px] tw-gap-[24px]">
-
-          <!-- Mobile (até 767px) -->
-          <img 
-            src="{{ 'bg-gift-mobile.png' | asset_url }}" 
-            alt="bg-gift-mobile"
-            class="tw-block md:tw-hidden tw-absolute tw-top-0 tw-left-0 tw-w-full tw-h-auto tw-object-contain tw-z-0"
-            height="" width=""
-          />
-
-          <!-- Tablet e Desktop (a partir de 768px) -->
-          <img 
-            src="{{ 'bg-gift.png' | asset_url }}" 
-            alt="bg-gift-desktop"
-            class="tw-hidden md:tw-block tw-absolute tw-top-0 tw-left-0 tw-w-full tw-h-auto tw-object-contain tw-z-0"
-            height="" width=""
-          />
-                            
-          <!-- RIGHT - CONTENT -->
-     
-    
-          <div class="tw-z-[2] tw-flex tw-flex-col tw-items-start " >
-              <p class="tw-text-white lg:tw-text-[18px] tw-text-[16px] tw-pb-[12px]">Fully custom. Fully effortless.</p>
-              <h1 class="tw-text-white tw-text-[32px] lg:tw-text-[48px] lg:tw-leading-none tw-leading-none tw-pb-[16px]">Seeking the<br/> perfect gift?</h1>
-              <a 
-                href="/products/rise-ai-giftcard"
-                class="
-                tw-font-normal tw-text-[16px] tw-bg-[#1C67F3] tw-py-[8px] tw-px-[32px] tw-text-white tw-rounded-full">Buy Now</a>
-          </div>
-
-
-      </div>
-
-
-      {% comment %} BOTTOM SPECIFIC {% endcomment %}
-      <div 
-        class="
-          tw-flex 
-        
-          tw-mt-[-1px]
-          tw-py-[24px] 
-          
-          lg:tw-px-[32px] 
-          tw-px-[24px] 
-
-          tw-items-center 
-          tw-tracking-normal 
-          tw-justify-between 
-          tw-bg-[#000] 
-
-          tw-rounded-b-[12px]">
-
-          <div class="tw-flex tw-justify-center tw-items-center tw-gap-[14px] lg:tw-flex-row tw-flex-col lg:tw-text-left tw-text-center"> 
-
-                <img src="{{"icon-engraving.svg" | asset_url }}" width="auto" height="28">
-
-                <div class="tw-flex tw-flex-col tw-leading-none tw-gap-[4px]">
-                  <p class="tw-text-[12px] lg:tw-text-[14px] tw-font-regular tw-text-white">Free Engraving</p>
-                  <p class="tw-text-[11px] lg:tw-text-[13px] tw-text-[#717171]">Make it yours</p>
-                </div>
-          </div>
-
-
-      
-      
-
-        <div class="tw-flex tw-justify-center tw-items-center tw-gap-[14px] lg:tw-flex-row tw-flex-col lg:tw-text-left tw-text-center"> 
-          <img src="{{"icon-ai-white.svg" | asset_url }}" width="auto" height="25">
-          <div class="tw-flex tw-flex-col tw-leading-none tw-gap-[4px]">
-            <p class="tw-text-[12px] lg:tw-text-[14px] tw-font-regular tw-text-white">AI Powered</p>
-            <p class="tw-text-[11px] lg:tw-text-[13px] tw-text-[#717171]">3D iPhone Scan</p>
-          </div>
-        </div>
-
-      
-
-
-        <div class="tw-flex tw-justify-center tw-items-center tw-gap-[14px] lg:tw-flex-row tw-flex-col lg:tw-text-left tw-text-center"> 
-          <img src="{{"shoes-white.svg" | asset_url }}" width="auto" height="27">
-          <div class="tw-flex tw-flex-col tw-leading-none tw-gap-[4px]">
-            <p class="tw-text-[12px] lg:tw-text-[14px] tw-font-regular tw-text-white">Compatible Fit</p>
-            <p class="tw-text-[11px] lg:tw-text-[13px] tw-text-[#717171]">All shoes & sneakers</p>
-          </div>
-        </div>
-      
-      </div>
-    </div>
-
-
-
+    {% render 'custom-card-highlight' %}
+    {% render 'custom-card-gift' %}
   </div>
 
-  <!-- 2 section: 3 BLOCOS -->
   <div class="tw-grid tw-grid-cols-1 lg:tw-grid-cols-3 tw-gap-8 page-width">
-
-    <!-- CARD 1 -->
-    {% comment %} <div class="tw-col-span-1">
-      <div class="tw-flex tw-flex-col tw-items-left tw-justify-end tw-bg-white tw-h-[500px] 
-        tw-rounded-t-[12px] tw-rounded-b-[0px] lg:tw-rounded-[12px]
-        tw-overflow-hidden tw-p-[32px] tw-gap-[24px]
-        tw-relative
-        ">
-   
-         <div class="tw-flex tw-h-[300px] tw-w-full tw-justify-center tw-items-center">
-          <img 
-            src="{{ 'theluxe-cover.png' | asset_url }}" 
-            alt="Hero Image" 
-            width="auto" 
-            height="auto" 
-            class="tw-h-[250px] tw-w-auto tw-object-contain">
-        </div>
-        <div>
-          <div 
-            class="
-            tw-h-[40px] 
-            
-            tw-absolute 
-
-            {% comment %} tw-bg-slate-200 {% endcomment %}
-            tw-top-[18px] 
-            tw-left-[32px] 
-
-            tw-w-full 
-            tw-flex 
-            tw-items-center
-            tw-gap-[12px]
-            
-            tw-font-semibold
-            tw-text-[black]
-            tw-text-[14px]
-            tw-tracking-wide
-            ">
-            <img src="{{ "luxe-item.png"  | asset_url }}" width="22" height="22">
-            
-            
-
-            
-            <span>Elegant</span>
-
-
-            <div class="tw-w-[1px] tw-h-[16px] tw-bg-[#C3C5CA]">&nbsp;</div>
-            <span class="tw-text-[12px] tw-text-[#90959e] tw-font-light tw-tracking-normal">Free engraving</span>
-
-
-          </div>
-          <h2 class="tw-text-[24px] tw-font-medium tw-mb-[4px]">The Luxe, by Groov</h2>
-          <p class="tw-text-[#464F59] tw-text-[16px] tw-tracking-normal">Elegant. Compact. Perfect for Snug Shoes</p>
-        </div>
-        <div class="tw-text-black tw-text-[18px] tw-flex tw-items-center tw-justify-between tw-w-full tw-font-semibold">
-          $149
-          <a 
-            href="/products/the-luxe"
-            class="
-            tw-font-normal tw-text-[16px] tw-ml-[16px] tw-bg-[black] tw-py-[8px] tw-px-[32px] tw-text-white tw-rounded-full">Buy Now</a>
-        </div>
-      </div>
-
-      {% comment %} Attribute Footer [The Luxe] {% endcomment %}
-      <div 
-        class="
-          tw-flex 
-          tw-py-[24px] 
-          
-          lg:tw-hidden
-          lg:tw-px-[56px] 
-          tw-px-[28px] 
-
-          tw-items-center 
-          tw-tracking-normal 
-          tw-justify-between 
-          tw-bg-[#FAFAFB] 
-          tw-rounded-b-[12px]">
-
-        <div class="tw-flex tw-justify-center tw-items-center tw-gap-[12px]"> 
-          <img src="{{"luxe-item.png" | asset_url }}" width="22" height="22">
-          <p class="tw-black tw-font-semibold tw-text-[16px] lg:tw-text-[16px] tw-text-black">Elegant</p>
-        </div>
-      
-        <span class="tw-w-[1px] tw-h-[24px] tw-bg-[#E5E5E5] tw-inline-block tw-self-center" aria-hidden="true"></span>
-      
-        <div class="tw-flex tw-justify-center tw-items-center tw-gap-[14px]"> 
-          <img src="{{"box-gray.svg" | asset_url }}" width="auto" height="28">
-          <div class="tw-flex tw-flex-col tw-leading-none tw-gap-[4px]">
-            <p class="tw-text-[14px] lg:tw-text-[14px] tw-font-semibold tw-text-black">Free Delivery</p>
-            <p class="tw-text-[13px] lg:tw-text-[13px] tw-text-[#717B8D]">Within 7 days</p>
-          </div>
-        </div>
-      
-      </div>
-    </div> {% endcomment %}
-
-
     {% render 'custom-card-1',
       cover_image: 'theluxe-cover.png',
       icon_image: 'luxe-item.png',
@@ -358,57 +64,46 @@
     {% render 'custom-card-1',
       cover_image: 'the-hat-2.png',
       icon_image: 'response-item.png',
-      
       title: 'Groov Hat',
       price: '$40',
       url: '/products/the-perfomance',
       footer_delivery_text: 'Free Delivery',
       footer_delivery_sub: 'Within 7 days'
     %}
-
-
-
-
-
-        </div>
+  </div>
 </div>
 
-
-
-
-<!-- 3 section: Pack Block-->
+<!-- 3 section: Pack Block -->
 
 <div class="page-width">
-  <div 
+  <div
     class="
-    tw-bg-cover tw-bg-center tw-mb-[64px] tw-overflow-hidden tw-rounded-xl tw-p-[0px] 
-    lg:tw-p-[24px]
-    " 
-    style="background-image: url({{ 'bg-pack.webp' | asset_url }});">
-
-
-
+      tw-bg-cover tw-bg-center tw-mb-[64px] tw-overflow-hidden tw-rounded-xl tw-p-[0px]
+      lg:tw-p-[24px]
+    "
+    style="background-image: url({{ 'bg-pack.webp' | asset_url }});"
+  >
     <!-- CARD -->
 
-    <div class="
-      tw-h-[230px] tw-w-full lg:tw-hidden tw-flex
-      tw-bg-cover
+    <div
+      class="
+        tw-h-[230px] tw-w-full lg:tw-hidden tw-flex
+        tw-bg-cover
       "
       style="background-image: url({{ "banner-mobile.png" | asset_url }})"
+    ></div>
+
+    <div
+      class="
+        tw-bg-[white] tw-p-[24px] tw-gap-[24px] tw-flex tw-flex-col tw-rounded-[0px] tw-w-full
+        lg:tw-w-[374px] lg:tw-rounded-[12px]
+      "
     >
-      
-    </div>
-
-    <div class="
-      tw-bg-[white] tw-p-[24px] tw-gap-[24px] tw-flex tw-flex-col tw-rounded-[0px] tw-w-full
-      lg:tw-w-[374px] lg:tw-rounded-[12px]
-      ">
-
       {% comment %} HEADER CARD {% endcomment %}
       <div>
         <div class="tw-flex tw-gap-[8px] tw-items-center">
-          <h1 class="tw-text-[24px] tw-font-semibold tw-tracking-normal">Groovy Bundle</h1> 
-          <div 
+          <h1 class="tw-text-[24px] tw-font-semibold tw-tracking-normal">Groovy Bundle</h1>
+          <div
             class="
               tw-flex
 
@@ -416,67 +111,59 @@
               tw-justify-center
 
               tw-text-[13px]
-              lg:tw-text-[12px] 
+              lg:tw-text-[12px]
 
               tw-gap-[4px]
-             
-              tw-text-[#266E3E] 
-              tw-px-[6px] 
-              tw-py-[2px] 
-              tw-bg-[#DEF6E6] 
-              tw-border-[#266E3E] 
-              tw-border-[0.5px] 
+
+              tw-text-[#266E3E]
+              tw-px-[6px]
+              tw-py-[2px]
+              tw-bg-[#DEF6E6]
+              tw-border-[#266E3E]
+              tw-border-[0.5px]
               tw-rounded-[4px]
               tw-h-fit
               tw-font-semibold
-            ">
+            "
+          >
             <img src="{{ 'promo.svg' | asset_url }}" width="14" height="14">
             Save 33%
           </div>
         </div>
-        <p class="lg:tw-text-[14px] tw-text-[16px] tw-tracking-normal tw-text-[#505C72] tw-mt-[8px]">All three models. One great price.</p>
+        <p class="lg:tw-text-[14px] tw-text-[16px] tw-tracking-normal tw-text-[#505C72] tw-mt-[8px]">
+          All three models. One great price.
+        </p>
       </div>
-      
 
-
-     {% comment %} BODY CARD {% endcomment %}
+      {% comment %} BODY CARD {% endcomment %}
       <div class="tw-flex tw-flex-col tw-gap-[8px]">
-
         <div class="tw-p-[8px] tw-bg-[#F4F4F6] tw-flex tw-items-center tw-rounded-[4px]">
-         
           <img src="{{  'theveryday-mini.png' | asset_url }}" width="45" height="auto" class="tw-mr-[12px]">
-       
-        <p class="tw-w-full tw-text-left tw-font-semibold tw-tracking-normal tw-text-[#1D2430] lg:tw-text-[14px] tw-text-[15px]">The Everyday</p>
-        <img src="{{ "check-18.svg" |  asset_url }}" width="19" height="auto" class="tw-mr-[8px]">
-      </div>
 
-
-
-        <div class="tw-p-[8px] tw-bg-[#F4F4F6] tw-flex tw-items-center tw-rounded-[4px]">
-         
-            <img src="{{  'theresponse-mini.png' | asset_url }}" width="45" height="auto" class="tw-mr-[12px]">
-         
-          <p class="tw-w-full tw-text-left tw-font-semibold tw-tracking-normal tw-text-[#1D2430] lg:tw-text-[14px] tw-text-[15px]">The Response</p>
+          <p class="tw-w-full tw-text-left tw-font-semibold tw-tracking-normal tw-text-[#1D2430] lg:tw-text-[14px] tw-text-[15px]">
+            The Everyday
+          </p>
           <img src="{{ "check-18.svg" |  asset_url }}" width="19" height="auto" class="tw-mr-[8px]">
         </div>
 
+        <div class="tw-p-[8px] tw-bg-[#F4F4F6] tw-flex tw-items-center tw-rounded-[4px]">
+          <img src="{{  'theresponse-mini.png' | asset_url }}" width="45" height="auto" class="tw-mr-[12px]">
 
-
+          <p class="tw-w-full tw-text-left tw-font-semibold tw-tracking-normal tw-text-[#1D2430] lg:tw-text-[14px] tw-text-[15px]">
+            The Response
+          </p>
+          <img src="{{ "check-18.svg" |  asset_url }}" width="19" height="auto" class="tw-mr-[8px]">
+        </div>
 
         <div class="tw-p-[8px] tw-bg-[#F4F4F6] tw-flex tw-items-center tw-rounded-[4px]">
-         
           <img src="{{  'theluxe-mini.png' | asset_url }}" width="45" height="auto" class="tw-mr-[12px]">
-       
-        <p class="tw-w-full tw-text-left tw-font-semibold tw-tracking-normal tw-text-[#1D2430] lg:tw-text-[14px] tw-text-[15px]">The Luxe</p>
-        <img src="{{ "check-18.svg" |  asset_url }}" width="19" height="auto" class="tw-mr-[8px]">
+
+          <p class="tw-w-full tw-text-left tw-font-semibold tw-tracking-normal tw-text-[#1D2430] lg:tw-text-[14px] tw-text-[15px]">
+            The Luxe
+          </p>
+          <img src="{{ "check-18.svg" |  asset_url }}" width="19" height="auto" class="tw-mr-[8px]">
+        </div>
       </div>
-
-
-
-
-
-      </div>
-
 
       {% comment %} FOOTER CARD  {% endcomment %}
       <div class="tw-flex tw-flex-row tw-items-center">
@@ -485,243 +172,240 @@
         <p class="tw-text-[#9E9E9E] tw-text-[24px]">$447</p>
       </div>
 
-      <button class="tw-text-[16px] tw-bg-[#1C67F3] tw-py-[8px] tw-w-full tw-text-white tw-rounded-full">Buy Now</button>
+      <button class="tw-text-[16px] tw-bg-[#1C67F3] tw-py-[8px] tw-w-full tw-text-white tw-rounded-full">
+        Buy Now
+      </button>
 
       <div class="tw-flex tw-items-center tw-justify-center tw-gap-[4px] tw-text-[#505C72] tw-text-[14px] tw-mt-[-12px]">
-       <img src="{{ "secure-18.svg" | asset_url }}" width="18" height="auto" >
+        <img src="{{ "secure-18.svg" | asset_url }}" width="18" height="auto">
         Safe Checkout
       </div>
-
-
-
     </div>
-
-
-
   </div>
 </div>
 
-<!-- 4 section: Banner-->
+<!-- 4 section: Banner -->
 
 <div class="page-width">
-  <div 
+  <div
     class="
-    tw-justify-center tw-items-center tw-flex tw-flex-col 
-    lg:tw-py-[64px] tw-py-[8px]
-    tw-max-w-[550px] tw-w-full tw-mx-auto
-    ">
-   
-      <h4 class="tw-text-[#5F6F89] tw-text-[18px] tw-mb-[8px]">How it works</h4>
-      <h1 class="tw-font-semibold tw-text-[32px] tw-text-center lg:tw-text-[48px] tw-leading-none">Buy now. Scan in-app. Groov this week..</h1>
-      <p class="tw-text-[#5F6F89] tw-text-center tw-text-[16px] lg:tw-text-[18px] tw-px-[12px] lg:tw-w-[78%] tw-mt-[18px]">Complete your scan in seconds post-checkout — your custom Groovs arrive in days.</p>
-      <img src="{{ "qrcode-home.svg" | asset_url }}" width="300" height="auto" />
+      tw-justify-center tw-items-center tw-flex tw-flex-col
+      lg:tw-py-[64px] tw-py-[8px]
+      tw-max-w-[550px] tw-w-full tw-mx-auto
+    "
+  >
+    <h4 class="tw-text-[#5F6F89] tw-text-[18px] tw-mb-[8px]">How it works</h4>
+    <h1 class="tw-font-semibold tw-text-[32px] tw-text-center lg:tw-text-[48px] tw-leading-none">
+      Buy now. Scan in-app. Groov this week..
+    </h1>
+    <p class="tw-text-[#5F6F89] tw-text-center tw-text-[16px] lg:tw-text-[18px] tw-px-[12px] lg:tw-w-[78%] tw-mt-[18px]">
+      Complete your scan in seconds post-checkout — your custom Groovs arrive in days.
+    </p>
+    <img src="{{ "qrcode-home.svg" | asset_url }}" width="300" height="auto">
   </div>
 </div>
 
-
-
-
-
-
-
-<!-- 4 section: Banner-->
+<!-- 4 section: Banner -->
 
 <div class="page-width">
-  <div 
+  <div
     class="
-    tw-justify-center tw-items-center tw-flex tw-flex-col tw-pt-[64px] tw-rounded-[18px]
-    tw-border-rounded-[24px]
-    tw-w-full 
-    tw-bg-[white]
-    tw-mb-[64px]
-    lg:tw-mb-[128px]
-    tw-px-[24px]
-    ">
+      tw-justify-center tw-items-center tw-flex tw-flex-col tw-pt-[64px] tw-rounded-[18px]
+      tw-border-rounded-[24px]
+      tw-w-full
+      tw-bg-[white]
+      tw-mb-[64px]
+      lg:tw-mb-[128px]
+      tw-px-[24px]
+    "
+  >
     <img src="{{ "logo-groov.svg" | asset_url }} " width="42" height="auto" class="tw-mb-[16px]">
-      <h4 class="tw-text-[black] tw-text-[18px] tw-mb-[6px]">ShapeSense By Groov</h4>
-      <h1 class="tw-font-semibold lg:tw-text-[48px] tw-text-[32px] tw-text-center tw-w-[350px] tw-leading-none">Scan Your Feet in Minutes.</h1>
-      <img src="{{ 
-        "hand-iphone.png" | asset_url }}" 
-        width="600" 
-        height="auto" 
-        class="tw-mt-[48px] lg:tw-mr-[-150px] tw-mr-[-80px]"
-      >
+    <h4 class="tw-text-[black] tw-text-[18px] tw-mb-[6px]">ShapeSense By Groov</h4>
+    <h1 class="tw-font-semibold lg:tw-text-[48px] tw-text-[32px] tw-text-center tw-w-[350px] tw-leading-none">
+      Scan Your Feet in Minutes.
+    </h1>
+    <img
+      src="
+        {{
+        "hand-iphone.png" | asset_url }}
+      "
+      width="600"
+      height="auto"
+      class="tw-mt-[48px] lg:tw-mr-[-150px] tw-mr-[-80px]"
+    >
   </div>
 </div>
- 
- 
- {% comment %} ----------------------------------- POPUP -----------------------------------   {% endcomment %}
+
+{% comment %} ----------------------------------- POPUP -----------------------------------   {% endcomment %}
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-  const cardProducts = document.querySelectorAll('.shop_all_block_content');
-  const popupOverlay = document.getElementById('popupOverlay');
-  const body = document.body;
-  const html = document.documentElement;
+  document.addEventListener('DOMContentLoaded', function () {
+    const cardProducts = document.querySelectorAll('.shop_all_block_content');
+    const popupOverlay = document.getElementById('popupOverlay');
+    const body = document.body;
+    const html = document.documentElement;
 
-  cardProducts.forEach(function (productEle) {
-    const submitBtn = productEle.querySelector('.custom-product-form.quick_add_button');
-    const nickNamePopup = productEle.querySelector('.nickname-popup.card');
-    const nickInput = productEle.querySelector('input[id="NickName"]');
-    const titleElement = productEle.querySelector('.shop_all_title');
-    const typeOfFinishInput = productEle.querySelector('input[name="properties[TypeOfFinish]"]');
+    cardProducts.forEach(function (productEle) {
+      const submitBtn = productEle.querySelector('.custom-product-form.quick_add_button');
+      const nickNamePopup = productEle.querySelector('.nickname-popup.card');
+      const nickInput = productEle.querySelector('input[id="NickName"]');
+      const titleElement = productEle.querySelector('.shop_all_title');
+      const typeOfFinishInput = productEle.querySelector('input[name="properties[TypeOfFinish]"]');
 
-    if (submitBtn && nickNamePopup && nickInput) {
-      submitBtn.addEventListener('click', function (e) {
-        e.preventDefault(); // Stop default form action
+      if (submitBtn && nickNamePopup && nickInput) {
+        submitBtn.addEventListener('click', function (e) {
+          e.preventDefault(); // Stop default form action
 
-        const titleText = titleElement?.textContent?.toLowerCase() || '';
+          const titleText = titleElement?.textContent?.toLowerCase() || '';
 
-        if (titleText.includes('gift')) {
-          // 🔥 Remove TypeOfFinish input if title contains "gift"
-          if (typeOfFinishInput) {
-            typeOfFinishInput.remove();
-          }
+          if (titleText.includes('gift')) {
+            // 🔥 Remove TypeOfFinish input if title contains "gift"
+            if (typeOfFinishInput) {
+              typeOfFinishInput.remove();
+            }
 
-          // ✅ Directly trigger real submit
-          const originalSubmitBtn = productEle.querySelector('.quick_add_button.default');
-          if (originalSubmitBtn) {
-            originalSubmitBtn.click();
-          }
-          return;
-        }
-
-        // Show the nickname popup for other products
-        nickNamePopup.style.display = 'flex';
-        popupOverlay.style.display = 'block';
-        body.classList.add('scroll-lock');
-        html.classList.add('scroll-lock');
-      });
-
-      const closeBtn = nickNamePopup.querySelector('.cross-svg-btn.card');
-      const doneBtn = nickNamePopup.querySelector('.done-btn.card');
-
-      nickNamePopup.addEventListener('click', function (e) {
-        e.stopPropagation();
-      });
-
-      if (closeBtn) {
-        closeBtn.addEventListener('click', function () {
-          nickNamePopup.style.display = 'none';
-          popupOverlay.style.display = 'none';
-          body.classList.remove('scroll-lock');
-          html.classList.remove('scroll-lock');
-        });
-      }
-
-      if (doneBtn) {
-        doneBtn.addEventListener('click', function () {
-          if (nickInput.value.trim() !== '') {
-            nickNamePopup.style.display = 'none';
-            popupOverlay.style.display = 'none';
-            body.classList.remove('scroll-lock');
-            html.classList.remove('scroll-lock');
-
+            // ✅ Directly trigger real submit
             const originalSubmitBtn = productEle.querySelector('.quick_add_button.default');
             if (originalSubmitBtn) {
               originalSubmitBtn.click();
             }
+            return;
           }
-        });
-      }
-    }
-  });
 
-  popupOverlay.addEventListener('click', function (e) {
-    e.stopPropagation();
+          // Show the nickname popup for other products
+          nickNamePopup.style.display = 'flex';
+          popupOverlay.style.display = 'block';
+          body.classList.add('scroll-lock');
+          html.classList.add('scroll-lock');
+        });
+
+        const closeBtn = nickNamePopup.querySelector('.cross-svg-btn.card');
+        const doneBtn = nickNamePopup.querySelector('.done-btn.card');
+
+        nickNamePopup.addEventListener('click', function (e) {
+          e.stopPropagation();
+        });
+
+        if (closeBtn) {
+          closeBtn.addEventListener('click', function () {
+            nickNamePopup.style.display = 'none';
+            popupOverlay.style.display = 'none';
+            body.classList.remove('scroll-lock');
+            html.classList.remove('scroll-lock');
+          });
+        }
+
+        if (doneBtn) {
+          doneBtn.addEventListener('click', function () {
+            if (nickInput.value.trim() !== '') {
+              nickNamePopup.style.display = 'none';
+              popupOverlay.style.display = 'none';
+              body.classList.remove('scroll-lock');
+              html.classList.remove('scroll-lock');
+
+              const originalSubmitBtn = productEle.querySelector('.quick_add_button.default');
+              if (originalSubmitBtn) {
+                originalSubmitBtn.click();
+              }
+            }
+          });
+        }
+      }
+    });
+
+    popupOverlay.addEventListener('click', function (e) {
+      e.stopPropagation();
+    });
   });
-});
 </script>
 
-
- 
- {% schema %}
- {
-   "name": "shop All",
-   "settings": [
-     {
-       "type": "richtext",
-       "id":"shop_all_heading",
-       "label": "Heading"
-     },
-     {
-       "type": "text",
-       "label": "Sub Heading",
-       "id": "sub-heading"
-     },
-     {
-       "type": "range",
-       "id": "font_size-sub-headng",
-       "min": 8,
-       "max": 100,
-       "step": 1,
-       "unit": "px",
-       "label": "Font size Sub Heading",
-       "default": 10
-     },
-     {
-       "type": "text",
-       "label": "Description",
-       "id": "desc"
-     },
-     {
-       "type": "range",
-       "id": "font_size-desc",
-       "min": 8,
-       "max": 100,
-       "step": 1,
-       "unit": "px",
-       "label": "Font size Sub desc",
-       "default": 10
-     },
-   ],
-   "blocks": [
-     {
-       "type": "block",
-        "name":"block",
-       "settings": [
-       {
-         "type": "product",
-         "id": "product",
-         "label": "Select Product"
-       },
-       {
-         "type": "image_picker",
-         "id": "shop_all_img",
-         "label": "Upload Image"
-       },
-       {
-       "type": "text",
-       "id": "shop_all_title",
-       "label": "Custom Title"
-       },
-       {
-       "type": "text",
-       "id": "shop_all_price",
-       "label": "Custom Price"
-       },
-       {
-       "type": "html",
-       "id": "shop_all_description",
-       "label": "Custom Description"
-       },
-       {
-         "type": "text",
-         "id": "quick_add_label",
-         "label": "Button Text",
-         "default": "Quick Add"
-       },
-       {
-         "type": "url",
-         "id":"take_quiz_url",
-         "label": "Button Url"
-       }
-       ]
-     }
-   ],
-   "presets": [
-     {
-       "name":"Shop All"
-     }
-   ]
- }
- {% endschema %}
+{% schema %}
+{
+  "name": "shop All",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "shop_all_heading",
+      "label": "Heading"
+    },
+    {
+      "type": "text",
+      "label": "Sub Heading",
+      "id": "sub-heading"
+    },
+    {
+      "type": "range",
+      "id": "font_size-sub-headng",
+      "min": 8,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size Sub Heading",
+      "default": 10
+    },
+    {
+      "type": "text",
+      "label": "Description",
+      "id": "desc"
+    },
+    {
+      "type": "range",
+      "id": "font_size-desc",
+      "min": 8,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size Sub desc",
+      "default": 10
+    }
+  ],
+  "blocks": [
+    {
+      "type": "block",
+      "name": "block",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Select Product"
+        },
+        {
+          "type": "image_picker",
+          "id": "shop_all_img",
+          "label": "Upload Image"
+        },
+        {
+          "type": "text",
+          "id": "shop_all_title",
+          "label": "Custom Title"
+        },
+        {
+          "type": "text",
+          "id": "shop_all_price",
+          "label": "Custom Price"
+        },
+        {
+          "type": "html",
+          "id": "shop_all_description",
+          "label": "Custom Description"
+        },
+        {
+          "type": "text",
+          "id": "quick_add_label",
+          "label": "Button Text",
+          "default": "Quick Add"
+        },
+        {
+          "type": "url",
+          "id": "take_quiz_url",
+          "label": "Button Url"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shop All"
+    }
+  ]
+}
+{% endschema %}
